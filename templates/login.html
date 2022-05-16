@@ -1,0 +1,53 @@
+{% load static %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+   <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+</head>
+<body>
+<div class ="split-screen">
+  <div class="left">
+  </div>
+  <div class="right">
+    <form  action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <section class="copy">
+        <h2>Sign In</h2>
+        <div class="login-container">
+          <p>Dont have account? <a href="{% url 'register'%}" class=""><strong>Sign up</strong> </a></p>
+        </div>
+      </section>
+      <div class="input-container username">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Enter your Username">
+      </div>
+      <div class="input-container password">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Enter your password" >
+      </div>
+      <div class="containter cta">
+        <label class="google-container">
+           <p class="social-text">Have Gmail Account? </p>
+
+          <a href="{% provider_login_url "google" method='oauth2' %}" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+
+
+        </label>
+      </div>
+      <button class="sign-up-btn" type="submit"> Sign in</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>
