@@ -65,39 +65,11 @@
   .right .copy p {
     margin: 1.5em 0;
     font-size: 0.875rem;
-<<<<<<< HEAD
-  }
-  .right form {
-    width:328px ;
-  }
-  form input[type="text"],
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"],
-  form input[type="password"]{
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border: 1px solid #c4c4c4;
-    padding: 1em;
-    margin-bottom: 1.25rem;
-    font-size: 0.75rem;
-  }
-  label{
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    justify-content: center;
-  }
- 
- .signup-btn{
-=======
 }
 
 .right form{
     width: 500px;
-    margin-left: 40%;
+    margin-left: 2%;
 }
 
 .input-container.password{
@@ -109,20 +81,18 @@ form input[type="text"],
 form input[type="email"],
 form input[type="password"],
 form input[type="date"] {
-display: block;
-width: 100%;
-box-sizing: border-box;
-border-radius: 8px;
-border: 1px solid black;
-padding: 1em;
-margin-bottom: 1.25rem;
-font-size: 0.875rem;
-box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, .1) ;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #c4c4c4;
+  padding: 1em;
+  margin-bottom: 1.25rem;
+  font-size: 0.75rem;
 
 }
 
 .signup-btn{
->>>>>>> e2be755687444a58aedd70885ee084da87d14a16
     display:block;
     width:100%;
     color: white;
@@ -140,23 +110,23 @@ box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, .1) ;
 .signup-btn:hover{
     background: #2c4893;
     cursor: pointer;
- 
- 
- 
- @media screen and (min-width: 900px){
-  split-screen{
-     flex-direction: row;
-     height: 100vh;
-   }
-   .left,
-   .right{
-     display:flex;
-     width: 50%;
-     height: auto;
-   }
- }
- 
 }
+ 
+ 
+@media screen and (min-width: 570px){
+  .split-screen{
+    flex-direction: row;
+    height: 100vh;
+  }
+  .left,
+  .right{
+    display:flex;
+    width: 50%;
+    height: auto;
+  }
+}
+
+
  
  
  
