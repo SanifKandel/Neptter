@@ -27,3 +27,8 @@ def loginProcess(request):
 
 def HomeProcess(request):
     return render(request, 'hello.html')
+
+
+def ForgetPass(request):
+    return render(request, 'forget-pw.html')
+
