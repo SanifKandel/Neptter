@@ -29,3 +29,7 @@ def loginProcess(request):
 def ForgetPass(request):
     return render(request, 'forget-pw.html')
 
+def resetpass(request):
+    return render(request, 'reset-pw.html')
+
+

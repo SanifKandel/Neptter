@@ -92,8 +92,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_neptter',
         'USER': 'root',
-        'PASSWORD': '#J@v@978',
-        'HOST': '127.0.0.1',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': '3306'
     }
 }
