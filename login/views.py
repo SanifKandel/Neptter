@@ -25,9 +25,6 @@ def loginProcess(request):
     else:
         return render(request, 'login.html')
 
-def HomeProcess(request):
-    return render(request, 'hello.html')
-
 
 def ForgetPass(request):
     return render(request, 'forget-pw.html')

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Sidebar</title>
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="content">
+        <div class="sidebar">
+            <div class="sidebar__brand">
+                {% comment %} <i class="fa fa-twitter"></i> {% endcomment %}
+            </div>
+            <a href="#" class="sidebar__item">
+                <i class="sidebar__item__icon fa fa-home"></i>
+                <span class="sidebar__item__text">Home</span>
+            </a>
+            <a href="#" class="sidebar__item">
+                <i class="sidebar__item__icon fa fa-search"></i>
+                <span class="sidebar__item__text">Search</span>
+            </a>
+            <a href="#" class="sidebar__item">
+                <i class="sidebar__item__icon fa fa-bell"></i>
+                <span class="sidebar__item__text">Notifications</span>
+            </a>
+            <a href="#" class="sidebar__item">
+                <i class="sidebar__item__icon fa fa-user"></i>
+                <span class="sidebar__item__text">Profile</span>
+            </a>
+            <a href="#" class="sidebar__item">
+                <i class="sidebar__item__icon fa fa-user"></i> 
+                <span class="sidebar__item__text">Dark Mode</span>
+            </a>
+            <a href="#" class="sidebar__item">
+                <i class="sidebar__item__icon fa fa-question-circle"></i>
+                <span class="sidebar__item__text">Lists</span>
+            </a>
+        </div>
+        
+    </div>
+</body>
+</html>
