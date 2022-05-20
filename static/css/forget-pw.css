@@ -28,7 +28,7 @@ body{
     background-color: #859de2;
 }
 form{
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 10%;
     margin-right: 10%;
     padding: 2%;
@@ -38,7 +38,7 @@ form{
     
 }
 .imagec{
-height: 300px;
+height: 280px;
 }
 a:hover{
     text-decoration: underline;

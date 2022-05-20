@@ -1,0 +1,75 @@
+
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<title>Reset Password </title>
+
+<script
+src="https://kit.fontawesome.com/64d58efce2.js"
+crossorigin="anonymous"
+></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/reset-pw.css' %}">
+</head>
+<body>
+
+<div class="container">
+  <div class="row px-3">
+    <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+      <div class="card-body">
+        <h4 class="title text-center">Reset Password</h4>
+
+        <form method="POST" class="form-box px-3">
+          {% csrf_token %}
+          <div class="form-input">
+            <h4>New Password</h4>
+            <span><i class="fa fa-lock fa-sm" aria-hidden="true"></i></span>
+            <input type="password" name="password-1" id="password-1" placeholder="******" tabindex="10" required />
+          </div>
+
+          <div class="form-input mt-2">
+            <h4>Confirm New Password</h4>
+            <span><i class="fa fa-lock fa-sm confirm" aria-hidden="true"></i></span>
+            <input type="password" name="password-2" id="password-2" placeholder="******" tabindex="10" required />
+          </div>
+
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" onclick="passwordToggle()" id="showpassword" name="" />
+            <label class="custom-control-label" for="showpassword">Show Password</label>
+          </div>
+          <input type="hidden" name="user_id" value="{{user_id}}" />
+
+          <div class="mb-3 n">
+            <button type="submit" class="btn btn-block text-uppercase">Submit</button>
+          </div>
+        </form>
+
+        <hr class="my-4" />
+
+        <div class="text-center mb-2">
+          Go back to
+          <a href="{% url 'login'%}" class="login-link">login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function passwordToggle() {
+      var x = document.getElementById("password-1");
+      var y = document.getElementById("password-2");
+
+      if (x.type === "password" && y.type == "password") {
+        x.type = "text";
+        y.type = "text";
+      } else {
+        x.type = "password";
+        y.type = "password";
+      }
+    }
+  </script>
+
+</div>
+</body>
+</html>

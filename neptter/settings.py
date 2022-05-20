@@ -94,11 +94,19 @@ WSGI_APPLICATION = 'neptter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< HEAD
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASS'),
         'HOST': env('DATABASE_HOST'),
         'PORT': env('DATABASE_PORT')
+=======
+        'NAME': 'db_neptter',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306'
+>>>>>>> 126309902906e623813c478b61af7551d4907128
     }
 }
 
