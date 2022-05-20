@@ -1,46 +1,185 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter Sidebar</title>
-    <link rel="stylesheet" href="{% static 'css/home.css'%}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-</head>
-<body>
-    <div class="content">
-        <div class="sidebar">
-            <div class="sidebar__brand">
-                {% comment %} <i class="fa fa-twitter"></i> {% endcomment %}
-            </div>
-            <a href="#" class="sidebar__item">
-                <i class="sidebar__item__icon fa fa-home"></i>
-                <span class="sidebar__item__text">Home</span>
-            </a>
-            <a href="#" class="sidebar__item">
-                <i class="sidebar__item__icon fa fa-search"></i>
-                <span class="sidebar__item__text">Search</span>
-            </a>
-            <a href="#" class="sidebar__item">
-                <i class="sidebar__item__icon fa fa-bell"></i>
-                <span class="sidebar__item__text">Notifications</span>
-            </a>
-            <a href="#" class="sidebar__item">
-                <i class="sidebar__item__icon fa fa-user"></i>
-                <span class="sidebar__item__text">Profile</span>
-            </a>
-            <a href="#" class="sidebar__item">
-                <i class="sidebar__item__icon fa fa-user"></i> 
-                <span class="sidebar__item__text">Dark Mode</span>
-            </a>
-            <a href="#" class="sidebar__item">
-                <i class="sidebar__item__icon fa fa-question-circle"></i>
-                <span class="sidebar__item__text">Lists</span>
-            </a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neptter</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- sidebar starts -->
+    <div class="sidebar">
+        <img  class= "image2" src="{% static 'images/neptter.png' %}" alt=""/>
+
+      <div class="sidebarOption active">
+        <span class="material-icons"> home </span>
+        <h2>Home</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> search </span>
+        <h2>Search</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> notifications </span>
+        <h2>Notifications</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> person </span>
+        <h2>Profile</h2>
+      </div>
+
+
+      <div class="sidebarOption">
+        <span class="material-icons"> dark_mode </span>
+        <h2>Dark Mode</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> bookmark_border </span>
+        <h2>Bookmarks</h2>
+      </div>
+
+      <div class= "loginOption">
+        <img src="{% static 'images/sanif.jpg' %}" alt=""/>
+        <div>
+        <h3>Sanif Kandel</h3>
+        <h5>@sanifkandel</h5>
         </div>
-        
+        <span class="material-icons"> more_vert </span>    
+        <i></i>
     </div>
-</body>
+    </div>
+    <!-- sidebar ends -->
+
+    <!-- feed starts -->
+    <div class="feed">
+      <div class="feed__header">
+        <h2>Home</h2>
+      </div>
+
+      <!-- tweetbox starts -->
+      <div class="input-box">
+        <div class="tweet-area">
+          <span class="placeholder">What's happening?</span>
+          <div class="input editable" contenteditable="true" spellcheck="false"></div>
+          <div class="input readonly" contenteditable="true" spellcheck="false"></div>
+        </div>
+        <div class="line"> </div>
+        <div class="bottom">
+            <ul class="icons">
+              <li><i class="uil uil-capture"></i></li>
+              <li><i class="far fa-file-image"></i></li>
+              <li><i class="fas fa-map-marker-alt"></i></li>
+              <li><i class="far fa-grin"></i></li>
+              <li><i class="far fa-user"></i></li>
+            </ul>
+            <div class="content">
+              <span class="counter">100</span>
+              <button>Tweet</button>
+            </div>
+          </div>
+      </div>
+      <!-- tweetbox ends -->
+
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="{% static 'images/sanif.jpg' %}"
+            alt=""
+          />
+        </div>
+
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                Sanif Kandel
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@sanifkandel</span
+                >
+                <span class="material-icons dots"> more_horiz </span> 
+              </h3>
+              
+            </div>
+            <div class="post__headerDescription">
+              <p>If you are bad, I am your dad.😎 </p>
+            </div>
+          </div>
+          <img
+            src="{% static 'images/post.jpg' %}"
+            alt=""
+          />
+          <div class="post__footer">
+            <span class="material-icons" id="like" >favorite </span>
+            <span class="material-icons"> chat_bubble_outline </span>
+            <span class="material-icons"> null </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="{% static 'images/sanif.jpg' %}"
+            alt=""
+          />
+        </div>
+
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                Sanif Kandel
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@sanifkandel</span
+                >
+                <span class="material-icons dots"> more_horiz </span> 
+              </h3>
+            </div>
+            <div class="post__headerDescription">
+              <p>Happy Anniversary Mark !!❤️ </p>
+            </div>
+          </div>
+          <img
+            src="{% static 'images/post2.jpg' %}"
+            alt=""
+          />
+          <div class="post__footer">
+            <span class="material-icons" id="like">favorite </span>
+            <span class="material-icons"> chat_bubble_outline </span>
+            <span class="material-icons"> null </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+    </div>
+    <!-- feed ends -->
+
+    <!-- widgets starts -->
+   
+   <div class="widgets">
+
+    </div> 
+
+     
+    <!-- widgets ends -->
+    
+  </body>
 </html>

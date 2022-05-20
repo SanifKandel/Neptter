@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
 from telnetlib import AUTHENTICATION
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
@@ -90,11 +94,11 @@ WSGI_APPLICATION = 'neptter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_neptter',
-        'USER': 'root',
-        'PASSWORD': '#J@v@978',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT')
     }
 }
 
@@ -167,4 +171,4 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '311643489579-a7vo8v1a5d060joovk89tec491op80q7.apps.googleusercontent.com'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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lnkjn
