@@ -1,11 +1,12 @@
+<!DOCTYPE html>
 {% load static %}
 {% load socialaccount %}
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Neptter</title>
+  {% csrf_token %}
    <script
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
@@ -33,6 +34,11 @@
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder="Enter your password" >
       </div>
+      <div class="containter fgt">
+        <label class="forgotten-password">
+          <a href=" {% url 'reset-password-enterusername'%}"> Forgot Password?</a>
+        </label>
+      </div>
       <div class="containter cta">
         <label class="google-container">
            <p class="social-text">Have Gmail Account? </p>
@@ -40,8 +46,6 @@
           <a href="{% provider_login_url "google" method='oauth2' %}" class="social-icon">
                 <i class="fab fa-google"></i>
               </a>
-
-
         </label>
       </div>
       <button class="sign-up-btn" type="submit"> Sign in</button>
