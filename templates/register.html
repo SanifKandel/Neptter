@@ -12,9 +12,10 @@
     </head>
 <body>
     <div class = "split-screen">
-        <div class=""left>
+        <div class="left">
             <section class="copy">
-                <img class="imagec" src="{% static 'images/register1.png'%}">
+                <h1>Explore your creativity</h1>
+                <p>Over 1000 courses taught.</p>
             </section>
         </div> 
         <div class="right">
@@ -44,28 +45,20 @@
                 </div>
                 <div class="input-container password">
                     <label for="password">Password</label>
-                    <input id="password1" name="password1" type="password" required placeholder="Must be atleast 6 characters">
-                    
+                    <input id="password1" name="password1" type="password" placeholder="Must be atleast 6 characters"> 
                 </div>
                 <div class="input-container password">
                     <label for="password">Confirm Password</label>
-                    <input id="password2" name="password2" type="password" required placeholder="Must be atleast 6 characters">
-                    
+                    <input id="password2" name="password2" type="password" placeholder="Must be atleast 6 characters">
                 </div>
-                {% comment %} <div class="input-container bday">
-                    <label>
-                        Date of Birth:
-                        <input type="date" name="dob" required>
-                      </label>
-                </div> {% endcomment %}
+        
                 <button class="signup-btn" type="submit">Sign up</button>
                 <section class="copy legal">
-                    <p><h4><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy policy</a> & <a href="#">Terms of service.</a></span></h4></p>
+                    <p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy policy</a> & <a href="#">Terms of service.</a></span></p>
                 </section>
 
             </form>
-        </div>
-
+              </div>
     </div>
 
 </body>

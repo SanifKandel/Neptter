@@ -1,61 +1,75 @@
-:root{
-    font-size: 100%;
+
+ :root{
+    font-size:100%;
     font-size: 16px;
-    line-height: 1.5em;
-    --primary-blue: #233975
-}
-body{
-    padding: 0;
+    line-height: 1.5;
+    --primary-blue:#233975;
+ }
+  body{
+    padding:0 ;
     margin: 0;
-    font-family: 'montserrat', poppins;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-}
-h2{
+  }
+  h1{
     font-size: 2.25rem;
     font-weight: 700;
-}
-a{
+  }
+  h2{
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  a{
     text-decoration: none;
     color: var(--primary-blue);
-}
-a:hoover{
+  }
+  a:hover{
     text-decoration: underline;
-}
-.small{
+  }
+  .small{
     font-size: 80%;
-    text-align:center;
-}
-.split-screen{
+    text-align: center;
+  }
+ 
+  .split-screen{
     display: flex;
     flex-direction: column;
-}
-.left, .imagec{
-    height: 750px;
-    /* background: linear-gradient(rgb(0,0,0,0),rgb(0,0,0,5)), url('neptter.png'); */
-    background-image: url(static/images/register2.png);
-    background-size: cover;
-   
-}
-
-.left, .right{
+  }
+  .left {
+    height: 200px;
+  }
+  .left, .right{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.right .copy{
+  }
+  .left {
+    background: linear-gradient(rgb(0,0,0,0),rgb(0,0,0,0.5)), url("/static/images/register2.png");
+    background-size: cover;
+  }
+  .left .copy{
+    color: white;
+    text-align: center;
+    --webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+ 
+  .left p {
+    font-weight: 400;
+  }
+ 
+  .right .copy{
     color: black;
     text-align: center;
-}
-
-.right .copy p{
+  }
+  .right .copy p {
     margin: 1.5em 0;
     font-size: 0.875rem;
 }
 
 .right form{
     width: 500px;
-    margin-left: 40%;
+    margin-left: 2%;
 }
 
 .input-container.password{
@@ -67,15 +81,14 @@ form input[type="text"],
 form input[type="email"],
 form input[type="password"],
 form input[type="date"] {
-display: block;
-width: 100%;
-box-sizing: border-box;
-border-radius: 8px;
-border: 1px solid black;
-padding: 1em;
-margin-bottom: 1.25rem;
-font-size: 0.875rem;
-box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, .1) ;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #c4c4c4;
+  padding: 1em;
+  margin-bottom: 1.25rem;
+  font-size: 0.75rem;
 
 }
 
@@ -98,19 +111,32 @@ box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, .1) ;
     background: #2c4893;
     cursor: pointer;
 }
-@media screen and (min-width:900px) {
-    .split-screen{
-        flex-direction: row;
-        height: 100vh;
-    }
-    .left, .right{
-        display: flex;
-        height: auto;
-    }
-    
+ 
+ 
+@media screen and (min-width: 570px){
+  .split-screen{
+    flex-direction: row;
+    height: 100vh;
+  }
+  .left,
+  .right{
+    display:flex;
+    width: 50%;
+    height: auto;
+  }
 }
 
 
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
