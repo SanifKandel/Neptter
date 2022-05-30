@@ -7,4 +7,5 @@ urlpatterns = [
 
 
  path('home/',views.HomeProcess,name="home"),
+ path('profile/',views.ProfileProcess,name="profile"),
 ]
