@@ -11,13 +11,8 @@
     ></script>
         <link rel="stylesheet" href="{% static 'css/forget-pw.css' %}">
         </head>
-<<<<<<< HEAD
-        <body>
-            <form>
-=======
         <Body>
             <form method="POST"  class="form"  action=""  id="form">
->>>>>>> origin/resetpass
                 {% csrf_token %}
                     <a href="{% url 'login'%}" target="_blank"> Back to Login</a>
                 <h1>Forgot password?</h1>
