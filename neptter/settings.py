@@ -56,7 +56,6 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -172,4 +171,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '311643489579-a7vo8v1a5d060joovk89tec491op80q7.apps.googleusercontent.com'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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lnkjn
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+# TO send mail to  users
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'nepttersocial@gmail.com'
+EMAIL_HOST_PASSWORD = 'Neptter@123'
+EMAIL_USE_TLS = True

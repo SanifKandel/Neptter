@@ -1,5 +1,6 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,18 +11,23 @@
     ></script>
         <link rel="stylesheet" href="{% static 'css/forget-pw.css' %}">
         </head>
+<<<<<<< HEAD
         <body>
             <form>
+=======
+        <Body>
+            <form method="POST"  class="form"  action=""  id="form">
+>>>>>>> origin/resetpass
                 {% csrf_token %}
-                    <a href="login.html" target="_blank"> Back to Login</a>
+                    <a href="{% url 'login'%}" target="_blank"> Back to Login</a>
                 <h1>Forgot password?</h1>
                 <img class="imagec" src="{% static 'images/email.PNG' %}" script=" height=20px;">
                 <h4>Send a link to your email to reset your password.</h4>
                 <div class="input-container Email">
-                    <label for="fname">Email</label>
-                    <input id="email" name="email" type="email" placeholder="The one used during your signup">
+                    <label for="fname">Username</label>
+                    <input id="username" name="username" type="text" placeholder="Enter your username">
                 </div>
-                <button class="sent" type="submit">Sent reset link <link rel="stylesheet" href=""></button>
+                <button class="sent" type="submit">Submit <link rel="stylesheet"></button>
 
             </form>
     
