@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-r-87bk0=j^o!y-f4yy(y56ypni_^60tzuyt%rk3s)6on*&271h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','neptter.herokuapp.com']
 
 
 # Application definition
