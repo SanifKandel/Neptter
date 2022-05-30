@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neptter</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- sidebar starts -->
+    <div class="sidebar">
+        <img  class= "image2" src="{% static 'images/neptter.png' %}" alt=""/>
+
+      <div class="sidebarOption active">
+        <span class="material-icons"> home </span>
+        <h2>Home</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> search </span>
+        <h2>Search</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> notifications </span>
+        <h2>Notifications</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> person </span>
+        <h2>Profile</h2>
+      </div>
+
+
+      <div class="sidebarOption">
+        <span class="material-icons"> dark_mode </span>
+        <h2>Dark Mode</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> bookmark_border </span>
+        <h2>Bookmarks</h2>
+      </div>
+
+      <div class= "loginOption">
+        <img src="{% static 'images/sanif.jpg' %}" alt=""/>
+        <div>
+        <h3>Sanif Kandel</h3>
+        <h5>@sanifkandel</h5>
+        </div>
+        <span class="material-icons"> more_vert </span>    
+        <i></i>
+    </div>
+    </div>
+    <!-- sidebar ends -->
+
+    {% block body %}
+
+    {% endblock %}
+    <!-- widgets starts -->
+   
+    <div class="widgets">
+
+    </div> 
+
+     
+    <!-- widgets ends -->
+</body>
+</html>

@@ -8,3 +8,7 @@ def HomeProcess(request):
 
 def ProfileProcess(request):
     return render(request, 'profile.html')
+
+
+def AboutProcess(request):
+    return render(request, 'aboutus.html')

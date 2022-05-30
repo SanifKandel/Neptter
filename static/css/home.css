@@ -24,7 +24,11 @@
 
   /* Sidebar */
   
+  .sidebar{
+    overflow: hidden;
+  }
   .sidebarOption {
+    
     display: flex;
     align-items: center;
     cursor: pointer;
