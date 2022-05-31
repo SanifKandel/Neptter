@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
-from login.models import Profile
+from home.models import Profile
 from register.forms import CreateUserForm 
 
 # Create your views here.
@@ -13,7 +13,7 @@ def registerProcess(request):
         password1 =request.POST['password1']
 
         user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name)
-        profile = Profile.objects.create(user=user,email=email)
+        profile = Profile.objects.create(user=user)
         user.save()
         profile.save()
         print("User created")

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'neptter',
     'register',
     'login',
+    'home',
 ]
 SITE_ID = 1
 
