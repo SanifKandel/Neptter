@@ -10,5 +10,8 @@ def ProfileProcess(request):
     return render(request, 'profile.html')
 
 
+def profile(request):
+    return render(request, 'profile_card.html')
+
 def AboutProcess(request):
     return render(request, 'aboutus.html')
