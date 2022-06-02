@@ -2,8 +2,6 @@ from django.shortcuts import render
 from .models import Profile
 from .forms import ProfileForm
 from django.contrib.auth.models import User
-
-
 # Create your views here.
 def HomeProcess(request):
     return render(request, 'home.html')
@@ -25,10 +23,11 @@ def ProfileProcess(request):
             context = {'profile': profile}
             return render(request, 'profile.html', context)
 
+
     context = {
-        'profile': ProfileForm(instance=cuser),
+        'profile':ProfileForm(instance=cuser),
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'profile.html',context)
 
 
 def AboutProcess(request):
