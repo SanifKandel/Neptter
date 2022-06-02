@@ -6,7 +6,6 @@ from login import views
 urlpatterns = [
 
     path('login/',views.loginProcess,name="login"),
-    path('home/',views.HomeProcess,name="index"),
     # path('forgetpassword/',views.ForgetPass,name="forget"),
     # path('resetpassword/<token>/',views.resetPassword,name="reset"),
 

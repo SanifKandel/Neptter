@@ -1,12 +1,16 @@
 from django.shortcuts import render
+
 from .models import Profile
 from .forms import ProfileForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+@login_required
 def HomeProcess(request):
     return render(request, 'home.html')
 
-
+@login_required
 def ProfileProcess(request):
     cuser = request.user.profile
     if request.method == 'POST':

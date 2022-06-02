@@ -144,6 +144,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login/'
 
 # file upload
 MEDIA_URL = "/assets/"

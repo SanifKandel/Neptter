@@ -22,16 +22,13 @@ def loginProcess(request):
         if username and password !="":
             if user is not None:
                 auth_login(request,user)
-                return redirect('index')
+                return redirect('home')
             else:
                 messages.info(request, "Username or password is incorrect")
         else:
             messages.info(request, "Enter username and password")
     else:
         return render(request, 'login.html')
-
-def HomeProcess(request):
-    return render(request, 'hello.html')
 
 
 
@@ -102,3 +99,8 @@ def resetPassword(request, token):
 
 def resetpasswordDone(request):
     return render(request, 'reset-password-done.html')
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('index')
