@@ -50,45 +50,42 @@
                 </div>
             </div>
 
-
-             <div class="contact_Info">
+       <form method="POST" enctype="multipart/form-data" >
+            <div class="contact_Info">
                 <h1 class="heading">Contact Information</h1>
-                 <form method="POST" enctype="multipart/form-data" >
+<!--                <form method="POST" enctype="multipart/form-data" >-->
                      {% csrf_token %}
-                <ul>
-                     <li class="full_name">
-                        <h1 class="label">Full Name:</h1>
-                        <span class="info"> <input id="full_name", name="full_name" type="text" placeholder="Enter your Full Name" value="{{request.user.first_name}}"></span>
-                    </li>
-                     <li class="address">
-                        <h1 class="label">Username:</h1>
-                        <span class="info"> <input id="username" name="username" type="text" placeholder="Enter your Username" value="{{request.user.username}}"></span>
-                    </li>
+                    <ul>
+                        <li class="full_name">
+                            <h1 class="label">Full Name:</h1>
+                            <span class="info"> <input id="full_name", name="full_name" type="text" placeholder="Enter your Full Name" value="{{request.user.first_name}}"></span>
+                        </li>
+                        <li class="address">
+                            <h1 class="label">Username:</h1>
+                            <span class="info"> <input id="username" name="username" type="text" placeholder="Enter your Username" value="{{request.user.username}}"></span>
+                        </li>
 
-                    <li class="phone">
-                        <h1 class="label">Phone:</h1>
-                        <span class="info">
-                          {{profile.phone}}
+                        <li class="phone">
+                            <h1 class="label">Phone:</h1>
+                            <span class="info">
+                                {{profile.phone}}
+                            </span>
+                        </li>
 
-                        </span>
+                        <li class="address">
+                            <h1 class="label">Address:</h1>
+                            <span class="info">
+                                {{profile.address}}
+                            </span>
+                        </li>
 
-                    </li>
-
-                    <li class="address">
-                        <h1 class="label">Address:</h1>
-                        <span class="info">
-                            {{profile.address}}
-                        </span>
-                    </li>
-
-                    <li class="email">
-                        <h1 class="label">E-mail:</h1>
-                        <span class="info">
-                            <input id="email" name="email" type="text" placeholder="Enter your Email" value="{{request.user.email}}">
-                        </span>
-                    </li>
-
-                </ul>
+                        <li class="email">
+                            <h1 class="label">E-mail:</h1>
+                            <span class="info">
+                                <input id="email" name="email" type="text" placeholder="Enter your Email" value="{{request.user.email}}">
+                            </span>
+                        </li>
+                    </ul>
             </div>
 
             <div class="basic_info">
@@ -118,9 +115,8 @@
                 </ul>
             </div>
             <button class="sign-up-btn" type="submit"> Update</button>
-
-             </form>
-        </section>
+       </form>
+    </section>
 
     </div>
 

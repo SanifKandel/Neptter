@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Profile(models.Model):
-
     gender = (
-        ('M','Male'),
+        ('M', 'Male'),
         ('F', 'Female'),
-        ('O','Others'),
+        ('O', 'Others'),
     )
 
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
