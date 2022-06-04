@@ -1,0 +1,85 @@
+{% load static %}
+
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="fw-bold">User Details list</h1>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>UserName</th>
+                                    <th>FullName</th>
+                                    <th>Email</th>
+                                    <th>Image</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                               
+                                {% for p in user_details %}
+                                    <tr>
+                                        <td>{{ p.id }} </td>
+                                        <td>{{ p.username }} </td>
+                                        <td>{{ p.fullname }} </td>
+                                        <td>{{ p.email }} </td>
+                                        <td>{{ p.image.url }} </td>
+                                        {% if p.Image %}
+                                            <td>
+                                                <img src="{{ p.image.url }}" alt="" class="prod-size">
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                <img src="{% static 'images/user.png' %}" alt="" class="prod-size">
+                                            </td>
+                                        {% endif %}
+                                        <td>{{ p.status }} </td>
+                                        <td>
+                                            <a href="#" class="btn btn-success badge">EDIT</a>
+                                            <a href="#" class="btn btn-danger badge">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                               
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+
+ 
+
+ 
+
+ 
+
+
+  
