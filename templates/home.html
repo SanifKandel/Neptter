@@ -10,6 +10,8 @@
       <!-- tweetbox starts -->
       <div class="input-box">
         <div class="tweet-area">
+          <form  method="POST">
+            {% csrf_token %}
           <input class="placeholder" placeholder="What's happening?"></span>
           <div class="input editable" contenteditable="true" spellcheck="false"></div>
           <div class="input readonly" contenteditable="true" spellcheck="false"></div>
@@ -26,21 +28,22 @@
             <div class="content">
               <span class="counter">100</span>
               <button>Tweet</button>
+              </form>
             </div>
           </div>
       </div>
       <!-- tweetbox ends -->
 
       <!-- post starts -->
-      <div class="post">
+      {% comment %} <div class="post">
         <div class="post__avatar">
           <img
             src="{% static 'images/sanif.jpg' %}"
             alt=""
           />
-        </div>
+        </div> {% endcomment %}
 
-        <div class="post__body">
+        {% comment %} <div class="post__body">
           <div class="post__header">
             <div class="post__headerText">
               <h3>
@@ -67,7 +70,7 @@
           </div>
         </div>
       </div>
-      <!-- post ends -->
+      <!-- post ends --> {% endcomment %}
 
       <!-- post starts -->
       <div class="post">
@@ -82,9 +85,9 @@
           <div class="post__header">
             <div class="post__headerText">
               <h3>
-                Sanif Kandel
+                {{user.first_name}}
                 <span class="post__headerSpecial"
-                  ><span class="material-icons post__badge"> verified </span>@sanifkandel</span
+                  ><span class="material-icons post__badge"> verified </span>@{{user.username}}</span
                 >
                 <span class="material-icons dots"> more_horiz </span> 
               </h3>

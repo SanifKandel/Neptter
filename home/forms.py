@@ -1,4 +1,4 @@
-from .models import Profile
+from .models import Post, Profile
 from django import forms
 class ProfileForm(forms.ModelForm):
 
@@ -9,3 +9,8 @@ class ProfileForm(forms.ModelForm):
         widgets = {
         'birthday': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
+
+class NewPostForm(forms.ModelForm):
+	class Meta:
+		model = Post
+		fields = ['description', 'pic', 'tags']
