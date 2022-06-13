@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'register',
     'login',
     'home',
+    'admins',
 ]
 SITE_ID = 1
 

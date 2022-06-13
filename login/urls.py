@@ -13,5 +13,4 @@ urlpatterns = [
     path('reset-password/<token>/', views.resetPassword, name='reset-password'),
     path('reset-password-done', views.resetpasswordDone, name='reset-password-done'),
 
-   
 ]

@@ -1,15 +1,17 @@
 
 # Create your views here.
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth import login as auth_login
 from home.models import Profile
 from django.core.mail import send_mail
 from django.conf import settings
 import uuid
+
+from login.auth import admin_only
 
 
 def loginProcess(request):
@@ -21,8 +23,12 @@ def loginProcess(request):
 
         if username and password !="":
             if user is not None:
-                auth_login(request,user)
-                return redirect('home')
+                if not user.is_staff:
+                    auth_login(request, user)
+                    return redirect('/')
+                elif user.is_staff:
+                    auth_login(request, user)
+                    return redirect('/admins')
             else:
                 messages.info(request, "Username or password is incorrect")
         else:
@@ -104,3 +110,4 @@ def resetpasswordDone(request):
 def logoutUser(request):
     logout(request)
     return redirect('index')
+

@@ -32,3 +32,6 @@ def ProfileProcess(request):
 
 def AboutProcess(request):
     return render(request, 'aboutus.html')
+
+
+
