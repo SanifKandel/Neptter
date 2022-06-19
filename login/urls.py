@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from login import views
+from . import views
 
 urlpatterns = [
 
     path('login/',views.loginProcess,name="login"),
+    path('logout_user/',views.logoutUser,name="logout"),
+
     # path('forgetpassword/',views.ForgetPass,name="forget"),
     # path('resetpassword/<token>/',views.resetPassword,name="reset"),
 
