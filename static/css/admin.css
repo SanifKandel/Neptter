@@ -66,7 +66,7 @@ a:hover {
   min-width: 250px;
   max-width: 250px;
   position: fixed;
-  /*background-color: #383841;*/
+  background-color: darkcyan;
   color: #fff;
   transition: 0.3s;
   position: sticky;
@@ -92,7 +92,7 @@ a:hover {
 
 #sidebar ul li a:hover {
   color: #111 !important;
-  background: #f7f7f7;
+  /*background: #f7f7f7;*/
 }
 
 #sidebar ul li a i {
