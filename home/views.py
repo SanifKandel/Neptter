@@ -1,13 +1,14 @@
 from django.shortcuts import render
 
-from .models import Profile , Post
+from .models import Profile , Post, LikePost
 from .forms import ProfileForm, NewPostForm
-from register.models import User
+from register.models import User 
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.template.context import Context
 
 # Create your views here.
 
@@ -78,6 +79,35 @@ def Postdelete(request):
     post = Post.objects.get(id=request.POST.get('id'))
     post.delete()
     return redirect('home')
+
+def Postlike (request):
+    username = request.user.username
+    post_id = request.GET.get('post_id')
+
+    post = Post.objects.get(id=post_id)
+    like_filter = LikePost.objects.filter(post_id=post_id,username=username).first()
+
+    if like_filter == None:
+        new_like =LikePost.objects.create(post_id=post_id, username=username)
+        new_like.save()
+        post.like = post.like+1
+        liked = True
+        post.save()
+        context={
+        'liked': liked
+    }   
+
+    else:
+        like_filter.delete()
+        post.like = post.like-1
+        post.save()
+        liked = False
+        context={
+        'liked': liked
+    }
+      
+        
+    return redirect('/',context)
 
 
 def AboutProcess(request):

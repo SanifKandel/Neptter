@@ -57,8 +57,13 @@
                     </div>
                     <div class="action-button">
                         <div class="interaction-button">
-                            <span><i class="uil uil-heart"></i></span>
+                            {% comment %} {% if liked == True %} {% endcomment %}
+                            <a href="/likepost?post_id={{post.id}}"><i class="uil uil-heart"></i></a>
+                            {% comment %} {% else %} 
+                            <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
+                            {% endif %}{% endcomment %}
                             <span><i class="uil uil-comment-dots"></i></span>
+
                         </div>
                     </div>
                     <div class="liked-by">
