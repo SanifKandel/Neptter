@@ -2,7 +2,7 @@
 # Create your views here.
 
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
@@ -10,6 +10,7 @@ from home.models import Profile
 from django.core.mail import send_mail
 from django.conf import settings
 import uuid
+from register.models import User
 
 
 def loginProcess(request):

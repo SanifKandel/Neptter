@@ -1,17 +1,27 @@
 from django.shortcuts import render
 
-from .models import Profile
+from .models import Profile , Post
 from .forms import ProfileForm, NewPostForm
-from django.contrib.auth.models import User
+from register.models import User
+from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
 # Create your views here.
 
-@login_required
-def HomeProcess(request):
-    return render(request, 'home.html')
+
+class HomeProcess(ListView):
+  model = Post
+  template_name = 'home.html'
+  context_object_name = 'posts'
+
+
+  def get_context_data(self, **kwargs):
+   context = super(HomeProcess, self).get_context_data(**kwargs)
+   return context
+
+
 
 @login_required
 def ProfileProcess(request):
@@ -39,18 +49,29 @@ def ProfileProcess(request):
 
 @login_required
 def create_post(request):
-	user = request.user
-	if request.method == "POST":
-		form = NewPostForm(request.POST, request.FILES)
-		if form.is_valid():
-			data = form.save(commit=False)
-			data.user_name = user
-			data.save()
-			messages.success(request, f'Posted Successfully')
-			return redirect('home')
-	else:
-		form = NewPostForm()
-	return render(request, 'home', {'form':form})
+    print(request.POST.get('pic',None))
+    
+    user = request.user
+    if request.method == "POST":
+      image= request.FILES.get('pic',None)
+      caption= request.POST.get('description',None)
+      form = NewPostForm(request.POST, request.FILES)
+      if form.is_valid():
+      
+        # data = form.save(commit=False)
+        data = Post()
+        data.user_name = user
+        data.description = caption
+        if image :
+          data.pic = image.url
+        data.save()
+       
+        messages.success(request, f'Posted Successfully')
+        return redirect('home')
+    else:
+      
+      form = NewPostForm(request.POST, request.FILES)
+      return render(request, 'home', {'form':form})
 
 
 def AboutProcess(request):

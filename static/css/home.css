@@ -9,10 +9,10 @@
   }
   
   body {
-    font-family: 'Lato';
-    background-color: #d0eaf9;
-    --twitter-color: #50b7f5;
-    --twitter-background: #e6ecf0;
+    font-family: 'Lato' !important;
+    background-color: #d0eaf9 !important;
+    --twitter-color: hsl(203, 89%, 64%) !important;
+    --twitter-background: #e6ecf0 !important;
   }
 
   body {

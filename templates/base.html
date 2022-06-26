@@ -7,78 +7,198 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Neptter</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    {% comment %} <link rel="stylesheet" href="{% static 'css/home.css' %}" />
     <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}" /> {% endcomment %}
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- ICONSCOUT CDN -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+   
   </head>
   <body>
- <!-- sidebar starts -->
-    <div class="sidebar">
-        <img  class= "image2" src="{% static 'images/neptter.png' %}" alt=""/>
-
-      <div class="sidebarOption active">
-        <span class="material-icons"> home </span>
-        <h2>Home</h2>
-      </div>
-
-      <div class="sidebarOption">
-        <span class="material-icons"> search </span>
-        <h2>Search</h2>
-      </div>
-
-      <div class="sidebarOption">
-        <span class="material-icons"> notifications </span>
-        <h2>Notifications</h2>
-      </div>
-
-      <div class="sidebarOption" href="www.google.com" >
-        <span class="material-icons"> person </span>
-        <a href="{% url 'profile' %}">Profile</a>
-      </div>
-
-
-      <div class="sidebarOption">
-        <span class="material-icons"> dark_mode </span>
-        <h2>Dark Mode</h2>
-      </div>
-
-      <div class="sidebarOption">
-        <span class="material-icons"> bookmark_border </span>
-        <h2>Bookmarks</h2>
-      </div>
-
-      <div class= "loginOption">
-        <img src="{% static 'images/sanif.jpg' %}" alt=""/>
-        <div>
-        <h3>{{user.first_name}}</h3>
-        <h5>@{{user.username}}</h5>
+    <nav>
+        <div class="container">
+         <h2 class="'log"> Neptter</h2>
+         <div class="search-bar" >
+             <i class="uil uil-search"></i>
+             <input type="search" id="post-searchbar" placeholder="Search for the posts" >
+            </div>
+            <div class="create">
+             <label class="btn btn-primary"for="create-post">Create</label>
+             <div class="profile-photo">
+                 <img src="../static/images/sanif.jpg">
+             </div>
+            </div>
         </div>
-        
-        <a href=" {% url 'logout'%}"> Logout</a>  
-        <i></i>
-    </div>
-    </div>
-    <!-- sidebar ends --> 
-
+     </nav>
+      <!--=========== MAIN ==========-->
+      <main>
+         <div class="container">
+               <!--=========== LEFT SIDE==========-->
+             <div class="left">
+                 <a class="profile">
+                     <div class="profile-photo">
+                         <img src="../static/images/sanif.jpg">
+                     </div>
+                     <div class="handle">
+                         <h4>Sanif Kandel</h4>
+                         <p class="text-muted">@sanifkandel</p>
+                     </div>
+                 </a>
  
-    {% block body %}
+                 <!--=========== SIDE BAR ==========-->
+                 <div class="sidebar">
+                     <a class="menu-item active">
+                         <span><i class="uil uil-home"></i></span><h3>Home</h3>
+                     </a>
+ 
+                     <a class="menu-item ">
+                         <span><i class="uil uil-compass"></i></span><h3>Profile</h3>
+                     </a>
+ 
+                     <a class="menu-item " id="notifications">
+                         <span><i class="uil uil-bell"><small class="notification-count">9+</small></i></span><h3>Notifications</h3>
+                          <!--=========== NOTIFICATIONSS =========== -->
+                          <div class="notifications-popup">
+                             <div>
+                                 <div class="profile-photo">
+                                     <img src="../static/images/profile-2.jpg" >
+                                 </div>
+                                 <div class="notification-body">
+                                     <b>Sanif Kandel</b> accepted your friend request <small class="text-muted"> 2 days ago.</small>
+                                 </div>
+                             </div>
+                             <div>
+                                 <div class="profile-photo">
+                                     <img src="../static/images/profile-3.jpg" >
+                                 </div>
+                                 <div class="notification-body">
+                                     <b>Sanif Kandel</b> accepted your friend request <small class="text-muted"> 2 days ago.</small>
+                                 </div>
+                             </div>
+                             <div>
+                                 <div class="profile-photo">
+                                     <img src="../static/images/profile-4.jpg" >
+                                 </div>
+                                 <div class="notification-body">
+                                     <b>Sanif Kandel</b> accepted your friend request <small class="text-muted"> 2 days ago.</small>
+                                 </div>
+                             </div>
+                          </div>
+                           <!--============== END NOTIFICATIONS ============== -->
+                     </a>
 
-    {% endblock %} 
-    <!-- widgets starts -->
+                     <a class="menu-item ">
+                         <span><i class="uil uil-chart-line"></i></span><h3>About Us</h3>
+                     </a>
+                     <a class="menu-item " id="theme">
+                         <span><i id="theme1" class="uil uil-moon"></i></span><h3 id="mode">Dark Mode</h3>
+                     </a>
+                     <a class="menu-item " href=" {% url 'logout'%}">
+                         <span><i class="uil uil-signout"></i></span><h3 class="logout">Logout</h3>
+                     </a>
+                 </div> 
+                 <!--============== END OF SIDEBAR ============== -->
+                  {% comment %} <label for="create-post" class="btn btn-primary">Create Post</label> {% endcomment %}
+ 
+             </div>
+             {% block body %}
+
+             {% endblock %} 
+
+             <!--===========RIGHT SECTION==========-->
+            <div class="right">
+                <div class="friend-requests">
+                    <h4>Friends to Follow </h4>
+                     <!--===========FRIEND_1==========-->
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="../static/images/sanif.jpg" alt="">
+                            </div>
+                            <div>
+                                <h5>Ram Sharma</h5>
+                                <p class="text-muted">
+                                    4 mutual
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+                    <!--===========FRIEND_2==========-->
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="../static/images/sanif.jpg" alt="">
+                            </div>
+                            <div>
+                                <h5>Ram Sharma</h5>
+                                <p class="text-muted">
+                                    4 mutual
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+
+                     <!--===========FRIEND_3==========-->
+                     <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="../static/images/sanif.jpg" alt="">
+                            </div>
+                            <div>
+                                <h5>Ram Sharma</h5>
+                                <p class="text-muted">
+                                    4 mutual
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+
+                      <!--===========FRIEND_4==========-->
+                      <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="../static/images/sanif.jpg" alt="">
+                            </div>
+                            <div>
+                                <h5>Ram Sharma</h5>
+                                <p class="text-muted">
+                                    4 mutual
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+     </main>
    
-    <div class="widgets">
-
-    </div> 
-
-     
-    <!-- widgets ends -->
-
-</body>
+	<script src="{% static 'js/index.js' %}"></script>
+  </body>
 </html>
