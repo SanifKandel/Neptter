@@ -3,6 +3,7 @@ from django.urls import path
 from django.urls.conf import include
 from . import views
 
+
 urlpatterns = [
 
 
@@ -10,4 +11,5 @@ urlpatterns = [
  path('profile/',views.ProfileProcess,name="profile"),
  path('aboutus/',views.AboutProcess,name="about"),
  path('post/',views.create_post,name="post"),
+ path('deletepost/',views.Postdelete,name="postdelete"),
 ]

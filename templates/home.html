@@ -5,7 +5,7 @@
              
             <div class="middle">
          
-             <form   method="POST" action="{% url 'post' %}" class="create-post">
+             <form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post">
                 {% csrf_token %}
                 <div class="profile-photo">
                     <img src="{{ user.profile.profile_pic.url }}">
@@ -31,16 +31,18 @@
                                 <small> {{post.date_posted}}</small>
                             </div>
                         </div>
+                        {% if post.user_name.first_name == user.first_name %}
                         <div class="menu">
                         <span class="edit">
                             <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
                         </span>
-                        <div class="menu-content">
+                        <div class="menu-content" action="{% url 'postdelete' %}">
                         <ul class="list">
                             <li><a href="#"><i class="uil uil-trash-alt"></i>Delete Post</a></li>
                           </ul></div>
 
                         </div>
+                        {% endif %}
                     </div>
                     <div class="caption">
                         <p>{{post.description}}</p>

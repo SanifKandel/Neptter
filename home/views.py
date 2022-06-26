@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
 # Create your views here.
 
 
@@ -63,7 +64,7 @@ def create_post(request):
         data.user_name = user
         data.description = caption
         if image :
-          data.pic = image.url
+          data.pic = image
         data.save()
        
         messages.success(request, f'Posted Successfully')
@@ -72,6 +73,11 @@ def create_post(request):
       
       form = NewPostForm(request.POST, request.FILES)
       return render(request, 'home', {'form':form})
+
+def Postdelete(request):
+    post = Post.objects.get(id=request.POST.get('id'))
+    post.delete()
+    return redirect('home')
 
 
 def AboutProcess(request):
