@@ -12,7 +12,6 @@ from django.template.context import Context
 
 # Create your views here.
 
-
 class HomeProcess(ListView):
   model = Post
   template_name = 'home.html'
@@ -75,11 +74,13 @@ def create_post(request):
       form = NewPostForm(request.POST, request.FILES)
       return render(request, 'home', {'form':form})
 
+@login_required
 def Postdelete(request):
     post = Post.objects.get(id=request.POST.get('id'))
     post.delete()
     return redirect('home')
 
+@login_required
 def Postlike (request):
     username = request.user.username
     post_id = request.GET.get('post_id')
@@ -91,8 +92,8 @@ def Postlike (request):
         new_like =LikePost.objects.create(post_id=post_id, username=username)
         new_like.save()
         post.like = post.like+1
-        liked = True
         post.save()
+        liked = True
         context={
         'liked': liked
     }   

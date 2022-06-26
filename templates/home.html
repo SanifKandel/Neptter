@@ -31,18 +31,21 @@
                                 <small> {{post.date_posted}}</small>
                             </div>
                         </div>
-                        {% if post.user_name.first_name == user.first_name %}
+                       
                         <div class="menu">
                         <span class="edit">
                             <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
                         </span>
                         <div class="menu-content" action="{% url 'postdelete' %}">
                         <ul class="list">
-                            <li><a href="#"><i class="uil uil-trash-alt"></i>Delete Post</a></li>
+                            {% if post.user_name.first_name == user.first_name %}
+                            <li><a><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
+                            {% endif %}
+                            <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>
                           </ul></div>
 
                         </div>
-                        {% endif %}
+                       
                     </div>
                     <div class="caption">
                         <p>{{post.description}}</p>
@@ -57,11 +60,11 @@
                     </div>
                     <div class="action-button">
                         <div class="interaction-button">
-                            {% comment %} {% if liked == True %} {% endcomment %}
+                            {% if liked is True %} 
                             <a href="/likepost?post_id={{post.id}}"><i class="uil uil-heart"></i></a>
-                            {% comment %} {% else %} 
+                             {% else %} 
                             <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
-                            {% endif %}{% endcomment %}
+                            {% endif %}
                             <span><i class="uil uil-comment-dots"></i></span>
 
                         </div>
