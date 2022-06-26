@@ -10,7 +10,7 @@
                 <div class="profile-photo">
                     <img src="{{ user.profile.profile_pic.url }}">
                 </div>
-                <input type="text"  name ='description' placeholder="What's on your {{user.first_name}}?" id="create-post">
+                <input type="text"  name ='description' placeholder="What's on your mind {{user.first_name}}?" id="create-post">
                 <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload" onchange="getImage(this.value);"> 
                 <label for="imageupload"><i class="uil uil-image"></i></label>
                 <div id="imageurl"></div>
@@ -60,11 +60,11 @@
                     </div>
                     <div class="action-button">
                         <div class="interaction-button">
-                            {% if liked is True %} 
+                            {% comment %} {% if liked %}  {% endcomment %}
                             <a href="/likepost?post_id={{post.id}}"><i class="uil uil-heart"></i></a>
-                             {% else %} 
+                             {% comment %} {% else %} 
                             <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                             <span><i class="uil uil-comment-dots"></i></span>
 
                         </div>

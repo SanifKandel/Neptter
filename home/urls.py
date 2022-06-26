@@ -9,6 +9,7 @@ urlpatterns = [
 
  path('',views.HomeProcess.as_view(),name="home"),
  path('profile/',views.ProfileProcess,name="profile"),
+  path('myprofile/',views.MyProfile.as_view(),name="myprofile"),
  path('aboutus/',views.AboutProcess,name="about"),
  path('post/',views.create_post,name="post"),
  path('deletepost/',views.Postdelete,name="postdelete"),

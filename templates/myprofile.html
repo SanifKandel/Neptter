@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="middle">
+        <div class="profile-part">
+        
+        <div class="cover-image" style="background-image:url({{ user.profile.cover_pic.url }})"></div>
+        <div class="profile-image" style="background-image: url({{ user.profile.profile_pic.url }})"></div>
+        <div class="profile-details">
+            <div class="buttons">
+                    <button class="btn btn-success" id="edit-profile-btn">Edit Profile</button>
+                    {% comment %} <button class="btn btn-success float-right" onclick="unfollow_user(this,'{{username.username}}','edit_page')" id="following-btn">Following</button>
+                    <button class="btn btn-outline-success float-right" onclick="follow_user(this,'{{username.username}}','edit_page')" id="follow-btn">Follow</button> {% endcomment %}
+            </div>
+            <div class="details-data">
+                <h4>{{user.first_name}}</h4>
+                <div class="grey">@{{user.username}}</div>
+                <div class="bio">
+                 Jindagi estai ho kta ho
+                </div>
+                <div class="grey" style="padding: 8px 0px;">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                        <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    &nbsp;Joined 2020/12/1
+                </div>
+                <div>
+                    <strong>
+                        7
+                    </strong>
+                    &nbsp;<span class="grey">Posts</span>
+                    &ensp;
+                    <a href="#">
+                        <strong id="following__count">45</strong>&nbsp;<span class="grey">Following</span>
+                    </a>
+                    &ensp;
+                    <a href="#">
+                        <strong id="follower__count">46</strong>&nbsp;<span class="grey">Followers</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title">
+        <span class="material-symbols-outlined">
+            article
+            </span>
+        <h4>{{user.first_name}}'s Posts</h4>
+    </div>
+    <div class="feeds">
+                <!--============== FEED- 1 ============== -->
+                {% for post in posts reversed %}
+                {% if post.user_name.first_name == user.first_name %}
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-photo">
+                                <img src="{{ post.user_name.profile.profile_pic.url }}" alt="">
+                            </div>
+                            <div class="info">
+                                <h3> {{post.user_name.first_name}} </h3>
+                                <small> {{post.date_posted}}</small>
+                            </div>
+                        </div>
+                       
+                        <div class="menu">
+                        <span class="edit">
+                            <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
+                        </span>
+                        <div class="menu-content" action="{% url 'postdelete' %}">
+                        <ul class="list">
+                            {% if post.user_name.first_name == user.first_name %}
+                            <li><a><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
+                            {% endif %}
+                            <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>
+                          </ul></div>
+
+                        </div>
+                       
+                    </div>
+                    <div class="caption">
+                        <p>{{post.description}}</p>
+                    </div>
+                    <div class="photo">
+                        {% if post.pic %}
+                        <img
+                          src="{{post.pic.url}}"
+                          alt=""
+                        />
+                        {% endif %}
+                    </div>
+                    <div class="action-button">
+                        <div class="interaction-button">
+                            {% comment %} {% if liked %}  {% endcomment %}
+                            <a href="/likepost?post_id={{post.id}}"><i class="uil uil-heart"></i></a>
+                             {% comment %} {% else %} 
+                            <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
+                            {% endif %} {% endcomment %}
+                            <span><i class="uil uil-comment-dots"></i></span>
+
+                        </div>
+                    </div>
+                    <div class="liked-by">
+                        <p><b>{{post.like}}</b> likes</p>
+                    </div>
+                    {% comment %} <div class="caption">
+                        <p> <b>{{post.user_name.first_name}}</b> {{post.description}}</p>
+                    </div> {% endcomment %}
+                </div>
+
+                  <!--===========END OF FEED ==========-->
+                  {% endif %}
+                  {% empty %}
+                  {% endfor %}
+                 
+</div>
+
+    </div>
+    {% comment %} <div class="space"></div> {% endcomment %}
+    
+{% endblock %}
+
+{% comment %} {% block emptyprofile %}
+    <center>
+        <br>
+        <strong style="font-size: 1.2em;">@{{username}} hasn't posted</strong>
+        <div class="grey" style="font-size: .9em;">When they do, their posts will show up here.</div>
+    </center>
+{% endblock %} {% endcomment %}

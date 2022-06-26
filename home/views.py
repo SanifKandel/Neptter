@@ -16,12 +16,23 @@ class HomeProcess(ListView):
   model = Post
   template_name = 'home.html'
   context_object_name = 'posts'
+  val= True
 
 
   def get_context_data(self, **kwargs):
    context = super(HomeProcess, self).get_context_data(**kwargs)
    return context
 
+class MyProfile(ListView):
+  model = Post
+  template_name = 'myprofile.html'
+  context_object_name = 'posts'
+
+
+
+  def get_context_data(self, **kwargs):
+   context = super(MyProfile, self).get_context_data(**kwargs)
+   return context
 
 
 @login_required
@@ -113,3 +124,6 @@ def Postlike (request):
 
 def AboutProcess(request):
     return render(request, 'aboutus.html')
+
+def MyProfileProcess(request):
+    return render(request, 'myprofile.html')
