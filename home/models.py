@@ -17,6 +17,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=300, null=True)
     profile_pic = models.FileField(upload_to='uploads', default='user.png')
     cover_pic = models.FileField(upload_to='uploads', default='user.png')
+    bio = models.CharField(max_length=255,blank=True ,default='')
     birthday = models.DateField(auto_now_add=False, null=True)
     gender = models.CharField(max_length=2, choices=gender, null=True)
     created_date = models.DateField(auto_now_add=True, null=True)

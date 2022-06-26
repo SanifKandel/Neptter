@@ -11,7 +11,7 @@
     --color-light:hsl(203,30%,var(--light-color-lightness));
     --color-gray:hsl(203,15%,65%);
     --color-primary:hsl(203,89%,64%);
-    --color-secondary:hsl(203,100%,90%);
+    --color-secondary:hsl(203,90%,80%);
     --color-success:rgb(104, 219, 104);
     --color-danger:hsl(0,95%,65%);
     --color-dark:hsl(203,30%,var(--dark-color-lightness));
@@ -477,73 +477,40 @@ main .container .right{
     justify-content:center;
 }
 
-/* ============= THEME ===============
-.right .background{
-    margin-top: 2rem;
-}
-
-.right .choose-bg{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 1.5rem;
-}
-.right .choose-bg > div{
-    padding: var(--card-padding);
-    width:100%;
-    display:flex;
-    align-items:center;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 0.4rem;
-    cursor: pointer;
-}
-.right .choose-bg > div.active{
-    border: 2px solid var(--color-primary);
-}
-.right .choose-bg .bg-1{
-    background:white;
-    color:black;
-}
-.right .choose-bg .bg-2{
-    background:hsl(252, 30%, 17%);
-    color:white;
-}
-.right .choose-bg .bg-3{
-    background:hsl(252, 30%, 10%);
-    color:white;
-}
- */
 
 /********** Profile Section **********/
 .middle .profile-part{
     background-color:var(--color-white);
-    border-radius: var(--border-radius);
+    border-radius: 1rem 1rem 1rem 1rem; 
 }
 .middle .cover-image{
     height: 210px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #ccd6dd;
-    border-radius: 2rem 2rem 0 0;
+    background-color: var(--color-white);
+    border-radius: 1rem 1rem 0 0;
+
 
 }
 .middle .profile-image{
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     position: absolute;
     left: 28%;
-    top: 110px;
+    top: 120px;
     border-radius: 99999px;
-    border: 4px solid white;
+    border: 4px solid var(--color-white);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: white;
+    background-color: var(--color-white);
 }
 .middle .profile-details{
     padding: 15px 20px;
+}
+.middle .profile-details .grey{
+    color:var(--color-gray);
 }
 .middle .profile-details .buttons{
     display:flex;
@@ -568,16 +535,25 @@ main .container .right{
     margin-top: 8px;
 }
 
+
 .middle .post-title{
-    background-color:var(--color-white);
+    background-color:var(--color-primary);
     padding:var(--card-padding);
+    color:var(--color-white);
     margin-top:1rem;
     display: flex;
-    border-radius: 2rem 2rem 0 0;
+    border-radius: 1.5rem 1.5rem 0 0;
 }
+
 .middle .post-title h4{
     padding: 0 0 0 5px ;
 }
+/* 
+.middle .feeds .feed:first-child{
+    border-top: 3px solid var(--color-white);
+    border-radius:0 0 1rem 1rem;
+    margin-top: 0;
+} */
 
 
 
@@ -652,6 +628,196 @@ main .container .right{
     }
 
 }
+
+
+/*--------------- Profile Update Page CSS ---------------*/
+
+
+/* pop up box styling */
+.main .popup-outer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 47%;
+    z-index: 9;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: var(--card-border-radius);
+    box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+    transform: scale(1.2);
+    transition: opacity 0.2s 0s ease-in-out,  
+                transform 0.2s 0s ease-in-out;
+}
+.main.active .popup-outer{
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+.main  .popup-box{
+    position: relative;
+    justify-content: center;
+    background: var(--color-white);
+    top: -15%;
+    border-radius: var(--card-border-radius);
+    padding: 30px;
+    max-width: 380px;
+    width: 100%;
+
+}
+.popup-box .close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    color: #b4b4b4;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.popup-box .close:hover{
+    color: #333;
+}
+.popup-box .profile-text{
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.popup-box .profile-text .text{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+.profile-text .text .name{
+    font-size: 14px;
+    font-weight: 400;
+}
+.profile-text .text .profession{
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: -4px;
+}
+ .popup-box img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.popup-box textarea{
+    min-height: 140px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 10px 10px 10px 14px;
+    font-weight: 400;
+    background: #f3f3f3;
+}
+.popup-box .button{
+    display: flex;
+    justify-content: flex-end;
+}
+.popup-box .button button{
+    outline: none;
+    border: none;
+    margin-left: 10px;
+    background: var(--color-primary);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.button button.cancel{
+    background: var(--color-danger);
+}
+.button button.cancel:hover{
+    opacity: 0.8;
+    
+}
+.button button.send:hover{
+    opacity: 0.8;
+}
+
+/* Form */
+
+/* Google Fonts - Poppins */
+
+/* .popup-box .form{
+    position: absolute;
+    max-width: 430px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 6px;
+    background: #FFF;
+} */
+
+header{
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--color-dark);
+    text-align: center;
+}
+/* form{
+    margin-top: 30px;
+} */
+.popup-box .field{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+.field input,
+.field button{
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 12px;
+    font-weight: 200;
+    border-radius: 6px;
+}
+.field input{
+    background:var(--color-white);
+    font-family: 'Poppins';
+    outline: none;
+    padding: 8px 8px 8px 8px;
+    border: 1px solid#CACACA;
+}
+.field input::placeholder{
+    color:var(--color-dark);
+}
+.field input .form-control-file{
+    align-items: center;
+}
+.field input:focus{
+    border-bottom-width: 2px;
+}
+.field button{
+    color: var(--color-white);
+    background-color: #0171d3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.field button:hover{
+    background-color: #016dcb;
+}
+@media screen and (max-width: 400px) {
+    .popup-box{
+        padding: 20px 10px;
+    }
+    
+}
+
+
+
+
 
 
 

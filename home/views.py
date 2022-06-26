@@ -25,7 +25,7 @@ class HomeProcess(ListView):
 
 class MyProfile(ListView):
   model = Post
-  template_name = 'myprofile.html'
+  template_name = 'profileupdate.html'
   context_object_name = 'posts'
 
 

@@ -1,6 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
+<div class="main">
+    <div class="popup-outer">
+        <div class="popup-box">
+                    <div class="form-content">
+                        <header>Update Profile</header>
+                        <form >
+                    
+                            <div class="field input-field">
+                                <input type="text" placeholder="Fullname" class="input"  value="{{request.user.first_name}}">
+                            </div>
+    
+                            <div class="field input-field">
+                                <input type="text" placeholder="Username" class="input" value="{{request.user.username}}">
+                            </div>
+
+                            <div class="field input-field">
+                                <input type="number" placeholder="Phone" class="input">
+                            </div>
+
+                            <div class="field input-field">
+                                <input type="text" placeholder="Address" class="input">
+                            </div>
+
+                            <div class="field input-field">
+                                <input id="email" name="email" type="text" placeholder="Enter your Email" value="{{request.user.email}}">
+                            </div>
+
+                            <div class="field input-field">
+                                <input type="date" id="birthday" name="birthday">
+                            </div>
+
+                            <div class="field input-field">
+                                <input type="text" placeholder="Gender" class="input">
+                            </div>
+
+                            <div class="field input-field">
+                                <input type="text" placeholder="Bio" class="input">
+                            </div>
+
+                            <div class="field input-field">
+                            <input name='pic' type="file" class="form-control-file " placeholder="Email"   id="imageupload">
+                        </div>
+                        <div class="field input-field">
+                            <input name='pic' type="file" class="form-control-file "  id="imageupload" >
+                        </div>
+                        <div class="button">
+                            <button class="send">Update</button>
+                            <button id="close" class="cancel">Cancel</button>
+                            
+                        </div>  
+                        </form>
+                    </div>
+    
+                   
+        </div>
+    </div>
     <div class="middle">
       
         
@@ -14,6 +70,8 @@
                     {% comment %} <button class="btn btn-success float-right" onclick="unfollow_user(this,'{{username.username}}','edit_page')" id="following-btn">Following</button>
                     <button class="btn btn-outline-success float-right" onclick="follow_user(this,'{{username.username}}','edit_page')" id="follow-btn">Follow</button> {% endcomment %}
             </div>
+            
+
             <div class="details-data">
                 <h4>{{user.first_name}}</h4>
                 <div class="grey">@{{user.username}}</div>
@@ -48,7 +106,9 @@
                 </div>
             </div>
         </div>
+        
     </div>
+
     <div class="post-title">
         <span class="material-symbols-outlined">
             article
@@ -124,14 +184,6 @@
 </div>
 
     </div>
-    {% comment %} <div class="space"></div> {% endcomment %}
+</div>
     
 {% endblock %}
-
-{% comment %} {% block emptyprofile %}
-    <center>
-        <br>
-        <strong style="font-size: 1.2em;">@{{username}} hasn't posted</strong>
-        <div class="grey" style="font-size: .9em;">When they do, their posts will show up here.</div>
-    </center>
-{% endblock %} {% endcomment %}

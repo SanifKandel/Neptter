@@ -107,3 +107,22 @@ function menuToggle(){
     const toggleMenu = document.querySelector('.menu');
     toggleMenu.classList.toggle('active');
 }
+
+
+
+//Profile Update Frontend
+
+const section = document.querySelector(".main"),
+      hireBtn = document.querySelector(".profile-details .buttons");
+      cancelBtn = document.querySelectorAll("#close");
+      
+
+hireBtn.addEventListener("click", ()=>{
+    section.classList.add("active");
+})
+cancelBtn.forEach(cBtn => {
+    cBtn.addEventListener("click", () =>{
+        section.classList.remove("active");
+    })
+});
+console.log(cancelBtn);
