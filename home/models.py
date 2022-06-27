@@ -27,7 +27,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
         description = models.CharField(max_length=255)
-        pic = models.ImageField(upload_to='uploads', blank=True)
+        pic = models.FileField(upload_to='uploads', blank=True)
         date_posted = models.DateTimeField(default=timezone.now)
         user_name = models.ForeignKey(User, on_delete=models.CASCADE)
         tags = models.CharField(max_length=100, blank=True)

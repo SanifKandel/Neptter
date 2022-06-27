@@ -1,5 +1,6 @@
 from .models import Post, Profile
 from django import forms
+
 class ProfileForm(forms.ModelForm):
 
     class Meta:
@@ -8,6 +9,14 @@ class ProfileForm(forms.ModelForm):
 
         widgets = {
         'birthday': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        'phone': forms.NumberInput(attrs={'class': 'form-control', 'type': 'tel'}),
+        'address': forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}),
+        'bio': forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}),
+        'gender': forms.Select(attrs={'class': 'form-control','id': 'gender'}),
+        'profile_pic': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
+        'cover_pic': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
+        
+
         }
 
 class NewPostForm(forms.ModelForm):

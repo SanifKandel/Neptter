@@ -6,7 +6,8 @@
         <div class="popup-box">
                     <div class="form-content">
                         <header>Update Profile</header>
-                        <form >
+                        <form method="POST" action='{% url 'myprofile' %}' enctype="multipart/form-data" >
+                            {% csrf_token %}
                     
                             <div class="field input-field">
                                 <input type="text" placeholder="Fullname" class="input"  value="{{request.user.first_name}}">
@@ -17,11 +18,11 @@
                             </div>
 
                             <div class="field input-field">
-                                <input type="tel" placeholder="Phone" class="input">
+                                {{profile.phone}}
                             </div>
 
                             <div class="field input-field">
-                                <input type="text" placeholder="Address" class="input">
+                                {{profile.address}}
                             </div>
 
                             <div class="field input-field">
@@ -29,22 +30,22 @@
                             </div>
 
                             <div class="field input-field">
-                                <input type="date" id="birthday" name="birthday">
+                                {{profile.birthday}}
                             </div>
 
                             <div class="field input-field">
-                                <input type="text" placeholder="Gender" class="input">
+                                {{profile.gender}}
                             </div>
 
                             <div class="field input-field">
-                                <input type="text" placeholder="Bio" class="input">
+                                {{profile.bio}}
                             </div>
 
                             <div class="field input-field">
-                            <input name='pic' type="file" class="form-control-file " placeholder="Email"   id="imageupload">
+                                {{profile.profile_pic}}
                         </div>
                         <div class="field input-field">
-                            <input name='pic' type="file" class="form-control-file "  id="imageupload" >
+                            {{profile.cover_pic}}
                         </div>
                         <div class="button">
                             <button class="send">Update</button>

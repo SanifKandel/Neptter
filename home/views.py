@@ -16,7 +16,6 @@ class HomeProcess(ListView):
   model = Post
   template_name = 'home.html'
   context_object_name = 'posts'
-  val= True
 
 
   def get_context_data(self, **kwargs):
@@ -24,19 +23,36 @@ class HomeProcess(ListView):
    return context
 
 class MyProfile(ListView):
+  http_method_names=['post','get']
   model = Post
   template_name = 'profileupdate.html'
   context_object_name = 'posts'
 
-
-
+  def post(self, request, **kwargs):
+        my_data = request.POST# do something with your data
+        context = {}  #  set your contextreturn super(TemplateView, self).render_to_response(context)
+        
   def get_context_data(self, **kwargs):
    context = super(MyProfile, self).get_context_data(**kwargs)
+   form = ProfileForm(initial={
+    'phone':self.request.user.profile.phone,
+    'address':self.request.user.profile.address,
+    'bio':self.request.user.profile.bio,
+    'gender':self.request.user.profile.gender,
+    'birthday':self.request.user.profile.birthday,
+    'cover_pic':self.request.user.profile.cover_pic,
+    'profile_pic':self.request.user.profile.profile_pic,
+
+   })
+   context['profile']=form
+   context['rtn']=True
    return context
+
 
 
 @login_required(login_url='login')
 def ProfileProcess(request):
+    rtn = request.POST.get('rtn', None)
     cuser = request.user.profile
     if request.method == 'POST':
         profile = ProfileForm(request.POST, request.FILES, instance=cuser)
@@ -50,12 +66,15 @@ def ProfileProcess(request):
         else:
 
             context = {'profile': profile}
+            if rtn:
+                return redirect('myprofile')
             return render(request, 'profile.html', context)
-
 
     context = {
         'profile':ProfileForm(instance=cuser),
     }
+    if rtn:
+                return redirect('myprofile')
     return render(request, 'profile.html',context)
 
 
@@ -72,6 +91,7 @@ def create_post(request):
       
         # data = form.save(commit=False)
         data = Post()
+        # print(Post.pic.content_type()) 
         data.user_name = user
         data.description = caption
         if image :
