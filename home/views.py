@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.shortcuts import render
 
 from .models import Profile , Post, LikePost
@@ -28,9 +29,28 @@ class MyProfile(ListView):
   template_name = 'profileupdate.html'
   context_object_name = 'posts'
 
-  def post(self, request, **kwargs):
-        my_data = request.POST# do something with your data
-        context = {}  #  set your contextreturn super(TemplateView, self).render_to_response(context)
+  def post(self, request, **kwargs):  
+    cuser = request.user.profile
+    if request.method == 'POST':
+        profile = ProfileForm(request.POST, request.FILES, instance=cuser)
+        full_name = request.POST.get('full_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        if profile.is_valid():
+            User.objects.filter(username=cuser).update(
+                first_name=full_name, email=email, username=username)
+            profile.save()
+        else:
+            context = {'profile': profile}
+            return render(request, 'profileupdate.html', context)
+
+    context = {
+        'profile':ProfileForm(instance=cuser),
+        'post':'model',
+    }
+
+    return render(request, 'profileupdate.html',context)
+
         
   def get_context_data(self, **kwargs):
    context = super(MyProfile, self).get_context_data(**kwargs)
@@ -40,7 +60,7 @@ class MyProfile(ListView):
     'bio':self.request.user.profile.bio,
     'gender':self.request.user.profile.gender,
     'birthday':self.request.user.profile.birthday,
-    'cover_pic':self.request.user.profile.cover_pic,
+    'cover_pic':self.request.user.profile.cover_pic.name,
     'profile_pic':self.request.user.profile.profile_pic,
 
    })
