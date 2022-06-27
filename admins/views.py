@@ -29,5 +29,5 @@ def admin_dashboard(request):
         'user_info': user_info,
         'admin_info': admin_info
     }
-    return render(request, 'admins-dashboard.html', context)
+    return render(request, 'admin-dashboard.html', context)
 

@@ -1,0 +1,211 @@
+{% extends 'Admin-layout.html' %}
+{% load socialaccount %}
+{% load static %}
+{% block main %}
+<div id="wrapper">
+  <div class="d-flex flex-column" id="content-wrapper">
+    <div id="content">
+      <div class="container-fluid">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-dark mb-0">Admin Dashboard</h3>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-xl-4 mb-4">
+            <a href="#">
+              <div class="card shadow shadow-info shadow-intensity-lg border-1 py-3">
+                <div class="card-body">
+                  <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                      <div class="text-uppercase fw-bold text-xs mb-1"><span>Total User </span></div>
+                      <div class="text-secondary fw-normal display-6 h5 mb-0">
+                        <span> User List : <span class="text-success">{{user}}</span></span>
+                      </div>
+                    </div>
+                    <div class="col-auto" style="color: black"><i class="fa-solid fa-user-group fa-3x"></i></div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-xl-4 mb-4">
+            <a href="#">
+              <div class="card shadow border-1 py-3">
+                <div class="card-body">
+                  <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                      <div class="text-uppercase fw-bold text-xs mb-1"><span>Total Admin</span></div>
+                      <div class="text-secondary fw-normal display-6 h5 mb-0">
+                        <span> Admin List: <span class="text-info">{{admin}}</span></span>
+                      </div>
+                    </div>
+                    <div class="col-auto" style="color: black"><i class="fas fa-user-secret fa-3x"></i></div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-xl-4 mb-4">
+            <a href="#">
+              <div class="card shadow border-1 py-3">
+                <div class="card-body">
+                  <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                      <div class="text-uppercase fw-bold text-xs mb-1"><span>Total Post</span></div>
+                      <div class="text-secondary fw-normal display-6 h5 mb-0">
+                        <span> Post <span class="text-info">200</span></span>
+                      </div>
+                    </div>
+                    <div class="col-auto" style="color: black"><i class="fa-solid fa-images fa-3x"></i></div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+
+          <div class="col-lg-6 col-md-6 col-xl-4 mb-4">
+            <a href="#">
+              <div class="card shadow border-1 py-3">
+                <div class="card-body">
+                  <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                      <div class="text-uppercase fw-bold text-xs mb-1">
+                        <span>Total Comments</span>
+                      </div>
+                      <div class="text-secondary fw-normal display-6 h5 mb-0">
+                        <span> Comments: <span class="text-warning">500</span></span>
+                      </div>
+                    </div>
+                    <div class="col-auto" style="color: black"><i class="fa-solid fa-comment-dots fa-3x"></i></div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-7 col-xl-8 ">
+            <div class="card mb-4 shadow border-0">
+              <div class="card-header bg-info d-flex justify-content-between align-items-center ">
+                <h6 class="text-center fw-bold m-0">User Overview</h6>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="text-primary fw-bold m-0">Admins</h6>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Joined Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            {% for iadmin in admin_info %}
+                            <tr>
+                              <th scope="row">{{iadmin.id}}</th>
+                              <td>{{iadmin.username}}</td>
+                              <td>{{iadmin.date_joined}}</td>
+                            </tr>
+                          {% endfor %}
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="text-primary fw-bold m-0">User</h6>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Joined Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for iuser in user_info %}
+                            <tr>
+                              <th scope="row">{{iuser.id}}</th>
+                              <td>{{iuser.username}}</td>
+                              <td>{{iuser.date_joined}}</td>
+                            </tr>
+                          {% endfor %}
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-5 col-xl-4">
+            <div class="card mb-4 shadow border-0">
+              <div class="card-header bg-info d-flex justify-content-between align-items-center">
+                <h6 class="fw-medium m-0">Total User overview</h6>
+              </div>
+              <div class="card-body">
+                <div class="card py-2" style="margin-bottom: 20px">
+                  <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                      <div class="col me-2">
+                        <div class="text-uppercase fw-bold text-xs mb-1" style="color: #383841"></div>
+                        <div class="fw-bold display-6 h5 mb-0">
+                          <span style="color: #383841"> Active: <span class="text-secondary">{{admin}}</span> </span>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-user-secret fa-3x text-primary" style="color: #32323a !important"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card py-2">
+                  <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                      <div class="col me-2">
+                        <div class="text-uppercase fw-bold text-xs mb-1" style="color: #0099cc"></div>
+                        <div class="fw-bold display-6 h5 mb-0">
+                          <span style="color: #0099cc"> Active: <span class="text-secondary">{{user}}</span> </span>
+                        </div>
+                      </div>
+                      <div class="col-auto"><i class="fa-solid fa-user-group fa-3x" style="color: #0099cc"></i></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-center small mt-4">
+                  <span class="me-2"> <i class="fas fa-circle" style="color: #32323a"></i>&nbsp;Admins </span>
+                  <span class="me-2"> <i class="fas fa-circle" style="color: #0099cc"></i>&nbsp; User</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %}
+
