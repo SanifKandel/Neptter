@@ -21,9 +21,14 @@ def loginProcess(request):
         user = authenticate(request,username=username, password=password)
 
         if username and password !="":
-            if user is not None:
-                auth_login(request,user)
-                return redirect('home')
+            if username and password != "":
+                if user is not None:
+                    if not user.is_staff:
+                        auth_login(request, user)
+                        return redirect('/')
+                    elif user.is_staff:
+                        auth_login(request, user)
+                        return redirect('/admins')
             else:
                 messages.info(request, "Username or password is incorrect")
         else:
@@ -103,6 +108,5 @@ def resetpasswordDone(request):
 
 
 def logoutUser(request):
-
     logout(request)
     return redirect('login')

@@ -1,8 +1,7 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from register.models import User
-from django.shortcuts import render
-
-
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from login.auth import admin_only
@@ -30,4 +29,10 @@ def admin_dashboard(request):
         'admin_info': admin_info
     }
     return render(request, 'admin-dashboard.html', context)
+
+
+@admin_only
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
 
