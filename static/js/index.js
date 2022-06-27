@@ -81,14 +81,6 @@ const searchpost =()=>{
             post.style.display = 'none';
         }
     })
-    //     let name = post.querySelectorAll('h3').textContent.toLowerCase();
-    //     if(name.indexOf(val) != -1){
-    //         post.style.display = 'block';
-    //     }
-    //     else{
-    //         post.style.display='none';
-    //     }
-    // })
 }
 
 postsearch.addEventListener('keyup', searchpost);
@@ -112,7 +104,7 @@ function menuToggle(){
 
 //Profile Update Frontend
 
-const section = document.querySelector(".main"),
+const section = document.querySelector(".profile-main"),
       hireBtn = document.querySelector(".profile-details .buttons");
       cancelBtn = document.querySelectorAll("#close");
       

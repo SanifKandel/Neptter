@@ -35,7 +35,7 @@ class MyProfile(ListView):
    return context
 
 
-@login_required
+@login_required(login_url='login')
 def ProfileProcess(request):
     cuser = request.user.profile
     if request.method == 'POST':
@@ -59,7 +59,7 @@ def ProfileProcess(request):
     return render(request, 'profile.html',context)
 
 
-@login_required
+@login_required(login_url='login')
 def create_post(request):
     print(request.POST.get('pic',None))
     
@@ -85,13 +85,13 @@ def create_post(request):
       form = NewPostForm(request.POST, request.FILES)
       return render(request, 'home', {'form':form})
 
-@login_required
+@login_required(login_url='login')
 def Postdelete(request):
     post = Post.objects.get(id=request.POST.get('id'))
     post.delete()
     return redirect('home')
 
-@login_required
+@login_required(login_url='login')
 def Postlike (request):
     username = request.user.username
     post_id = request.GET.get('post_id')
@@ -125,5 +125,18 @@ def Postlike (request):
 def AboutProcess(request):
     return render(request, 'aboutus.html')
 
-def MyProfileProcess(request):
-    return render(request, 'myprofile.html')
+@login_required(login_url='login')
+def MyProfiles(request, pk):
+    user_object = User.objects.get(username=pk)
+    user_profile = Profile.objects.get(user=user_object)
+    user_posts =Post.objects.filter(user_name=user_object)
+    user_post_length = len(user_posts)
+
+    context={
+    'user_object':user_object,
+    'user_profile': user_profile,
+    'user_posts':user_posts,
+    'user_post_length':user_post_length,
+
+    }
+    return render(request, 'profileupdate.html',context)

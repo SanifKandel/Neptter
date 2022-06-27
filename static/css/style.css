@@ -247,7 +247,7 @@ main .container .left .profile{
     overflow:hidden; 
 }
 .left .sidebar .menu-item:last-child.active{
-    border-top-left-radius: var(--card-border-radius);
+    border-bottom-left-radius: var(--card-border-radius);
     overflow:hidden; 
 }
 
@@ -548,12 +548,6 @@ main .container .right{
 .middle .post-title h4{
     padding: 0 0 0 5px ;
 }
-/* 
-.middle .feeds .feed:first-child{
-    border-top: 3px solid var(--color-white);
-    border-radius:0 0 1rem 1rem;
-    margin-top: 0;
-} */
 
 
 
@@ -581,7 +575,20 @@ main .container .right{
     .left .btn{
         display:none;
     }
+    main .profile-main .popup-outer{
+        width: 59% ;
+
+    }
 }
+
+@media screen and (max-width: 1100px){
+    main .profile-main .popup-outer{
+        width: 58% ;
+    }
+}
+
+
+
 
 /* ============= FOR SMALL TABLETS AND MOBILE PHONES =============== */
 
@@ -605,6 +612,9 @@ main .container .right{
         right: 0;
     }
 
+ 
+    
+
     /* ============= NOTIFICATIONS POPUP =============== */
 
     .left .notification-popup {
@@ -626,6 +636,19 @@ main .container .right{
     main .container .right{
         display: none;
     }
+    main .profile-main{
+        grid-column: 1/3;
+    }
+    .middle .profile-details .buttons button{
+        padding: 0.6rem 1rem;
+    }
+    main .profile-main .popup-outer{
+        width: 91% ;
+        left:-1rem;
+
+
+    }
+    
 
 }
 
@@ -634,7 +657,7 @@ main .container .right{
 
 
 /* pop up box styling */
-.main .popup-outer{
+.profile-main .popup-outer{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -651,16 +674,16 @@ main .container .right{
     transition: opacity 0.2s 0s ease-in-out,  
                 transform 0.2s 0s ease-in-out;
 }
-.main.active .popup-outer{
+.profile-main.active .popup-outer{
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
 }
-.main  .popup-box{
-    position: relative;
+.profile-main  .popup-box{
+    position: absolute;
     justify-content: center;
     background: var(--color-white);
-    top: -15%;
+    top: 5%;
     border-radius: var(--card-border-radius);
     padding: 30px;
     max-width: 380px;
@@ -809,9 +832,9 @@ header{
     background-color: #016dcb;
 }
 @media screen and (max-width: 400px) {
-    .popup-box{
+    /* .popup-box{
         padding: 20px 10px;
-    }
+    } */
     
 }
 
