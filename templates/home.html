@@ -59,11 +59,12 @@
                         />
                         </a>
                     </div> {% endcomment %}
-                    {% if  post.pic.toString().endsWith(".mp4") %}
+                    {% comment %} {% if  post.pic.toString().endsWith(".mp4") %}
                     <video class="photo" controls>
                         <source src="{{post.pic.url}}" type="video/mp4">
                 </video> 
-                {% else %}
+                {% else %} {% endcomment %}
+                {% if post.pic %}
                 <div  class="photo">
                     <a href="{{post.pic.url}}" target="_blank">
                     <img

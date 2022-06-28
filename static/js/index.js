@@ -47,6 +47,7 @@ const changeBG= () => {
 }
 
 button.addEventListener('click', ()=>{
+    // function darkmode{
     if (icon.classList.contains('uil-moon')){
     darkColorLightness='95%';
     whiteColorLightness='0%';
@@ -54,13 +55,66 @@ button.addEventListener('click', ()=>{
     icon.classList.remove('uil-moon');
     icon.classList.add('uil-sun');
     mode.innerHTML='Light Mode';
+    localStorage.setItem("mode", "Light Mode");
     
     changeBG();
     }
     else{
-        window.location.reload();
+    darkColorLightness='17%';
+    whiteColorLightness='95%';
+    lightColorLightness= '100%';
+    icon.classList.remove('uil-sun');
+    icon.classList.add('uil-moon');
+    mode.innerHTML='Dark Mode';
+    localStorage.setItem("mode", "Dark Mode");
+    
+    changeBG();
     }  
 });
+
+
+
+
+// function darkmode(){
+//     darkColorLightness='95%';
+//     whiteColorLightness='0%';
+//     lightColorLightness= '10%';
+//     icon.classList.remove('uil-moon');
+//     icon.classList.add('uil-sun');
+//     mode.innerHTML='Light Mode';
+//     localStorage.setItem("mode", "light");
+    
+//     changeBG();
+// }
+// function lightmode(){
+//     darkColorLightness='17%';
+//     whiteColorLightness='95%';
+//     lightColorLightness= '100%';
+//     icon.classList.remove('uil-sun');
+//     icon.classList.add('uil-moon');
+//     mode.innerHTML='Dark Mode';
+//     localStorage.setItem("mode", "dark");
+//     changeBG();
+// }
+
+// if(localStorage.getItem("mode")=="dark")
+//     darkmode();
+// else
+//     nodark();
+
+// $('#theme').change(function(){   
+
+//     if ($(this).prop('checked'))
+//     {
+//     darkmode();
+//     }
+//     else
+//     {
+//     nodark();
+//     }
+
+// });
+
 
 // Search feature of post
 

@@ -158,7 +158,6 @@ def Postlike (request):
         'liked': liked
     }
       
-        
     return redirect('/',context)
 
 

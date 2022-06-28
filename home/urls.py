@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.contrib.auth.decorators import login_required
 from . import views
 
 
 urlpatterns = [
 
 
- path('',views.HomeProcess.as_view(),name="home"),
+ path('',login_required(views.HomeProcess.as_view()),name="home"),
  path('profile/',views.ProfileProcess,name="profile"),
  path('myprofile/',views.MyProfile.as_view(),name="myprofile"),
   path('myprofile/<str:pk>',views.MyProfiles,name="myprofiles"),
