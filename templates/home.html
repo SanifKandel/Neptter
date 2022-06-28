@@ -50,17 +50,28 @@
                     <div class="caption">
                         <p>{{post.description}}</p>
                     </div>
-                    {% if post.pic %}
-                    <div class="photo">
+                    {% comment %} {% if post.pic %}
+                    <div  class="photo">
+                        <a href="{{post.pic.url}}" target="_blank">
                         <img
                           src="{{post.pic.url}}"
                           alt=""
                         />
-                    </div>
-                    {% comment %} {% elif post.pic.url.endswith('.mp4') %}
+                        </a>
+                    </div> {% endcomment %}
+                    {% if  post.pic.toString().endsWith(".mp4") %}
                     <video class="photo" controls>
                         <source src="{{post.pic.url}}" type="video/mp4">
-                </video> {% endcomment %}
+                </video> 
+                {% else %}
+                <div  class="photo">
+                    <a href="{{post.pic.url}}" target="_blank">
+                    <img
+                      src="{{post.pic.url}}"
+                      alt=""
+                    />
+                    </a>
+                </div>
                     {% endif %}
                     <div class="action-button">
                         <div class="interaction-button">

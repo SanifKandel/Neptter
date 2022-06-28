@@ -150,14 +150,15 @@
                     <div class="caption">
                         <p>{{post.description}}</p>
                     </div>
+                    
+                    {% if post.pic %}
                     <div class="photo">
-                        {% if post.pic %}
                         <img
                           src="{{post.pic.url}}"
                           alt=""
                         />
-                        {% endif %}
                     </div>
+                    {% endif %}
                     <div class="action-button">
                         <div class="interaction-button">
                             {% comment %} {% if liked %}  {% endcomment %}

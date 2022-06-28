@@ -410,7 +410,7 @@ color: var(--color-danger);
 .middle  .feed .photo{
     border-radius:var(--card-border-radius);
     overflow: hidden;
-    margin: 1rem 0 1rem 0; 
+    margin: 1rem 0 0 0; 
 }
 
 .middle .feed .action-button{
@@ -418,7 +418,7 @@ color: var(--color-danger);
     justify-content: space-between;
     align-items: center;
     font-size: 1.4rem;
-    margin: -1rem 0.4rem 0.4rem 0.4rem;
+    margin: 0.3rem 0.4rem 0.4rem 0.4rem;
     cursor: pointer;
 }
 
