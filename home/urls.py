@@ -8,8 +8,8 @@ from . import views
 urlpatterns = [
 
 
-#  path('',login_required(views.HomeProcess.as_view()),name="home"),
- path('',views.HomeProcess,name="home"),
+ path('',login_required(views.HomeProcess.as_view()),name="home"),
+#  path('',views.HomeProcess,name="home"),
  path('profile/',views.ProfileProcess,name="profile"),
  path('follow/',views.Follow,name="follow"),
 #  path('myprofile/',login_required(views.MyProfile.as_view()),name="myprofile"),

@@ -10,36 +10,47 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.template.context import Context
+from itertools import chain
 
 # Create your views here.
 
-# class HomeProcess(ListView):
-#   model = Post
-#   template_name = 'home.html'
-#   context_object_name = 'posts'
+class HomeProcess(ListView):
+  model = Post
+  template_name = 'home.html'
+  context_object_name = 'posts'
 
 
-#   def get_context_data(self, **kwargs):
-#    context = super(HomeProcess, self).get_context_data(**kwargs)
-#    return context
+  def get_context_data(self, **kwargs):
+   context = super(HomeProcess, self).get_context_data(**kwargs)
+   return context
 
-def HomeProcess(request):
-    user_object = User.objects.get(username=request.user)
-    user_profile = Profile.objects.get(user=user_object)
-    user_posts =Post.objects.all()
+# def HomeProcess(request):
+#     user_object = User.objects.get(username=request.user.username)
+#     user_profile = Profile.objects.get(user=user_object)
 
-    user_following_list =[]
-    feed =[]
+#     user_following_list =[]
+#     feed =[]
 
+#     user_following = FollowersCount.objects.filter(follower=request.user.username)
+
+#     for users in user_following:
+#         user_following_list.append(users.user)
+
+#     for usernames in user_following_list:
+#         feed_lists =Post.objects.filter(tags=usernames)
+#         feed.append(feed_lists)
     
+#     feed_list = list(chain(*feed))
 
-    context={
-    'user_object':user_object,
-    'user_profile': user_profile,
-    'user_posts':user_posts,
-    }
+
+
+#     context={
+#     'user_object':user_object,
+#     'user_profile': user_profile,
+#     'user_posts':feed_list,
+#     }
     
-    return render(request, 'home.html',context)
+#     return render(request, 'home.html',context)
 
 class MyProfile(ListView):
   http_method_names=['post','get']

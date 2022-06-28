@@ -8,7 +8,7 @@
              <form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post">
                 {% csrf_token %}
                 <div class="profile-photo">
-                    <img src="{{ user_profile.user.profile.profile_pic.url }}">
+                    <img src="{{ user.profile.profile_pic.url }}">
                 </div>
                 <input type="text"  name ='description' placeholder="What's on your mind {{user.first_name}}?" id="create-post">
                 <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload" onchange="getImage(this.value);"> 
@@ -19,7 +19,7 @@
              <!--============== FEEDS ============== -->
               <div class="feeds">
                 <!--============== FEED- 1 ============== -->
-                {% for post in user_post reversed %}
+                {% for post in posts reversed %}
                 <div class="feed">
                     <div class="head">
                         <div class="user">
