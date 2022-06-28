@@ -8,7 +8,7 @@
              <form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post">
                 {% csrf_token %}
                 <div class="profile-photo">
-                    <img src="{{ user.profile.profile_pic.url }}">
+                    <img src="{{ user_profile.user.profile.profile_pic.url }}">
                 </div>
                 <input type="text"  name ='description' placeholder="What's on your mind {{user.first_name}}?" id="create-post">
                 <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload" onchange="getImage(this.value);"> 
@@ -19,7 +19,7 @@
              <!--============== FEEDS ============== -->
               <div class="feeds">
                 <!--============== FEED- 1 ============== -->
-                {% for post in posts reversed %}
+                {% for post in user_post reversed %}
                 <div class="feed">
                     <div class="head">
                         <div class="user">
@@ -30,7 +30,7 @@
                             </div>
                             <div class="info">
                                 <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
-                                <small> {{post.date_posted}}</small>
+                                <small> {{post.date_posted }}</small>
                             </div>
                         </div>
                        
@@ -40,7 +40,7 @@
                         </span>
                         <div class="menu-content" action="{% url 'postdelete' %}">
                         <ul class="list">
-                            {% if post.user_name.first_name == user.first_name %}
+                            {% if post.user_name.first_name == user_profile.user.first_name %}
                             <li><a><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
                             {% endif %}
                             <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>

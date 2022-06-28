@@ -1,7 +1,7 @@
 from pyexpat import model
 from django.shortcuts import render
 
-from .models import Profile , Post, LikePost
+from .models import Profile , Post, LikePost,FollowersCount
 from .forms import ProfileForm, NewPostForm
 from register.models import User 
 from django.views.generic import ListView
@@ -13,15 +13,33 @@ from django.template.context import Context
 
 # Create your views here.
 
-class HomeProcess(ListView):
-  model = Post
-  template_name = 'home.html'
-  context_object_name = 'posts'
+# class HomeProcess(ListView):
+#   model = Post
+#   template_name = 'home.html'
+#   context_object_name = 'posts'
 
 
-  def get_context_data(self, **kwargs):
-   context = super(HomeProcess, self).get_context_data(**kwargs)
-   return context
+#   def get_context_data(self, **kwargs):
+#    context = super(HomeProcess, self).get_context_data(**kwargs)
+#    return context
+
+def HomeProcess(request):
+    user_object = User.objects.get(username=request.user)
+    user_profile = Profile.objects.get(user=user_object)
+    user_posts =Post.objects.all()
+
+    user_following_list =[]
+    feed =[]
+
+    
+
+    context={
+    'user_object':user_object,
+    'user_profile': user_profile,
+    'user_posts':user_posts,
+    }
+    
+    return render(request, 'home.html',context)
 
 class MyProfile(ListView):
   http_method_names=['post','get']
@@ -171,6 +189,19 @@ def MyProfiles(request, pk):
         user_profile = Profile.objects.get(user=user_object)
         user_posts =Post.objects.filter(user_name=user_object)
         user_post_length = len(user_posts)
+        follower = request.user.username
+        user = pk
+        button_check="unfollow"
+
+        if FollowersCount.objects.filter(follower=follower ,user=user).first():
+            button_text = "unfollow"
+        else:
+            button_text = "Follow"
+
+        followers =len(FollowersCount.objects.filter(user=pk))
+        following =len(FollowersCount.objects.filter(follower=pk))
+
+
         form = ProfileForm(initial={
         'phone':request.user.profile.phone,
         'address':request.user.profile.address,
@@ -189,7 +220,29 @@ def MyProfiles(request, pk):
         'user_posts':user_posts,
         'user_post_length':user_post_length,
         'pk':pk,
+        'button_text':button_text,
+        'button_check':button_check,
+        'followers' :followers,
+        'following' :following,
 
         }
         
         return render(request, 'profileupdate.html',context)
+
+
+@login_required
+def Follow(request):
+    if request.method =='POST':
+        follower = request.POST['follower']
+        user = request.POST['user']
+
+        if FollowersCount.objects.filter(follower=follower ,user=user).first():
+            delete_follower = FollowersCount.objects.get(follower=follower,user=user)
+            delete_follower.delete()
+            return redirect('/profile/'+user)
+        else:
+            new_follower = FollowersCount.objects.create(follower=follower ,user=user)
+            new_follower.save()
+            return redirect('/profile/'+user)
+    else:
+        return render('/')

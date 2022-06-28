@@ -73,9 +73,18 @@
                     <button class="btn btn-outline-success float-right" onclick="follow_user(this,'{{username.username}}','edit_page')" id="follow-btn">Follow</button> {% endcomment %}
             </div>
             {% else %}
-            <div class="buttons">
-                <button class="btn btn-success" id="edit-profile-btn" style="visibility:hidden">Edit Profile</button>
+            <form action='{% url 'follow' %}' method="POST">
+                {% csrf_token %}
+            <div class="buttons-follow">
+                <input type='hidden' value='{{user.username}}' name="follower"/>
+                <input type='hidden' value='{{user_object.username}}' name="user"/>
+                {% if button_text == button_check %}
+                <button class="btn btn-primary1" id="follow-btn" type="submit">Unfollow</button>
+                {% else %}
+                <button class="btn btn-primary" id="follow-btn" type="submit">Follow</button>
+                {% endif %}
             </div>
+        </form>
             {% endif %}
             
 
@@ -104,11 +113,15 @@
                     &nbsp;<span class="grey">Posts</span>
                     &ensp;
                     <a href="#">
-                        <strong id="following__count">45</strong>&nbsp;<span class="grey"> Following</span>
+                        <strong id="following__count">{{following}}</strong>&nbsp;<span class="grey"> Following</span>
                     </a>
                     &ensp;
                     <a href="#">
-                        <strong id="follower__count">46</strong>&nbsp;<span class="grey"> Followers</span>
+                        {% if followers == 0 or followers == 1 %}
+                        <strong id="follower__count">{{followers}}</strong>&nbsp;<span class="grey"> Follower</span>
+                        {% else %}
+                        <strong id="follower__count">{{followers}}</strong>&nbsp;<span class="grey"> Followers</span>
+                        {% endif %}
                     </a>
                 </div>
             </div>
@@ -124,6 +137,11 @@
     </div>
     <div class="feeds">
                 <!--============== FEED- 1 ============== -->
+                {% if user_post_length == 0%}
+                <div class="nofeed" >
+                <span><h3 >No posts from {{user_profile.user.first_name}} yet.</h3></span>
+                </div>
+                {% else %}
                 {% for post in user_posts reversed %}
                 {% comment %} {% if user_posts.post.user_name.first_name == user_profile.user.first_name %} {% endcomment %}
                 <div class="feed">
@@ -188,6 +206,7 @@
                   {% comment %} {% endif %} {% endcomment %}
                   {% empty %}
                   {% endfor %}
+                  {% endif %}
                  
 </div>
 
