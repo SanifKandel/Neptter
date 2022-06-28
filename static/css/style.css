@@ -58,6 +58,10 @@ button, ::placeholder{
 
 }
 
+a{
+    color: var(--color-dark);
+}
+
 
 /* GENRAL STYLES CSS*/
 
@@ -685,7 +689,7 @@ main .container .right{
     background: var(--color-white);
     top: 5%;
     border-radius: var(--card-border-radius);
-    padding: 30px;
+    padding: 20px 30px 30px 30px;
     max-width: 380px;
     width: 100%;
 

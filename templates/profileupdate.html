@@ -5,8 +5,10 @@
     <div class="popup-outer">
         <div class="popup-box">
                     <div class="form-content">
+                        <a id="close" class="cancel"><i class="uil uil-times-circle" style="cursor:pointer; color:red; margin-left:19rem; font-size:19px;"></i></a>
                         <header>Update Profile</header>
-                        <form method="POST" action='{% url 'myprofile' %}' enctype="multipart/form-data" >
+
+                        <form method="POST" action='{% url 'myprofiles' pk=user.username %}' enctype="multipart/form-data" >
                             {% csrf_token %}
                     
                             <div class="field input-field">
@@ -18,11 +20,11 @@
                             </div>
 
                             <div class="field input-field">
-                                {{profile.phone}}
+                                {{user_profile.user.profile.phone}}
                             </div>
 
                             <div class="field input-field">
-                                {{profile.address}}
+                                {{user_profile.user.profile.address}}
                             </div>
 
                             <div class="field input-field">
@@ -30,29 +32,27 @@
                             </div>
 
                             <div class="field input-field">
-                                {{profile.birthday}}
+                                {{user_profile.user.profile.birthday}}
                             </div>
 
                             <div class="field input-field">
-                                {{profile.gender}}
+                                {{user_profile.user.profile.gender}}
                             </div>
 
                             <div class="field input-field">
-                                {{profile.bio}}
+                                {{user_profile.user.profile.bio}}
                             </div>
 
                             <div class="field input-field">
-                                {{profile.profile_pic}}
+                                {{user_profile.user.profile.profile_pic}}
                         </div>
                         <div class="field input-field">
-                            {{profile.cover_pic}}
+                            {{user_profile.user.profile.cover_pic}}
                         </div>
                         <div class="button">
                             <button class="send">Update</button>
-                            <button id="close" class="cancel">Cancel</button>
-                            
                         </div>  
-                        </form>
+                    </form>           
                     </div>
     
                    
@@ -63,21 +63,27 @@
         
         <div class="profile-part">
         
-        <div class="cover-image" style="background-image:url({{ user.profile.cover_pic.url }})"></div>
-        <div class="profile-image" style="background-image: url({{ user.profile.profile_pic.url }})"></div>
+        <div class="cover-image" style="background-image:url({{ user_profile.user.profile.cover_pic.url }})"></div>
+        <div class="profile-image" style="background-image: url({{ user_profile.user.profile.profile_pic.url }})"></div>
         <div class="profile-details">
+            {% if user_profile.user.username == user.username %}
             <div class="buttons">
                     <button class="btn btn-success" id="edit-profile-btn">Edit Profile</button>
                     {% comment %} <button class="btn btn-success float-right" onclick="unfollow_user(this,'{{username.username}}','edit_page')" id="following-btn">Following</button>
                     <button class="btn btn-outline-success float-right" onclick="follow_user(this,'{{username.username}}','edit_page')" id="follow-btn">Follow</button> {% endcomment %}
             </div>
+            {% else %}
+            <div class="buttons">
+                <button class="btn btn-success" id="edit-profile-btn" style="visibility:hidden">Edit Profile</button>
+            </div>
+            {% endif %}
             
 
             <div class="details-data">
-                <h4>{{user.first_name}}</h4>
-                <div class="grey">@{{user.username}}</div>
+                <h4>{{user_profile.user.first_name}}</h4>
+                <div class="grey">@{{user_profile.user.username}}</div>
                 <div class="bio">
-                    <p>{{user.profile.bio}}</p>
+                    <p>{{user_profile.user.profile.bio}}</p>
                 </div>
                 <div  style="padding: 8px 0px;">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3 " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -87,13 +93,13 @@
                     &nbsp;
                         Birthday :
                     
-                    &nbsp;<span class="grey">{{user.profile.birthday}}</span>
+                    &nbsp;<span class="grey">{{user_profile.user.profile.birthday}}</span>
                   
                      
                 </div>
                 <div>
                     <strong>
-                        7
+                       {{user_post_length}}
                     </strong>
                     &nbsp;<span class="grey">Posts</span>
                     &ensp;
@@ -114,12 +120,12 @@
         <span class="material-symbols-outlined">
             article
             </span>
-        <h4>{{user.first_name}}'s Posts</h4>
+        <h4>{{user_profile.user.first_name}}'s Posts</h4>
     </div>
     <div class="feeds">
                 <!--============== FEED- 1 ============== -->
-                {% for post in posts reversed %}
-                {% if post.user_name.first_name == user.first_name %}
+                {% for post in user_posts reversed %}
+                {% comment %} {% if user_posts.post.user_name.first_name == user_profile.user.first_name %} {% endcomment %}
                 <div class="feed">
                     <div class="head">
                         <div class="user">
@@ -179,7 +185,7 @@
                 </div>
 
                   <!--===========END OF FEED ==========-->
-                  {% endif %}
+                  {% comment %} {% endif %} {% endcomment %}
                   {% empty %}
                   {% endfor %}
                  

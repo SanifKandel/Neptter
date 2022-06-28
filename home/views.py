@@ -164,18 +164,32 @@ def Postlike (request):
 def AboutProcess(request):
     return render(request, 'aboutus.html')
 
-@login_required(login_url='login')
+@login_required
 def MyProfiles(request, pk):
-    user_object = User.objects.get(username=pk)
-    user_profile = Profile.objects.get(user=user_object)
-    user_posts =Post.objects.filter(user_name=user_object)
-    user_post_length = len(user_posts)
+    if request.method == "GET":
+        user_object = User.objects.get(username=pk)
+        user_profile = Profile.objects.get(user=user_object)
+        user_posts =Post.objects.filter(user_name=user_object)
+        user_post_length = len(user_posts)
+        form = ProfileForm(initial={
+        'phone':request.user.profile.phone,
+        'address':request.user.profile.address,
+        'bio':request.user.profile.bio,
+        'gender':request.user.profile.gender,
+        'birthday':request.user.profile.birthday,
+        'cover_pic':request.user.profile.cover_pic.name,
+        'profile_pic':request.user.profile.profile_pic,
 
-    context={
-    'user_object':user_object,
-    'user_profile': user_profile,
-    'user_posts':user_posts,
-    'user_post_length':user_post_length,
+        })
 
-    }
-    return render(request, 'profileupdate.html',context)
+        context={
+        'profile':form,
+        'user_object':user_object,
+        'user_profile': user_profile,
+        'user_posts':user_posts,
+        'user_post_length':user_post_length,
+        'pk':pk,
+
+        }
+        
+        return render(request, 'profileupdate.html',context)

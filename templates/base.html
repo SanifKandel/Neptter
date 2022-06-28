@@ -22,7 +22,7 @@
   <body>
     <nav>
         <div class="container">
-         <h2 class="'log"> Neptter</h2>
+         <h2 class="log"><a  href='{% url 'home'  %}'> Neptter</a></h2>
          <div class="search-bar" >
              <i class="uil uil-search"></i>
              <input type="search" id="post-searchbar" placeholder="Search for the posts" >
@@ -42,9 +42,9 @@
              <div class="left">
                   <a class="profile">
                      <div class="profile-photo">
-                         <img src="{{ user.profile.profile_pic.url }}">
+                            <img src="{{ user.profile.profile_pic.url }}" alt="">
                      </div>
-                     <div class="handle">
+                     <div class="handle"  href='{% url 'myprofiles' pk=user.username %}'>
                          <h4>{{user.first_name}}</h4>
                          <p class="text-muted">@{{user.username}}</p>
                      </div>
@@ -55,7 +55,7 @@
                     <a class="menu-item  active" href=" {% url 'home'%}">
                         <span><i class="uil uil-estate"></i></span><h3>Home</h3>
                     </a>
-                     <a class="menu-item"  href=" {% url 'myprofile'%}">
+                     <a class="menu-item"  href=" {% url 'myprofiles' pk=user.username %}">
                          <span ><i class="uil uil-user-circle" ></i></span><h3 >Profile</h3>
                      </a>
  

@@ -24,10 +24,12 @@
                     <div class="head">
                         <div class="user">
                             <div class="profile-photo">
+                                <a href='{% url 'myprofiles' pk=post.user_name.username %}'>
                                 <img src="{{ post.user_name.profile.profile_pic.url }}" alt="">
+                                </a>
                             </div>
                             <div class="info">
-                                <h3> {{post.user_name.first_name}} </h3>
+                                <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
                                 <small> {{post.date_posted}}</small>
                             </div>
                         </div>
@@ -76,12 +78,13 @@
                     {% endif %}
                     <div class="action-button">
                         <div class="interaction-button">
-                            {% comment %} {% if liked %}  {% endcomment %}
+                
                             <a href="/likepost?post_id={{post.id}}"><i class="uil uil-heart"></i></a>
                              {% comment %} {% else %} 
                             <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
                             {% endif %} {% endcomment %}
                             <span><i class="uil uil-comment-dots"></i></span>
+
 
                         </div>
                     </div>
