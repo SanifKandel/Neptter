@@ -37,23 +37,24 @@ ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','neptter.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
-    'django.contrib.auth',
-    'django.contrib.sites',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'django.contrib.admin',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'allauth.socialaccount.providers.google',
-    'neptter',
-    'register',
-    'login',
-    'home',
+'django.contrib.auth',
+'django.contrib.sites',
+'allauth',
+'allauth.account',
+'allauth.socialaccount',
+'django.contrib.admin',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'allauth.socialaccount.providers.google',
+'neptter',
+'register',
+'login',
+'home',
+'users',
+
 ]
 SITE_ID = 1
 
