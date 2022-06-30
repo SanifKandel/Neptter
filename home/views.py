@@ -18,6 +18,7 @@ class HomeProcess(ListView):
   model = Post
   template_name = 'home.html'
   context_object_name = 'posts'
+ 
 
 
   def get_context_data(self, **kwargs):
@@ -34,7 +35,7 @@ class HomeProcess(ListView):
 #     user_following = FollowersCount.objects.filter(follower=request.user.username)
 
 #     for users in user_following:
-#         user_following_list.append(users.user)
+#         user_following_list.append(users.user_id)
 
 #     for usernames in user_following_list:
 #         feed_lists =Post.objects.filter(tags=usernames)
@@ -219,7 +220,7 @@ def MyProfiles(request, pk):
         'bio':request.user.profile.bio,
         'gender':request.user.profile.gender,
         'birthday':request.user.profile.birthday,
-        'cover_pic':request.user.profile.cover_pic.name,
+        'cover_pic':request.user.profile.cover_pic,
         'profile_pic':request.user.profile.profile_pic,
 
         })
