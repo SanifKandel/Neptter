@@ -606,6 +606,14 @@ main .container .right{
     margin-top: 20px;
     font-size: .92em;
 }
+.middle .profile-details > .details-data h4 {
+color: var(--color-dark);
+}
+.middle .profile-details > .details-data .verify {
+    display:flex;
+    gap:4px;
+
+}
 .middle .profile-details h5{
     font-weight: 800;
     margin-bottom: 0px;
@@ -922,9 +930,244 @@ header{
 }
 
 
+/* Comment Page */
+
+
+.comment-main .post-title{
+    background-color:var(--color-primary);
+    padding:var(--card-padding);
+    color:var(--color-white);
+    margin-top:1rem;
+    display: flex;
+    align-items:center;
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+.comment-main .post-title i{
+    font-size:24px;
+    padding-right: 10px;
+}
+
+.comment-main .feeds .feed{
+    background: var(--color-white);
+    border-radius:var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    border: 2px solid var(--color-secondary);
+    font-size: 0.85rem ;
+    line-height: 1.5;
+    display: block;
+}
+.comment-main  .feeds .nofeed{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+}
+
+.comment-main  .feeds .nofeed span{
+    padding: 1rem;
+    margin: 1rem 1rem;
+    color: var(--color-gray);
+}
+.comment-main  .feed .head{
+    display:flex;
+    justify-content: space-between;
+}
+.comment-main  .feed .user{
+    display: flex;
+    gap: 1rem;
+}
+.comment-main  .feed .caption{
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
+    margin-left: 0.5rem;
+    padding-top: 2px;
+    padding-bottom: -7px;
+}
+
+/* DELETE BUTTONNNN */
+
+.comment-main .feed .menu {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .comment-main  .feed .menu-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-white);
+    color:red;
+    min-width: 160px;
+    right: -10px;
+    box-shadow: 0px 3px 5px 0px rgba(197, 227, 251, 0.594);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+
+  .comment-main  .feed .menu-content ul li i{
+    color: var(--color-dark);
+    max-width: 20px;
+    margin-right: 10px;
+    transition:0.5s;
+}
+.comment-main  .feed .menu-content ul li a{
+    display:inline-block;
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 500;
+    transition:0.5s;
+    margin: 0.3rem 0 0.3rem 0;
+}
+.comment-main  .feed .menu-content ul li a .uil-trash-alt{
+color: var(--color-danger);
+}
+  
+.comment-main  .feed .menu-content ul li a .uil-import{
+    color: var(--color-success);
+}
+  .menu:hover .menu-content {
+    display: block;
+  }
+
+
+/* END OF DELETE BUTTONNNN */
+
+.comment-main   .feed .photo{
+    border-radius:var(--card-border-radius);
+    overflow: hidden;
+    margin: 1rem 0 0 0; 
+}
+
+.comment-main  .feed .action-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0.3rem 0.4rem 0.4rem 0.4rem;
+    cursor: pointer;
+}
 
 
 
+
+.comment-main  .liked-by{
+    display: flex;
+}
+.comment-main  .liked-by p{
+    margin-top: -0.5rem;
+    margin-left: 0.5rem;
+}
+
+/* Comment Section */
+
+.comment-main .create-post{
+    overflow: absolute;
+    width: 100%;
+    height:5rem;
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    background: var(--color-white);
+    padding: 0.4rem var(--card-padding);
+    border-radius: var(--border-radius);
+}
+
+.comment-main .create-post .profile-photo{
+    position: absolute;
+}
+
+
+.comment-main .create-post input[type="text"]{
+    justify-self: start;
+    width: 100%;
+    padding-left: 3rem;
+    background: transparent;
+    color: var(--color-dark);
+    margin-left: 1rem;
+}
+.comment-main .create-post input[type="file"]{
+    display:none; 
+    visibility:none;
+}
+.comment-main .create-post .uil-image{
+    color: var(--color-primary);
+    font-size:24px; 
+    padding:25px;
+    cursor: pointer;
+}
+
+/* Comments */
+
+
+.comment-main .comment-title{
+    background-color:var(--color-white);
+    padding:var(--card-padding);
+    color:var(--color-primary);
+    margin-top:1rem;
+    align-items: center;
+    display: flex;
+    border-radius: 1.5rem 1.5rem 0 0;
+    border-bottom: 2px solid #eae9e9;
+}
+
+.comment-main .comment-title i{
+    font-size:20px;
+    padding-right: 10px;
+}
+.comment-main .comments {
+    margin-bottom: 30px;
+}
+
+.comment-main .comments .comment{
+    background: var(--color-white);
+    /* border-radius:var(--card-border-radius); */
+     padding: var(--card-padding);
+    font-size: 0.85rem ;
+    line-height: 1.5;
+    display: block;
+    border-bottom:1px solid #eae9e9;
+}
+.comment-main .comments .comment:last-child{
+    border-radius: 0 0 1rem 1rem;
+}
+.comment-main .comments .comment .info{
+    align-items: center;
+}
+.comment-main  .comments .nofeed{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+}
+
+.comment-main  .comment .edit i{
+    font-size:18px;
+    color: var(--color-danger);
+   margin-bottom:14px;
+
+}
+
+.comment-main  .comment .head{
+    display:flex;
+    justify-content: space-between;
+}
+.comment-main  .comment .user{
+    display: flex;
+    gap: 1rem;
+}
+.comment-main  .comment .caption{
+    margin-top: 0.1rem;
+    margin-bottom: -0.5rem;
+    padding-bottom: -7px;
+}
 
 
 

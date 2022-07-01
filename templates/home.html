@@ -29,7 +29,11 @@
                                 </a>
                             </div>
                             <div class="info">
+                                {% if post.user_name.username == 'neptter' %}
+                                <a class="verify"><h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3><img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
+                                {% else %}
                                 <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
+                                {% endif %}
                                 <small> {{post.date_posted }}</small>
                             </div>
                         </div>
@@ -40,7 +44,7 @@
                         </span>
                         <div class="menu-content" action="{% url 'postdelete' %}">
                         <ul class="list">
-                            {% if post.user_name.first_name == user_profile.user.first_name %}
+                            {% if post.user_name.first_name == user.first_name %}
                             <li><a><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
                             {% endif %}
                             <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>

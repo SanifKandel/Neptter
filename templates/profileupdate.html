@@ -89,7 +89,11 @@
             
 
             <div class="details-data">
-                <h4>{{user_profile.user.first_name}}</h4>
+                {% if user_profile.user.username == 'neptter' %}
+                <a class="verify"><h4>{{user_profile.user.first_name}}</h4> <img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
+                {% else %}
+                <h4>{{user_profile.user.first_name}}</h4> 
+                {% endif %}
                 <div class="grey">@{{user_profile.user.username}}</div>
                 <div class="bio">
                     <p>{{user_profile.user.profile.bio}}</p>

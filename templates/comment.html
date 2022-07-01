@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="comment-main">      
+
+    <div class="post-title">
+        <i class="uil uil-arrow-left"></i>
+        <h4>Post</h4>
+    </div>
+    <div class="feeds">
+                <!--============== FEED- 1 ============== -->
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-photo">
+                                <img src="../static/images/sanif.jpg" alt="">
+                            </div>
+                            <div class="info">
+                                <h3>Sanif Kandel</h3>
+                                <small>15 Minutes Ago</small>
+                            </div>
+                        </div>
+                        <span class="edit">
+                            <i class="uil uil-ellipsis-h"></i>
+                        </span>
+                    </div>
+                    <div class="photo">
+                        <img src="../static/images/post.jpg" >
+                    </div>
+                    <div class="action-button">
+                        <div class="interaction-button">
+                            <span><i class="uil uil-heart"></i></span>
+                            <span><i class="uil uil-comment-dots"></i></span>
+                        </div>
+                    </div>
+                    <div class="liked-by">
+                        <p><b>300</b> likes</p>
+                    </div>
+                    <div class="caption">
+                        <p> <b>Sanif Kandel</b> How are you doing ? #style </p>
+                    </div>
+                </div>
+
+                  <!--===========END OF FEED ==========-->
+                  {% comment %} {% endif %} {% endcomment %}
+                 
+</div>
+
+<form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post">
+    {% csrf_token %}
+    <div class="profile-photo">
+        <img src="{{ user.profile.profile_pic.url }}">
+    </div>
+    <input type="text"  name ='description' placeholder="Write a comment...." id="create-post">
+    <button type="submit" class="btn btn-primary">Comment</button>
+ </form>
+
+
+ <div class="comment-title" >
+    <i class="uil uil-comment-alt"></i>
+    <h4>Comments</h4>
+</div>
+<div class="comments">
+    <!--============== Comment-1 ============== -->
+    <div class="comment">
+        <div class="head">
+            <div class="user">
+                <div class="profile-photo">
+                    <img src="../static/images/man.png" alt="">
+                </div>
+                <div class="info">
+                    <h3>Shahrukh Khan</h3>
+                    <div class="caption">
+                        <p>Looking good hmm... </p>
+                    </div>
+                </div>
+            </div>
+        
+            <span class="edit">
+                <i class="uil uil-trash-alt"></i>
+            </span>
+        </div>
+    </div>
+
+      <!--============== Comment- 2 ============== -->
+      <div class="comment">
+        <div class="head">
+            <div class="user">
+                <div class="profile-photo">
+                    <img src="../static/images/sanif.jpg" alt="">
+                </div>
+                <div class="info">
+                    <h3>Ram Sharma</h3>
+                    <div class="caption">
+                        <p>Nice pic sexy. </p>
+                    </div>
+                </div>
+            </div>
+        
+            <span class="edit">
+                <i class="uil uil-trash-alt"></i>
+            </span>
+        </div>
+    </div>
+     
+</div>
+
+
+
+</div>
+    
+{% endblock %}

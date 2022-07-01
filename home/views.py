@@ -258,3 +258,7 @@ def Follow(request):
             return redirect('/profile/'+user)
     else:
         return render('/')
+
+
+def Postcomment(request):
+    return render(request, 'comment.html')
