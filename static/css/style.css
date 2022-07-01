@@ -112,6 +112,7 @@ img{
     font-weight: 500;
 }
 .text-muted{
+    font-size: 13px;
     color:var(--color-gray);
 }
 
@@ -543,18 +544,18 @@ main .container .right{
     gap: 1rem;
 }
 .right .request .info .name{
-    padding-left: 3rem;
+    margin-left: 3rem;
 }
 .right .request .profile-photo{
     width: 2.3rem;
     position: absolute;
-    display:none;
+
 
     border-radius:50%;
 }
 
 .right .request .action{
-    display:flex;
+    position: relative;
     justify-content:center;
 }
 

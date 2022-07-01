@@ -29,7 +29,8 @@
                                 </a>
                             </div>
                             <div class="info">
-                                {% if post.user_name.username == 'neptter' %}
+                                {% if post.user_name.username == 'neptter12' %}
+                                
                                 <a class="verify"><h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3><img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
                                 {% else %}
                                 <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
