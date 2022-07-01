@@ -32,6 +32,7 @@ class Post(models.Model):
         user_name = models.ForeignKey(User, on_delete=models.CASCADE)
         tags = models.CharField(max_length=100, blank=True)
         like = models.PositiveIntegerField(default=0, null=True)
+        comment = models.PositiveIntegerField(default=0, null=True)
 
         def __str__(self):
             return self.description
@@ -45,8 +46,18 @@ class LikePost(models.Model):
 
 
 class FollowersCount(models.Model):
+    user_id = models.CharField(max_length=500,null=True)
     follower = models.CharField(max_length=100)
     user = models.CharField(max_length=100)
 
     def __str__(self):
         return self.user
+
+class Comment(models.Model):
+    post= models.ForeignKey(Post, related_name="comments" ,on_delete=models.CASCADE)
+    name= models.CharField(max_length=255)
+    body = models.TextField()
+    date_added = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return '%s - %s' % (self.post.description, self.name)

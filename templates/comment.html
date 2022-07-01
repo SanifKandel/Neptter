@@ -9,40 +9,93 @@
     </div>
     <div class="feeds">
                 <!--============== FEED- 1 ============== -->
+                {% for post in  posts reversed %}
                 <div class="feed">
                     <div class="head">
                         <div class="user">
                             <div class="profile-photo">
-                                <img src="../static/images/sanif.jpg" alt="">
+                                <a href='{% url 'myprofiles' pk=post.user_name.username %}'>
+                                <img src="{{ post.user_name.profile.profile_pic.url }}" alt="">
+                                </a>
                             </div>
                             <div class="info">
-                                <h3>Sanif Kandel</h3>
-                                <small>15 Minutes Ago</small>
+                                {% if post.user_name.username == 'neptter12' %}
+                                
+                                <a class="verify"><h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3><img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
+                                {% else %}
+                                <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
+                                {% endif %}
+                                <small> {{post.date_posted }}</small>
                             </div>
                         </div>
+                       
+                        <div class="menu">
                         <span class="edit">
-                            <i class="uil uil-ellipsis-h"></i>
+                            <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
                         </span>
+                        <div class="menu-content" action="{% url 'postdelete' %}">
+                        <ul class="list">
+                            {% if post.user_name.first_name == user.first_name %}
+                            <li><a><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
+                            {% endif %}
+                            <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>
+                          </ul></div>
+
+                        </div>
+                       
                     </div>
-                    <div class="photo">
-                        <img src="../static/images/post.jpg" >
+                    <div class="caption">
+                        <p>{{post.description}}</p>
                     </div>
+                    {% comment %} {% if post.pic %}
+                    <div  class="photo">
+                        <a href="{{post.pic.url}}" target="_blank">
+                        <img
+                          src="{{post.pic.url}}"
+                          alt=""
+                        />
+                        </a>
+                    </div> {% endcomment %}
+                    {% comment %} {% if  post.pic.toString().endsWith(".mp4") %}
+                    <video class="photo" controls>
+                        <source src="{{post.pic.url}}" type="video/mp4">
+                </video> 
+                {% else %} {% endcomment %}
+                {% if post.pic %}
+                <div  class="photo">
+                    <a href="{{post.pic.url}}" target="_blank">
+                    <img
+                      src="{{post.pic.url}}"
+                      alt=""
+                    />
+                    </a>
+                </div>
+                    {% endif %}
                     <div class="action-button">
                         <div class="interaction-button">
-                            <span><i class="uil uil-heart"></i></span>
-                            <span><i class="uil uil-comment-dots"></i></span>
+                
+                            <a href="/likepost?post_id={{post.id}}" class="like"><i class="uil uil-heart"></i></a>
+                             {% comment %} {% else %} 
+                            <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
+                            {% endif %} {% endcomment %}
+                            <a href="{% url 'comment' pk=post.id%}" class="comment"><i class="uil uil-comment-alt"></i></a>
+
+
                         </div>
                     </div>
                     <div class="liked-by">
-                        <p><b>300</b> likes</p>
+                        <p><b>{{post.like}}</b> likes</p>
+                        <p style="margin-left:11.8rem"><b>{{post.like}}</b> comment</p>
                     </div>
-                    <div class="caption">
-                        <p> <b>Sanif Kandel</b> How are you doing ? #style </p>
-                    </div>
+                    
+                    {% comment %} <div class="caption">
+                        <p> <b>{{post.user_name.first_name}}</b> {{post.description}}</p>
+                    </div> {% endcomment %}
                 </div>
+                {% empty %}
+                {% endfor %}
 
-                  <!--===========END OF FEED ==========-->
-                  {% comment %} {% endif %} {% endcomment %}
+
                  
 </div>
 

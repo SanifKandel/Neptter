@@ -147,27 +147,31 @@
                     
                     <h4>Friends to Follow </h4>
                         <!--===========FRIEND_1==========-->
+                        {% for suggestion in suggestions_username_profile_list %}
                         <div class="request">
                             <div class="info">
                                 <div class="profile-photo">
-                                    <img src="../static/images/man.png" alt="">
+                                    <a href='{% url 'myprofiles' pk=suggestion.user.username %}'>
+                                        <img src="{{ suggestion.profile_pic.url }}" alt="">
+                                        </a>
                                 </div>
                                 <div class="name">
-                                    <h5>Ram Sharma</h5>
+                                    <h5><a href='{% url 'myprofiles' pk=suggestion.user.username %}'> {{suggestion.user.first_name}} </a></h5>
                                     <p class="text-muted">
-                                        @ramsharma
+                                        @{{suggestion.user.username}}
                                     </p>
                                 </div>
                                 <div class="action">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary follow">
                                         Follow
                                     </button>
                                 </div>
                             </div>
                            
                         </div> 
+                        {% endfor %}
                 
-                     <!--===========FRIEND_2==========-->
+                     {% comment %} <!--===========FRIEND_2==========-->
                      <div class="request">
                         <div class="info">
                             <div class="profile-photo">
@@ -230,7 +234,7 @@
                             </div>
                         </div>
                        
-                    </div> 
+                    </div>  {% endcomment %}
             
 
 

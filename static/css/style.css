@@ -136,6 +136,7 @@ nav .search-bar{
     background: var(--color-light);
     border-radius:var(--border-radius);
     padding:var(--search-padding);
+    display:flex;
 }
 nav .search-bar input[type="search"]{
     background : transparent ;
@@ -363,6 +364,7 @@ main .container .left .profile{
 
 /*---------------CREATE POST---------------*/
 
+
 .middle .create-post{
     overflow: absolute;
     width: 100%;
@@ -383,6 +385,7 @@ main .container .left .profile{
 .middle .create-post input[type="text"]{
     justify-self: start;
     width: 100%;
+    font-family: 'Poppins', sans-serif;
     padding-left: 3rem;
     background: transparent;
     color: var(--color-dark);
@@ -506,6 +509,12 @@ color: var(--color-danger);
 
 
 
+.middle .feed .action-button .comment{
+    margin-left: 14rem;
+}
+
+
+
 
 .middle .liked-by{
     display: flex;
@@ -514,6 +523,7 @@ color: var(--color-danger);
     margin-top: -0.5rem;
     margin-left: 0.5rem;
 }
+
 
 /*---------------RIGHT---------------*/
 
@@ -538,10 +548,19 @@ main .container .right{
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
     margin-bottom: 0.7rem;
+    width:20rem;
+    display:flex;
 }
 .right .request .info{
     display:flex;
     gap: 1rem;
+}
+/* .right .request .info .action{
+    justify-content: flex-end;
+
+} */
+.right .request .info button{
+    justify-content: right;
 }
 .right .request .info .name{
     margin-left: 3rem;
@@ -691,6 +710,7 @@ color: var(--color-dark);
         padding:0.3rem 0.3rem;
         margin-left:0.3rem;
         margin-right:0.3rem;
+        display: flex;
     }
 
     main .container{
