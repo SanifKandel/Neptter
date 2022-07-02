@@ -5,13 +5,19 @@
              
             <div class="middle">
          
-             <form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post">
+             <form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post" >
                 {% csrf_token %}
                 <div class="profile-photo">
                     <img src="{{ user.profile.profile_pic.url }}">
                 </div>
+            
                 <input type="text"  name ='description' placeholder="What's on your mind {{user.first_name}}?" id="create-post">
-                <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload" onchange="getImage(this.value);"> 
+                {% comment %} <div class="image-preview" id="imagePreview">
+                    <span class="image-preview__default-text">Image Preview</span>
+                    <img src="" alt="Image Preview" class="image-preview__image">
+ 
+                 </div> {% endcomment %}
+                <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload"> 
                 <label for="imageupload"><i class="uil uil-image"></i></label>
                 <div id="imageurl"></div>
                 <button type="submit" class="btn btn-primary">Post</button>
@@ -81,25 +87,35 @@
                     </a>
                 </div>
                     {% endif %}
-                    <div class="action-button">
+                    {% comment %} <div class="action-button">
                         <div class="interaction-button">
                             {% if like %}
                             <a href="/likepost?post_id={{post.id}}" class="like"><i class="uil uil-heart"></i></a>
                             {% else%}
                             <a href="/likepost?post_id={{post.id}}" class="like"><i class="uil uil-comment"></i></a>
                             {% endif %}
-                             {% comment %} {% else %} 
-                            <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
-                            {% endif %} {% endcomment %}
                             <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
 
+
+                        </div>
+                    </div> {% endcomment %}
+                    <div class="action-button">
+                        <div class="interaction-button">
+                            {% if liked_filters != None %} 
+                            
+                            <a href="/likepost?post_id={{post.id}}"  class="like" id="like"><i class="fa-solid fa-heart" style="color: red; font-size:20px;"></i></a>
+                            <h3 id="postid" style="display: none;">{{post.id}}</h3>
+                            {% else %} 
+                            <a href="/likepost?post_id={{post.id}}"  class="like" id="like"><i class="fa-regular fa-heart"></i></a>
+                            {% endif %} 
+                            <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
+        
 
                         </div>
                     </div>
                     
                     <div class="liked-by">
                         <p><b>{{post.like}}</b> likes</p>
-                        <p style="margin-left:11.8rem"><b>{{user_comment_length}}</b> comment</p>
                     </div>
                    
                     {% comment %} {% if not post.comments.all%} No Comments<a href="#">Add One</a>

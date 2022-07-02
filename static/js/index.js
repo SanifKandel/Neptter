@@ -1,6 +1,7 @@
 //SIDEBAR
 const menuItems = document.querySelectorAll('.menu-item');
 
+
 //remove active
 const changeActiveItem =() => {
     menuItems.forEach(item => {
@@ -46,31 +47,78 @@ const changeBG= () => {
     root.style.setProperty('--dark-color-lightness', darkColorLightness);
 }
 
-button.addEventListener('click', ()=>{
-    // function darkmode{
-    if (icon.classList.contains('uil-moon')){
-    darkColorLightness='95%';
-    whiteColorLightness='0%';
-    lightColorLightness= '10%';
-    icon.classList.remove('uil-moon');
-    icon.classList.add('uil-sun');
-    mode.innerHTML='Light Mode';
-    localStorage.setItem("mode", "Light Mode");
+// button.addEventListener('click', ()=>{
+//     // function darkmode{
+//     if (icon.classList.contains('uil-moon')){
+//     darkColorLightness='95%';
+//     whiteColorLightness='0%';
+//     lightColorLightness= '10%';
+//     icon.classList.remove('uil-moon');
+//     icon.classList.add('uil-sun');
+//     mode.innerHTML='Light Mode';
+//     localStorage.setItem("mode", "Light Mode");
     
-    changeBG();
+//     changeBG();
+//     }
+//     else{
+//     darkColorLightness='17%';
+//     whiteColorLightness='95%';
+//     lightColorLightness= '100%';
+//     icon.classList.remove('uil-sun');
+//     icon.classList.add('uil-moon');
+//     mode.innerHTML='Dark Mode';
+//     localStorage.setItem("mode", "Dark Mode");
+    
+//     changeBG();
+//     }  
+// });
+
+
+//We're going to use "check" to get the ckeckbox element
+const check =document.getElementById("theme")
+
+//If darkMode doesn’t exist in the LocalStorage, create it. False by default
+if (localStorage.getItem('darkMode')===null){
+    localStorage.setItem('darkMode', "true");
+}
+
+//checkStatus is only called one time in the program, when you reload the page
+//It gives the page it's default look, depening on waht darkMode is set to
+
+button.addEventListener('click', ()=>{  
+    if (localStorage.getItem('darkMode')=="true"){
+        // checked = true;                                       //the checkbox is checked (if you load the page by default it isn’t)
+       Dark();
+        
+    }else{
+        // checked = false;
+        White();
+
     }
-    else{
-    darkColorLightness='17%';
-    whiteColorLightness='95%';
-    lightColorLightness= '100%';
-    icon.classList.remove('uil-sun');
-    icon.classList.add('uil-moon');
-    mode.innerHTML='Dark Mode';
-    localStorage.setItem("mode", "Dark Mode");
-    
-    changeBG();
-    }  
 });
+
+function Dark (){                                   //This function gets called every time the checkbox is clicked
+    // localStorage.getItem('darkMode')==="true"             //if darkMode was active and this function is called it means the user now wants light
+        localStorage.setItem('darkMode', "false");                  //so we set it to false, to indicate we are in light mode
+        darkColorLightness='95%';
+        whiteColorLightness='0%';
+        lightColorLightness= '10%';
+        icon.classList.remove('uil-moon');
+        icon.classList.add('uil-sun');
+        mode.innerHTML='Light Mode';
+        changeBG();
+    } 
+    
+function White(){
+        localStorage.setItem('darkMode', "true");                   //same code but adapted for dark theme
+        darkColorLightness='17%';
+        whiteColorLightness='100%';
+        lightColorLightness= '95%';
+        icon.classList.remove('uil-sun');
+        icon.classList.add('uil-moon');
+        mode.innerHTML='Dark Mode';
+        changeBG();
+    }
 
 
 
@@ -140,19 +188,6 @@ const searchpost =()=>{
 postsearch.addEventListener('keyup', searchpost);
 
 
-//Display Image URL
-var url = document.getElementById('imageurl');
-
-function getImage (imagename){
-    $.url.html(imagename);
-}
-
-//Toggle Image URL
-
-function menuToggle(){
-    const toggleMenu = document.querySelector('.menu');
-    toggleMenu.classList.toggle('active');
-}
 
 
 
@@ -174,3 +209,27 @@ cancelBtn.forEach(cBtn => {
 console.log(cancelBtn);
 
 
+
+
+
+const id = document.getElementById('postid');
+const like = document.getElementById('like');
+
+like.addEventListener("click", ()=>{
+// $(document).on("click",function(e){
+    // e.preventDefault();
+
+    $.ajax({
+        type: "GET",
+        url:'/likepost',
+        data:{
+            post_id: id
+        },
+        
+        success:function(){
+
+    }
+
+    });
+
+});

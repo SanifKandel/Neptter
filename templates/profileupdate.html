@@ -38,7 +38,7 @@
                             <div class="field input-field">
                                 {{profile.gender}}
                             </div>
-
+                
                             <div class="field input-field">
                                 {{profile.bio}}
                             </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="field input-field">
                             {{profile.cover_pic}}
-                            <h6> {{user_profile.user.profile.profile_pic}}</h6>
+                            <h6> {{user_profile.user.profile.cover_pic}}</h6>
                         </div>
                         <div class="button">
                             <button class="send">Update</button>
@@ -91,8 +91,8 @@
             
 
             <div class="details-data">
-                {% if user_profile.user.username == 'neptter' %}
-                <a class="verify"><h4>{{user_profile.user.first_name}}</h4> <img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
+                {% if user_profile.user.username == 'neptter' or 'elonmusk' %}
+                <a class="verify"><h4>{{user_profile.user.first_name}}</h4> <img src="{% static 'images/verified.png' %}" style="width:17px; height:17px; margin-top:2.1px;" alt=""/></a>
                 {% else %}
                 <h4>{{user_profile.user.first_name}}</h4> 
                 {% endif %}
@@ -192,11 +192,12 @@
                     <div class="action-button">
                         <div class="interaction-button">
                             {% comment %} {% if liked %}  {% endcomment %}
-                            <a href="/likepost?post_id={{post.id}}"><i class="uil uil-heart"></i></a>
+                            <a href="/likepost?post_id={{post.id}}"  class="like"><i class="fa-solid fa-heart" style="color: red; font-size:20px;"></i></a>
                              {% comment %} {% else %} 
                             <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
                             {% endif %} {% endcomment %}
-                            <span><i class="uil uil-comment-dots"></i></span>
+                            <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
+        
 
                         </div>
                     </div>

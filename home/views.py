@@ -25,6 +25,7 @@ def HomeProcess(request):
     #Customized Home
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
+   
 
     user_following_list =[]
     feed =[]
@@ -49,6 +50,7 @@ def HomeProcess(request):
     print(feed_lists)
 
     feed_list = list(chain(*feed))
+
 
 
     # Friends Suggestions
@@ -86,6 +88,7 @@ def HomeProcess(request):
         'posts':post,
         'user_profile': user_profile,
         'user_posts':feed_list,
+    
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
 
     }
@@ -130,26 +133,27 @@ def Postlike (request):
 
     post = Post.objects.get(id=post_id)
     like_filter = LikePost.objects.filter(post_id=post_id,username=username).first()
+    like_filters = LikePost.objects.filter(post_id=post_id,username=username)
+    print(like_filters)
 
     if like_filter == None:
         new_like =LikePost.objects.create(post_id=post_id, username=username)
         new_like.save()
         post.like = post.like+1
         post.save()
-        liked = True
-        context={
-        'liked': liked
-    }   
+        
+       
 
     else:
         like_filter.delete()
         post.like = post.like-1
         post.save()
-        liked = False
-        context={
-        'liked': liked
-    }
-      
+    
+    context={
+        'like_filters' :like_filters,
+    
+    }  
+  
     return redirect('/',context)
 
 

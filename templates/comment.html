@@ -73,19 +73,18 @@
                     {% endif %}
                     <div class="action-button">
                         <div class="interaction-button">
-                
-                            <a href="/likepost?post_id={{post.id}}" class="like"><i class="uil uil-heart"></i></a>
+                            {% comment %} {% if liked %}  {% endcomment %}
+                            <a href="/likepost?post_id={{post.id}}"  class="like"><i class="fa-solid fa-heart" style="color: red; font-size:20px;"></i></a>
                              {% comment %} {% else %} 
                             <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
                             {% endif %} {% endcomment %}
-                            <a href="{% url 'comment' pk=post.id%}" class="comment"><i class="uil uil-comment-alt"></i></a>
-
+                            <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
+        
 
                         </div>
                     </div>
                     <div class="liked-by">
                         <p><b>{{post.like}}</b> likes</p>
-                        <p style="margin-left:11.8rem"><b>{{post.like}}</b> comment</p>
                     </div>
                     
                     {% comment %} <div class="caption">

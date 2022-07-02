@@ -43,9 +43,10 @@
    align-items: center;
  }
  .left {
-   background: linear-gradient(rgb(0,0,0,0),rgb(0,0,0,5)), url('neptter.png');
-   background-size: cover;
- }
+  background: linear-gradient(rgb(0,0,0,0),rgb(0,0,0,0.5)), url("/static/images/register-cover.png");
+  background-size:cover;
+
+}
  .left .copy{
    color: white;
    text-align: center;

@@ -8,13 +8,13 @@ class ProfileForm(forms.ModelForm):
         fields= ['phone','address','profile_pic','cover_pic','bio','birthday','gender']
 
         widgets = {
-        'birthday': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-        'phone': forms.NumberInput(attrs={'class': 'form-control', 'type': 'tel'}),
-        'address': forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}),
-        'bio': forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}),
-        'gender': forms.Select(attrs={'class': 'form-control','id': 'gender'}),
-        'profile_pic': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
-        'cover_pic': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
+        'birthday': forms.DateInput(attrs={'class': 'form-control', 'type': 'date' }),
+        'phone': forms.NumberInput(attrs={'class': 'form-control', 'type': 'tel','placeholder':'Enter Your Phone No. here'}),
+        'address': forms.TextInput(attrs={'class': 'form-control', 'type': 'text','placeholder':'Enter Your Address here'}),
+        'bio': forms.TextInput(attrs={'class': 'form-control', 'type': 'text','placeholder':'Enter Your Bio here'}),
+        'gender': forms.Select(attrs={'class': 'form-control','id': 'gender','placeholder':'Enter Your Gender here'}),
+        'profile_pic': forms.FileInput(attrs={'class': 'form-control', 'type': 'file','placeholder':'Put Your Profile Pic here'}),
+        'cover_pic': forms.FileInput(attrs={'class': 'form-control', 'type': 'file','placeholder':'Put Your Cover Pic here'}),
         
 
         }
