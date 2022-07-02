@@ -1,4 +1,4 @@
-from .models import Post, Profile
+from .models import Post, Profile , Comment
 from django import forms
 
 class ProfileForm(forms.ModelForm):
@@ -23,3 +23,8 @@ class NewPostForm(forms.ModelForm):
 	class Meta:
 		model = Post
 		fields = ['description', 'pic']
+
+class NewCommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		fields = ['body']

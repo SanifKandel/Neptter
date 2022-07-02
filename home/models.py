@@ -45,7 +45,7 @@ class LikePost(models.Model):
         return self.username
 
 
-class FollowersCount(models.Model):
+class FollowerCount(models.Model):
     user_id = models.CharField(max_length=500,null=True)
     follower = models.CharField(max_length=100)
     user = models.CharField(max_length=100)
@@ -61,3 +61,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.post.description, self.name)
+

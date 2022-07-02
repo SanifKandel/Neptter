@@ -2,8 +2,8 @@ from pyexpat import model
 import random
 from django.shortcuts import render
 
-from .models import Profile , Post, LikePost,FollowersCount
-from .forms import ProfileForm, NewPostForm
+from .models import Profile , Post, LikePost,FollowerCount,Comment
+from .forms import ProfileForm, NewPostForm, NewCommentForm
 from register.models import User 
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -25,11 +25,11 @@ from itertools import chain
 #   def get_context_data(self, **kwargs):
 #    context = super(HomeProcess, self).get_context_data(**kwargs)
 #    return context
-
+@login_required
 def HomeProcess(request):
     post =Post.objects.all()
     all_users = User.objects.all()
-    user_following = FollowersCount.objects.filter(follower=request.user.username)
+    user_following = FollowerCount.objects.filter(follower=request.user.username)
 
 
     user_object = User.objects.get(username=request.user.username)
@@ -38,7 +38,7 @@ def HomeProcess(request):
     user_following_list =[]
     feed =[]
 
-    user_following = FollowersCount.objects.filter(follower=request.user.username)
+    user_following = FollowerCount.objects.filter(follower=request.user.username)
     print(user_following)
 
     for users in user_following:
@@ -81,11 +81,19 @@ def HomeProcess(request):
 
     suggestions_username_profile_list = list(chain(*username_profile_list))
 
+    # comment = Comment.objects.all()
+    # user_object = User.objects.get(username=comment.name)
+    # posts =Post.objects.filter(user_name=user_object)
+    # user_comments =Comment.objects.filter(id=posts.id)
+    # user_comment_length = len(user_comments)
+
+
     context={
         'posts':post,
         'user_profile': user_profile,
 
      'user_posts':feed_list,
+    #    'user_comment_length':user_comment_length ,
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
 
     }
@@ -271,13 +279,13 @@ def MyProfiles(request, pk):
         user = pk
         button_check="unfollow"
 
-        if FollowersCount.objects.filter(follower=follower ,user=user).first():
+        if FollowerCount.objects.filter(follower=follower ,user=user).first():
             button_text = "unfollow"
         else:
             button_text = "Follow"
 
-        followers =len(FollowersCount.objects.filter(user=pk))
-        following =len(FollowersCount.objects.filter(follower=pk))
+        followers =len(FollowerCount.objects.filter(user=pk))
+        following =len(FollowerCount.objects.filter(follower=pk))
 
 
         form = ProfileForm(initial={
@@ -314,12 +322,12 @@ def Follow(request):
         follower = request.POST['follower']
         user = request.POST['user']
 
-        if FollowersCount.objects.filter(follower=follower ,user=user).first():
-            delete_follower = FollowersCount.objects.get(follower=follower,user=user)
+        if FollowerCount.objects.filter(follower=follower ,user=user).first():
+            delete_follower = FollowerCount.objects.get(follower=follower,user=user)
             delete_follower.delete()
             return redirect('/profile/'+user)
         else:
-            new_follower = FollowersCount.objects.create(follower=follower ,user=user)
+            new_follower = FollowerCount.objects.create(follower=follower ,user=user)
             new_follower.save()
             return redirect('/profile/'+user)
     else:
@@ -329,9 +337,32 @@ def Follow(request):
 def Postcomment(request,pk):
     post =Post.objects.all()
     user_posts =Post.objects.filter(id=pk)
-
+    comments = Comment.objects.filter(post_id=pk)
 
     context={
-        'posts': user_posts
+        'posts': user_posts,
+        'comments': comments,
     }
     return render(request, 'comment.html',context)
+
+@login_required
+def create_comment(request ):
+
+    # user = request.user.first_name
+    # post = Post.objects.all()
+    if request.method == "POST":
+    #   comment= request.POST.get('body',None)
+    #   form = NewCommentForm(request.POST)
+    #   if form.is_valid():
+    #     data = Comment()
+    #     data.post_id=post
+    #     data.name= user
+    #     data.body = comment
+    #     data.save()
+       
+    #     messages.success(request, f'Commented Successfully')
+         return render(request, 'comment.html')
+    # else:
+      
+    #   form = NewCommentForm(request.POST)
+    #   return render(request, 'comment', {'form':form})

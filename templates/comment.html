@@ -99,12 +99,12 @@
                  
 </div>
 
-<form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post">
+    <form   method="POST" enctype="multipart/form-data"  action="{% url 'createcomment' %}" class="create-comment">
     {% csrf_token %}
-    <div class="profile-photo">
+        <div class="profile-photo">
         <img src="{{ user.profile.profile_pic.url }}">
     </div>
-    <input type="text"  name ='description' placeholder="Write a comment...." id="create-post">
+    <input type="text"  name ='body' placeholder="Write a comment...." id="create-comment">
     <button type="submit" class="btn btn-primary">Comment</button>
  </form>
 
@@ -113,8 +113,9 @@
     <i class="uil uil-comment-alt"></i>
     <h4>Comments</h4>
 </div>
-<div class="comments">
+    <div class="comments">
     <!--============== Comment-1 ============== -->
+    {% for comment in comments %}
     <div class="comment">
         <div class="head">
             <div class="user">
@@ -122,9 +123,9 @@
                     <img src="../static/images/man.png" alt="">
                 </div>
                 <div class="info">
-                    <h3>Shahrukh Khan</h3>
+                    <h3>{{comment.name}}</h3>
                     <div class="caption">
-                        <p>Looking good hmm... </p>
+                        <p>{{comment.body}}</p>
                     </div>
                 </div>
             </div>
@@ -134,8 +135,9 @@
             </span>
         </div>
     </div>
+    {% endfor %}
 
-      <!--============== Comment- 2 ============== -->
+      {% comment %} <!--============== Comment- 2 ============== -->
       <div class="comment">
         <div class="head">
             <div class="user">
@@ -154,7 +156,7 @@
                 <i class="uil uil-trash-alt"></i>
             </span>
         </div>
-    </div>
+    </div> {% endcomment %}
      
 </div>
 

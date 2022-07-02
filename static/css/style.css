@@ -1085,7 +1085,7 @@ color: var(--color-danger);
 
 /* Comment Section */
 
-.comment-main .create-post{
+.comment-main .create-comment{
     overflow: absolute;
     width: 100%;
     height:5rem;
@@ -1097,12 +1097,12 @@ color: var(--color-danger);
     border-radius: var(--border-radius);
 }
 
-.comment-main .create-post .profile-photo{
+.comment-main .create-comment .profile-photo{
     position: absolute;
 }
 
 
-.comment-main .create-post input[type="text"]{
+.comment-main .create-comment input[type="text"]{
     justify-self: start;
     width: 100%;
     padding-left: 3rem;
@@ -1110,11 +1110,11 @@ color: var(--color-danger);
     color: var(--color-dark);
     margin-left: 1rem;
 }
-.comment-main .create-post input[type="file"]{
+.comment-main .create-comment input[type="file"]{
     display:none; 
     visibility:none;
 }
-.comment-main .create-post .uil-image{
+.comment-main .create-comment .uil-image{
     color: var(--color-primary);
     font-size:24px; 
     padding:25px;
