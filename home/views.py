@@ -1,3 +1,4 @@
+from curses import use_default_colors
 from pyexpat import model
 import random
 from django.shortcuts import render
@@ -31,17 +32,21 @@ def HomeProcess(request):
     user_following = FollowerCount.objects.filter(follower=request.user.username)
     print(user_following)
 
-    for users in user_following:
-        user_following_list.append(users.user_id)
+    for user in user_following:
+        user_list =User.objects.get(username=user.user)
+        user_following_list.append(user_list)
         print(user_following_list)
 
     for usernames in user_following_list:
-        print(usernames)
         feed_lists =Post.objects.filter(user_name_id= usernames)
+        print("Before")
+        print(feed_lists)
         feed.append(feed_lists)
 
     feed_lists =Post.objects.filter(user_name_id=user_object.id)
     feed.append(feed_lists)
+    print("After")
+    print(feed_lists)
 
     feed_list = list(chain(*feed))
 
@@ -86,109 +91,6 @@ def HomeProcess(request):
     }
     return render(request, 'home.html',context)
 
-# def HomeProcess(request):
-#     user_object = User.objects.get(username=request.user.username)
-#     user_profile = Profile.objects.get(user=user_object)
-
-#     user_following_list =[]
-#     feed =[]
-
-#     user_following = FollowersCount.objects.filter(follower=request.user.username)
-
-#     for users in user_following:
-#         user_following_list.append(users.user_id)
-
-#     for usernames in user_following_list:
-#         feed_lists =Post.objects.filter(tags=usernames)
-#         feed.append(feed_lists)
-    
-#     feed_list = list(chain(*feed))
-
-
-
-#     context={
-#     'user_object':user_object,
-#     'user_profile': user_profile,
-#     'user_posts':feed_list,
-#     }
-    
-#     return render(request, 'home.html',context)
-
-# class MyProfile(ListView):
-#   http_method_names=['post','get']
-#   model = Post
-#   template_name = 'profileupdate.html'
-#   context_object_name = 'posts'
-
-#   def post(self, request, **kwargs):  
-#     cuser = request.user.profile
-#     if request.method == 'POST':
-#         profile = ProfileForm(request.POST, request.FILES, instance=cuser)
-#         full_name = request.POST.get('full_name')
-#         email = request.POST.get('email')
-#         username = request.POST.get('username')
-#         if profile.is_valid():
-#             User.objects.filter(username=cuser).update(
-#                 first_name=full_name, email=email, username=username)
-#             profile.save()
-#         else:
-#             context = {'profile': profile}
-#             return render(request, 'profileupdate.html', context)
-
-#     context = {
-#         'profile':ProfileForm(instance=cuser),
-#         'post':'model',
-#     }
-
-#     return render(request, 'profileupdate.html',context)
-
-        
-#   def get_context_data(self, **kwargs):
-#    context = super(MyProfile, self).get_context_data(**kwargs)
-#    form = ProfileForm(initial={
-#     'phone':self.request.user.profile.phone,
-#     'address':self.request.user.profile.address,
-#     'bio':self.request.user.profile.bio,
-#     'gender':self.request.user.profile.gender,
-#     'birthday':self.request.user.profile.birthday,
-#     'cover_pic':self.request.user.profile.cover_pic.name,
-#     'profile_pic':self.request.user.profile.profile_pic,
-
-#    })
-#    context['profile']=form
-#    context['rtn']=True
-#    return context
-
-
-
-# @login_required(login_url='login')
-# def ProfileProcess(request):
-#     rtn = request.POST.get('rtn', None)
-#     cuser = request.user.profile
-#     if request.method == 'POST':
-#         profile = ProfileForm(request.POST, request.FILES, instance=cuser)
-#         full_name = request.POST.get('full_name')
-#         email = request.POST.get('email')
-#         username = request.POST.get('username')
-#         if profile.is_valid():
-#             User.objects.filter(username=cuser).update(
-#                 first_name=full_name, email=email, username=username)
-#             profile.save()
-#         else:
-
-#             context = {'profile': profile}
-#             if rtn:
-#                 return redirect('myprofile')
-#             return render(request, 'profile.html', context)
-
-#     context = {
-#         'profile':ProfileForm(instance=cuser),
-#     }
-#     if rtn:
-#                 return redirect('myprofile')
-#     return render(request, 'profile.html',context)
-
-
 @login_required(login_url='login')
 def create_post(request):
     print(request.POST.get('pic',None))
@@ -199,10 +101,7 @@ def create_post(request):
       caption= request.POST.get('description',None)
       form = NewPostForm(request.POST, request.FILES)
       if form.is_valid():
-      
-        # data = form.save(commit=False)
         data = Post()
-        # print(Post.pic.content_type()) 
         data.user_name = user
         data.description = caption
         if image :
@@ -365,6 +264,7 @@ def Follow(request):
 
 @login_required
 def Postcomment(request,pk):
+    user =request.user
     post =Post.objects.all()
     user_posts =Post.objects.filter(id=pk)
     comments = Comment.objects.filter(post_id=pk)
@@ -373,7 +273,8 @@ def Postcomment(request,pk):
     context={
         'posts': user_posts,
         'comments': comments,
-        'post_id': post_id
+        'post_id': post_id,
+        'user':user
     }
     return render(request, 'comment.html',context)
 
@@ -381,19 +282,23 @@ def Postcomment(request,pk):
 
 @login_required
 def create_comment(request,pk):
+    user =request.user.username 
+    print(user)
+    current_user =User.objects.get(username=user)
+    print(current_user)
+  
     post=Post.objects.get(id=pk)
     if request.method == 'POST':
         comment = request.POST.get('body',None)
         print(comment)
         form = NewCommentForm(request.POST)
         if  form.is_valid():
-            data = Comment()
-            data.name = post.user_name.first_name
+            data =  Comment()
+            data.name = current_user.first_name
             data.post = post
             data.body = comment
             data.save()
             print("form saved")
-            # messages.success("New account created")
             return redirect('comment',pk)
             
         else:
@@ -403,6 +308,5 @@ def create_comment(request,pk):
 @login_required
 def Commentdelete(request,comment_id): 
     comment = Comment.objects.get(id=comment_id)
-    print("Hari")
     comment.delete()
     return redirect('comment')
