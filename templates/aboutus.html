@@ -1,57 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<title>Popup Modal Box</title>-->
-    <link rel="stylesheet" href="style.css">
-    <!-- Fontawesome CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="profile-main">
+    <div class="middle">
+      
+        
+        <div class="profile-part">
+        
+        <div class="cover-image" style="background-image:url(../static/images/nepcov.png)"></div>    
+    <div class="about-text">
+    <h1>About Us</h1>
+    <h5>Designer</h5>
+    <p>At Softwarica, we promote the idea of learning, informing and empowering for a brighter tomorrow. In recent times, when our students can educate themselves on multiple aspects at the same time on the internet, we would like to provide them the platform to be the best that they can be in the tech world. </p>
+    <button type="button">Let's Talk</button>
+</div> 
+</div> 
 
-    <!-- Boxicons CSS -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-      <section>
-          <div class="profile">
-              <div class="profile-img">
-                  <!--<img src="profile.jpg" alt="">-->
-              </div>
-              <span class="name">Prem Shahi</span>
-              <span class="profession">Web & App Designer</span>
-              <div class="button">
-                <i class='bx bxs-envelope'></i>
-                <button>Hire Me</button>
-              </div>
-          </div>
-          <div class="popup-outer">
-              <div class="popup-box">
-                <i id="close" class='bx bx-x close'></i>
-                  <div class="profile-text">
-                      <!--<img src="profile.jpg" alt="">-->
-                      <div class="text">
-                          <span class="name">Prem Shahi</span>
-                          <span class="profession">Web & App Designer</span>
-                      </div>
-                  </div>
-                  <textare placeholder="Enter your message"></textare>
-                  <div class="button">
-                      <button id="close" class="cancel">Cancel</button>
-                      <button class="send">Send</button>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-    <!--<script src="script.js"></script>-->
-</body>
-</html>
-
-
-<video class="photo" controls>
+</div>
+   
+</div>
     
-        <source src="{{post.pic.url}}" type="video/mp4">
-
-</video>
+{% endblock %}

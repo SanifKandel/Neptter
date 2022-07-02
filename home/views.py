@@ -15,16 +15,6 @@ from itertools import chain
 
 # Create your views here.
 
-# class HomeProcess(ListView):
-#   model = Post
-#   template_name = 'home.html'
-#   context_object_name = 'posts'
- 
-
-
-#   def get_context_data(self, **kwargs):
-#    context = super(HomeProcess, self).get_context_data(**kwargs)
-#    return context
 @login_required
 def HomeProcess(request):
     post =Post.objects.all()
@@ -33,8 +23,6 @@ def HomeProcess(request):
 
     #Customized Home
     user_object = User.objects.get(username=request.user.username)
-    # like_post = Post.objects.filter(user_name=user_object.id)
-    # liked = LikePost.objects.filter(post_id=like_post.like)
     user_profile = Profile.objects.get(user=user_object)
 
     user_following_list =[]
@@ -91,11 +79,8 @@ def HomeProcess(request):
 
     context={
         'posts':post,
-       # 'like':like,
         'user_profile': user_profile,
-
         'user_posts':feed_list,
-    #    'user_comment_length':user_comment_length ,
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
 
     }
@@ -232,10 +217,12 @@ def create_post(request):
       return render(request, 'home', {'form':form})
 
 @login_required(login_url='login')
-def Postdelete(request):
-    post = Post.objects.get(id=request.POST.get('id'))
+def Postdelete(request,post_id): 
+    post = Post.objects.get(id=post_id)
     post.delete()
     return redirect('home')
+
+
 
 @login_required(login_url='login')
 def Postlike (request):
@@ -273,6 +260,7 @@ def AboutProcess(request):
 @login_required
 def MyProfiles(request, pk):
     if request.method == "GET":
+        all_users = User.objects.all()
         user_object = User.objects.get(username=pk)
         user_profile = Profile.objects.get(user=user_object)
         user_posts =Post.objects.filter(user_name=user_object)
@@ -288,6 +276,31 @@ def MyProfiles(request, pk):
 
         followers =len(FollowerCount.objects.filter(user=pk))
         following =len(FollowerCount.objects.filter(follower=pk))
+    # Friends Suggestions
+        user_following = FollowerCount.objects.filter(follower=request.user.username)
+        user_following_all =[]
+
+        for user in user_following:
+            user_list =User.objects.get(username=user.user)
+            user_following_all.append(user_list)
+
+        new_suggestions_list = [x for x in list(all_users) if (x not in list(user_following_all))]
+        current_user = User.objects.filter(username=request.user.username)
+        final_suggestions_list = [x for x in list(new_suggestions_list) if ( x not in list(current_user))]
+        random.shuffle(final_suggestions_list)
+
+        username_profile = []
+        username_profile_list = []
+
+        for users in final_suggestions_list:
+            username_profile.append(users.id)
+
+        for ids in username_profile:
+            profile_lists = Profile.objects.filter(user_id=ids)
+            username_profile_list.append(profile_lists)
+
+        suggestions_username_profile_list = list(chain(*username_profile_list))
+
 
 
         form = ProfileForm(initial={
@@ -307,6 +320,7 @@ def MyProfiles(request, pk):
         'user_profile': user_profile,
         'user_posts':user_posts,
         'user_post_length':user_post_length,
+        'suggestions_username_profile_list':suggestions_username_profile_list[:4],
         'pk':pk,
         'button_text':button_text,
         'button_check':button_check,
@@ -328,14 +342,6 @@ def MyProfiles(request, pk):
             User.objects.filter(username=cuser).update(
                 first_name=full_name, email=email, username=username)
             profile.save()
-        # else:
-        #     context = {'profile': profile}
-        #     return redirect('myprofiles')
-
-        # context = {
-        # 'profile':ProfileForm(instance=cuser),
-        # }
-
         return redirect('myprofiles' ,pk)
 
 
@@ -357,36 +363,46 @@ def Follow(request):
     else:
         return render('/')
 
-
+@login_required
 def Postcomment(request,pk):
     post =Post.objects.all()
     user_posts =Post.objects.filter(id=pk)
     comments = Comment.objects.filter(post_id=pk)
+    post_id = pk
 
     context={
         'posts': user_posts,
         'comments': comments,
+        'post_id': post_id
     }
     return render(request, 'comment.html',context)
 
-@login_required
-def create_comment(request ):
 
-    # user = request.user.first_name
-    # post = Post.objects.all()
-    if request.method == "POST":
-    #   comment= request.POST.get('body',None)
-    #   form = NewCommentForm(request.POST)
-    #   if form.is_valid():
-    #     data = Comment()
-    #     data.post_id=post
-    #     data.name= user
-    #     data.body = comment
-    #     data.save()
-       
-    #     messages.success(request, f'Commented Successfully')
-         return render(request, 'comment.html')
-    # else:
-      
-    #   form = NewCommentForm(request.POST)
-    #   return render(request, 'comment', {'form':form})
+
+@login_required
+def create_comment(request,pk):
+    post=Post.objects.get(id=pk)
+    if request.method == 'POST':
+        comment = request.POST.get('body',None)
+        print(comment)
+        form = NewCommentForm(request.POST)
+        if  form.is_valid():
+            data = Comment()
+            data.name = post.user_name.first_name
+            data.post = post
+            data.body = comment
+            data.save()
+            print("form saved")
+            # messages.success("New account created")
+            return redirect('comment',pk)
+            
+        else:
+            form = NewCommentForm(request.POST)
+            return render(request, 'comment', pk,{'form':form})
+
+@login_required
+def Commentdelete(request,comment_id): 
+    comment = Comment.objects.get(id=comment_id)
+    print("Hari")
+    comment.delete()
+    return redirect('comment')

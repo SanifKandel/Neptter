@@ -43,10 +43,10 @@
                         <span class="edit">
                             <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
                         </span>
-                        <div class="menu-content" action="{% url 'postdelete' %}">
+                        <div class="menu-content">
                         <ul class="list">
                             {% if post.user_name.first_name == user.first_name %}
-                            <li><a><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
+                            <li><a href="{% url 'postdelete' post_id=post.id %}"><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
                             {% endif %}
                             <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>
                           </ul></div>

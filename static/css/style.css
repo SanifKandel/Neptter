@@ -260,6 +260,7 @@ main .container .left .profile{
     translate: all 300ms ease;
     position: relative;
 }
+
 .left .sidebar .menu-item .uil-signout{
     color: var(--color-danger);
 }
@@ -1190,11 +1191,12 @@ color: var(--color-danger);
     padding-bottom: -7px;
 }
 
+/* About Us Page */
 
+.about-main .middle .about-text{ 
+    justify-content: center;
 
-
-
-
+}
 
 
 

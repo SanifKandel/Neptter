@@ -16,8 +16,9 @@ urlpatterns = [
  path('profile/<str:pk>',views.MyProfiles,name="myprofiles"),
  path('aboutus/',views.AboutProcess,name="about"),
  path('post/',views.create_post,name="post"),
- path('deletepost/',views.Postdelete,name="postdelete"),
+ path('deletepost/<int:post_id>',views.Postdelete,name="postdelete"),
  path('likepost/',views.Postlike,name="likepost"),
  path('comment/<int:pk>',views.Postcomment,name="comment"),
- path('createcomment/',views.create_comment,name="createcomment"),
+ path('createcomment/<int:pk>',views.create_comment,name="createcomment"),
+ path('deletecomment/<int:comment_id>',views.Commentdelete,name="deletecomment"),
 ]
