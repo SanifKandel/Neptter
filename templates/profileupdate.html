@@ -20,11 +20,11 @@
                             </div>
 
                             <div class="field input-field">
-                                {{user_profile.user.profile.phone}}
+                                {{profile.phone}}
                             </div>
 
                             <div class="field input-field">
-                                {{user_profile.user.profile.address}}
+                                {{profile.address}}
                             </div>
 
                             <div class="field input-field">
@@ -32,22 +32,24 @@
                             </div>
 
                             <div class="field input-field">
-                                {{user_profile.user.profile.birthday}}
+                                {{profile.birthday}}
                             </div>
 
                             <div class="field input-field">
-                                {{user_profile.user.profile.gender}}
+                                {{profile.gender}}
                             </div>
 
                             <div class="field input-field">
-                                {{user_profile.user.profile.bio}}
+                                {{profile.bio}}
                             </div>
 
                             <div class="field input-field">
-                                {{user_profile.user.profile.profile_pic}}
+                                {{profile.profile_pic}}
+                               <h6> {{user_profile.user.profile.profile_pic}}</h6>
                         </div>
                         <div class="field input-field">
-                            {{user_profile.user.profile.cover_pic}}
+                            {{profile.cover_pic}}
+                            <h6> {{user_profile.user.profile.cover_pic}}</h6>
                         </div>
                         <div class="button">
                             <button class="send">Update</button>

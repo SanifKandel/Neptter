@@ -31,8 +31,10 @@ def HomeProcess(request):
     all_users = User.objects.all()
     user_following = FollowerCount.objects.filter(follower=request.user.username)
 
-
+    #Customized Home
     user_object = User.objects.get(username=request.user.username)
+    # like_post = Post.objects.filter(user_name=user_object.id)
+    # liked = LikePost.objects.filter(post_id=like_post.like)
     user_profile = Profile.objects.get(user=user_object)
 
     user_following_list =[]
@@ -45,19 +47,18 @@ def HomeProcess(request):
         user_following_list.append(users.user_id)
         print(user_following_list)
 
-    
-
     for usernames in user_following_list:
         print(usernames)
-        feed_lists =Post.objects.filter(user_name_id=usernames)
-        
+        feed_lists =Post.objects.filter(user_name_id= usernames)
         feed.append(feed_lists)
 
-    
+    feed_lists =Post.objects.filter(user_name_id=user_object.id)
+    feed.append(feed_lists)
+
     feed_list = list(chain(*feed))
 
 
-    
+    # Friends Suggestions
     user_following_all =[]
 
     for user in user_following:
@@ -90,9 +91,10 @@ def HomeProcess(request):
 
     context={
         'posts':post,
+       # 'like':like,
         'user_profile': user_profile,
 
-     'user_posts':feed_list,
+        'user_posts':feed_list,
     #    'user_comment_length':user_comment_length ,
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
 
@@ -127,50 +129,50 @@ def HomeProcess(request):
     
 #     return render(request, 'home.html',context)
 
-class MyProfile(ListView):
-  http_method_names=['post','get']
-  model = Post
-  template_name = 'profileupdate.html'
-  context_object_name = 'posts'
+# class MyProfile(ListView):
+#   http_method_names=['post','get']
+#   model = Post
+#   template_name = 'profileupdate.html'
+#   context_object_name = 'posts'
 
-  def post(self, request, **kwargs):  
-    cuser = request.user.profile
-    if request.method == 'POST':
-        profile = ProfileForm(request.POST, request.FILES, instance=cuser)
-        full_name = request.POST.get('full_name')
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        if profile.is_valid():
-            User.objects.filter(username=cuser).update(
-                first_name=full_name, email=email, username=username)
-            profile.save()
-        else:
-            context = {'profile': profile}
-            return render(request, 'profileupdate.html', context)
+#   def post(self, request, **kwargs):  
+#     cuser = request.user.profile
+#     if request.method == 'POST':
+#         profile = ProfileForm(request.POST, request.FILES, instance=cuser)
+#         full_name = request.POST.get('full_name')
+#         email = request.POST.get('email')
+#         username = request.POST.get('username')
+#         if profile.is_valid():
+#             User.objects.filter(username=cuser).update(
+#                 first_name=full_name, email=email, username=username)
+#             profile.save()
+#         else:
+#             context = {'profile': profile}
+#             return render(request, 'profileupdate.html', context)
 
-    context = {
-        'profile':ProfileForm(instance=cuser),
-        'post':'model',
-    }
+#     context = {
+#         'profile':ProfileForm(instance=cuser),
+#         'post':'model',
+#     }
 
-    return render(request, 'profileupdate.html',context)
+#     return render(request, 'profileupdate.html',context)
 
         
-  def get_context_data(self, **kwargs):
-   context = super(MyProfile, self).get_context_data(**kwargs)
-   form = ProfileForm(initial={
-    'phone':self.request.user.profile.phone,
-    'address':self.request.user.profile.address,
-    'bio':self.request.user.profile.bio,
-    'gender':self.request.user.profile.gender,
-    'birthday':self.request.user.profile.birthday,
-    'cover_pic':self.request.user.profile.cover_pic.name,
-    'profile_pic':self.request.user.profile.profile_pic,
+#   def get_context_data(self, **kwargs):
+#    context = super(MyProfile, self).get_context_data(**kwargs)
+#    form = ProfileForm(initial={
+#     'phone':self.request.user.profile.phone,
+#     'address':self.request.user.profile.address,
+#     'bio':self.request.user.profile.bio,
+#     'gender':self.request.user.profile.gender,
+#     'birthday':self.request.user.profile.birthday,
+#     'cover_pic':self.request.user.profile.cover_pic.name,
+#     'profile_pic':self.request.user.profile.profile_pic,
 
-   })
-   context['profile']=form
-   context['rtn']=True
-   return context
+#    })
+#    context['profile']=form
+#    context['rtn']=True
+#    return context
 
 
 
@@ -314,6 +316,28 @@ def MyProfiles(request, pk):
         }
         
         return render(request, 'profileupdate.html',context)
+
+    elif request.method == "POST":
+        cuser = request.user.profile
+        profile = ProfileForm(request.POST, request.FILES, instance=cuser)
+        full_name = request.POST.get('full_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        pk =username
+        if profile.is_valid():
+            User.objects.filter(username=cuser).update(
+                first_name=full_name, email=email, username=username)
+            profile.save()
+        # else:
+        #     context = {'profile': profile}
+        #     return redirect('myprofiles')
+
+        # context = {
+        # 'profile':ProfileForm(instance=cuser),
+        # }
+
+        return redirect('myprofiles' ,pk)
+
 
 
 @login_required
