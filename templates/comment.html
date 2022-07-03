@@ -115,7 +115,9 @@
     <div class="comments">
     <!--============== Comment-1 ============== -->
     {% if not comments %}
-    No comment buddy
+    <div class="nofeed" >
+    <span><h3 >No comments yet.</h3></span>
+    </div>
     {%else%}
     {% for comment in comments %}
     <div class="comment">

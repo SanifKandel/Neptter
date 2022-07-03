@@ -35,12 +35,7 @@
                                 </a>
                             </div>
                             <div class="info">
-                                {% if post.user_name.username == 'neptter12' %}
-                                
-                                <a class="verify"><h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3><img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
-                                {% else %}
                                 <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
-                                {% endif %}
                                 <small> {{post.date_posted }}</small>
                             </div>
                         </div>
@@ -101,7 +96,7 @@
                     </div> {% endcomment %}
                     <div class="action-button">
                         <div class="interaction-button">
-                            {% if liked_filters != None %} 
+                            {% if liked_filters == None %} 
                             
                             <a href="/likepost?post_id={{post.id}}"  class="like" id="like"><i class="fa-solid fa-heart" style="color: red; font-size:20px;"></i></a>
                             <h3 id="postid" style="display: none;">{{post.id}}</h3>

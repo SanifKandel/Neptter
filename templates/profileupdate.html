@@ -91,7 +91,7 @@
             
 
             <div class="details-data">
-                {% if user_profile.user.username == 'neptter' or 'elonmusk' %}
+                {% if pk == 'neptter' or 'elonmusk' %}
                 <a class="verify"><h4>{{user_profile.user.first_name}}</h4> <img src="{% static 'images/verified.png' %}" style="width:17px; height:17px; margin-top:2.1px;" alt=""/></a>
                 {% else %}
                 <h4>{{user_profile.user.first_name}}</h4> 
