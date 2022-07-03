@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'register',
     'login',
     'home',
+    'post',
+    'userprofile',
 ]
 SITE_ID = 1
 

@@ -1,24 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from django.urls.conf import include
-from django.contrib.auth.decorators import login_required
 from . import views
 
 
 urlpatterns = [
-
-
-#  path('',login_required(views.HomeProcess.as_view()),name="home"),
  path('',views.HomeProcess,name="home"),
-#  path('profile/',views.ProfileProcess,name="profile"),
- path('follow/',views.Follow,name="follow"),
-#  path('myprofile/',login_required(views.MyProfile.as_view()),name="myprofile"),
- path('profile/<str:pk>',views.MyProfiles,name="myprofiles"),
  path('aboutus/',views.AboutProcess,name="about"),
- path('post/',views.create_post,name="post"),
- path('deletepost/<int:post_id>',views.Postdelete,name="postdelete"),
- path('likepost/',views.Postlike,name="likepost"),
- path('comment/<int:pk>',views.Postcomment,name="comment"),
- path('createcomment/<int:pk>',views.create_comment,name="createcomment"),
- path('deletecomment/<int:comment_id>',views.Commentdelete,name="deletecomment"),
 ]

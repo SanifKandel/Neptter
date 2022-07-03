@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from register.models import User
-from home.models import Profile
+from userprofile.models import Profile
 
 from register.forms import CreateUserForm 
 

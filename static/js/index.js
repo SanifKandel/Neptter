@@ -250,10 +250,12 @@ function defaultBtnActive(){
 
     const file = this.files[0];
     console.log(file);
+    console.log("hii2");
 
     if(file){
       const reader = new FileReader();
       reader.onload = function(){
+        console.log("hii3");
         const result = reader.result;
         img.src = result;
         console.log(result);
