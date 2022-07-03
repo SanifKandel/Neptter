@@ -64,12 +64,18 @@
             </li>
             <li>
                 <a href="#" aria-expanded="false" class="">
+                    <i class="fa-solid fa-heart fa-2x"></i>
+                    Likes
+                </a>
+            </li>
+            <li>
+                <a href="#" aria-expanded="false" class="">
                     <i class="fa-solid fa-comment-dots fa-2x"></i>
                     Comments
                 </a>
             </li>
             <li>
-                <a href="#" onclick="return confirm('Are you sure want to logout?')" id="logout" aria-expanded="false">
+                <a href="{%url 'logout'%}" onclick="return confirm('Are you sure want to logout?')" id="logout" aria-expanded="false">
                     <i class="fa fa-sign-out-alt fa-2x " aria-hidden="true" ></i>
                     Log Out
                 </a>

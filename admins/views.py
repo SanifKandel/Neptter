@@ -39,7 +39,6 @@ def admin_dashboard(request):
     return render(request, 'admin-dashboard.html', context)
 
 
-@admin_only
 def logoutUser(request):
     logout(request)
     return redirect('login')
