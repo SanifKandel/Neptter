@@ -31,7 +31,7 @@ AUTH_USER_MODEL = 'register.User'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','192.168.101.4','neptter.herokuapp.com','neptter.azurewebsites.net']
 
