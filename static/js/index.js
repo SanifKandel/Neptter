@@ -198,9 +198,9 @@ const section = document.querySelector(".profile-main"),
       cancelBtn = document.querySelectorAll("#close");
       
 
-hireBtn.addEventListener("click", ()=>{
-    section.classList.add("active");
-})
+// hireBtn.addEventListener("click", ()=>{
+//     section.classList.add("active");
+// })
 cancelBtn.forEach(cBtn => {
     cBtn.addEventListener("click", () =>{
         section.classList.remove("active");
@@ -233,3 +233,41 @@ like.addEventListener("click", ()=>{
     });
 
 });
+
+
+//Display Image
+const middle = document.querySelector(".middle");
+const wrapper = middle.querySelector(".lower-part");
+const defaultbtn = middle.querySelector("#imageupload");
+const img = wrapper.querySelector("img");
+var cancelBtn = wrapper.querySelector(".cancel");
+
+function defaultBtnActive(){
+    defaultbtn.click();
+  }
+  defaultbtn.addEventListener("change", function(){
+    console.log("hii");
+
+    const file = this.files[0];
+    console.log(file);
+
+    if(file){
+      const reader = new FileReader();
+      reader.onload = function(){
+        const result = reader.result;
+        img.src = result;
+        console.log(result);
+        wrapper.classList.add("active");
+      }
+
+     cancelBtn.addEventListener("click", function(){
+     img.src = "";
+     wrapper.classList.remove("active");
+      })
+      reader.readAsDataURL(file);
+
+    }
+      });
+   
+
+   
