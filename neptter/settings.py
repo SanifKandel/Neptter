@@ -33,7 +33,7 @@ AUTH_USER_MODEL = 'register.User'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','192.168.101.4','neptter.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','192.168.101.4','neptter.herokuapp.com','neptter.azurewebsites.net']
 
 
 # Application definition
@@ -75,10 +75,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'neptter.urls'
 
+TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [TEMPLATE_DIR] ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
