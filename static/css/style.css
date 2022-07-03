@@ -391,12 +391,16 @@ main .container .left .profile{
     overflow: hidden;
 }
 .middle .lower-part.active{
+    height: 300px;
+    width:300px;
+    margin-left:17%;
     display: flex;
     border-radius: var(--border-radius);
     justify-content: center;
 }
 
 .middle .lower-part img{
+    padding: var(--card-padding);
 
     display:block;
      margin-top: 15px; 
