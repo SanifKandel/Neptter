@@ -62,7 +62,6 @@ homepage==0.5.5
 idna==3.3
 inflect==5.4.0
 itsdangerous==2.0.1
-Jinja2==3.0.3
 jsonpickle==2.2.0
 kombu==4.6.11
 legacy==0.1.6
@@ -133,3 +132,4 @@ websockets==8.1
 Werkzeug==2.0.2
 youtube-dl==2021.12.17
 zope.event==4.5.0
+zope.interface==5.4.0
