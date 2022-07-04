@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from register.models import User
 from userprofile.models import Profile
 
-from register.forms import CreateUserForm 
+
 
 # Create your views here.
 

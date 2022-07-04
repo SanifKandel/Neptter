@@ -1,16 +1,13 @@
-from curses import use_default_colors
-from pyexpat import model
 from django.shortcuts import render
 
 from .models import  Post, LikePost,Comment
 from .forms import NewPostForm, NewCommentForm
 from register.models import User 
-from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.template.context import Context
+
 
 # Create your views here.
 

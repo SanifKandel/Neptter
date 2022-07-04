@@ -7,11 +7,11 @@ from .models import Profile ,FollowerCount
 from post.models import Post
 from .forms import ProfileForm 
 from register.models import User 
-from django.views.generic import ListView
+
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
-from django.contrib import messages
+
 from django.template.context import Context
 from itertools import chain
 
