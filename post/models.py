@@ -16,7 +16,7 @@ class Post(models.Model):
             return self.description
 
 class LikePost(models.Model):
-    post_id =models.CharField(max_length=500)
+    post= models.ForeignKey(Post,on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
 
     def __str__(self):

@@ -2,6 +2,7 @@ import random
 from django.shortcuts import render
 from post.models import Post
 from userprofile.models import Profile ,FollowerCount
+from post.models import LikePost
 from register.models import User 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -77,11 +78,13 @@ def HomeProcess(request):
     # user_comments =Comment.objects.filter(id=posts.id)
     # user_comment_length = len(user_comments)
 
+    liked_post = LikePost.objects.all()
 
     context={
         'posts':post,
         'user_profile': user_profile,
         'user_posts':feed_list,
+        'liked_post':liked_post,
     
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
 

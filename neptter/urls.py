@@ -17,6 +17,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
+from post import views as Postviews
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('register.urls')),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('', include('login.urls')),
     path('accounts/', include('allauth.urls')),
+     path('likepost/',Postviews.Postlike,name="likepost"),
     
 ]
 

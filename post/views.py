@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from .models import  Post, LikePost,Comment
@@ -41,35 +42,45 @@ def Postdelete(request,post_id):
     post.delete()
     return redirect('home')
 
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
 @login_required(login_url='login')
 def Postlike (request):
-    username = request.user.username
-    post_id = request.GET.get('post_id')
+    if is_ajax(request=request):
+        print("inside ajax")
+        username = request.user.username
+        post_id = request.POST.get('post_id')
 
-    post = Post.objects.get(id=post_id)
-    like_filter = LikePost.objects.filter(post_id=post_id,username=username).first()
-    like_filters = LikePost.objects.filter(post_id=post_id,username=username)
-    print(like_filters)
-
-    if like_filter == None:
-        new_like =LikePost.objects.create(post_id=post_id, username=username)
-        new_like.save()
-        post.like = post.like+1
-        post.save()
+        post = Post.objects.get(id=post_id)
+        like_filter = LikePost.objects.filter(post_id=post_id,username=username).first()
+        like_filters = LikePost.objects.filter(post_id=post_id,username=username)
+        print(like_filters)
+        status = False
         
-       
 
-    else:
-        like_filter.delete()
-        post.like = post.like-1
-        post.save()
+        if like_filter == None:
+            new_like =LikePost.objects.create(post_id=post_id, username=username)
+            status = True
+            new_like.save()
+            post.like = post.like+1
+            post.save()
+            
+        
+
+        else:
+            like_filter.delete()
+            status= False
+            post.like = post.like-1
+            post.save()
+        
+        context={
+            'like_filters' :like_filters,
+        
+        }  
     
-    context={
-        'like_filters' :like_filters,
-    
-    }  
-  
-    return redirect('/',context)
+        return JsonResponse(status,safe=False)
+
 
 
 @login_required
