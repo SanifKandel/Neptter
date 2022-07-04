@@ -215,13 +215,13 @@ postsearch.addEventListener('keyup', searchpost);
 //Profile Update Frontend
 
 const section = document.querySelector(".profile-main");
-const hireBtn = document.querySelector(".buttons");
+const  hireBtn = document.querySelector(".buttons");
       cancelBtn = document.querySelectorAll("#close");
       
 
-// hireBtn.addEventListener("click", ()=>{
-//     section.classList.add("active");
-// });
+hireBtn.addEventListener("click", ()=>{
+    section.classList.add("active");
+});
 
 cancelBtn.forEach(cBtn => {
     cBtn.addEventListener("click", () =>{

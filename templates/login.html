@@ -41,11 +41,11 @@
       </div>
       <div class="containter cta">
         <label class="google-container">
-           <p class="social-text">Have Gmail Account? </p>
+           {% comment %} <p class="social-text">Have Gmail Account? </p> {% endcomment %}
 
-          <a href="{% provider_login_url "google" method='oauth2' %}" class="social-icon">
+          {% comment %} <a href="{% provider_login_url "google" method='oauth2' %}" class="social-icon">
                 <i class="fab fa-google"></i>
-              </a>
+              </a> {% endcomment %}
         </label>
       </div>
       <button class="sign-up-btn" type="submit"> Sign in</button>
