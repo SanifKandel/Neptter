@@ -22,25 +22,3 @@ def registerProcess(request):
    
     else:
         return render(request,"register.html")
-
-
-       
-        # form = CreateUserForm()
-
-        # if request.method == 'POST':
-        #     print(request.POST)
-        #     print("Got data")
-        #     form = CreateUserForm(request.POST)
-        #     if  form.is_valid():
-        #         print("form valid")
-        #         form.save()
-        #         print("form saved")
-        #         # messages.success("New account created")
-        #         return redirect('login')
-                
-        #     else:
-        #         messages.error(request, "Error")
-        # context={
-        #     'form':form,
-        # }
-        # return render(request,"register.html",context

@@ -1,7 +1,10 @@
+from itertools import chain
+import random
 from django.http import JsonResponse
 from django.shortcuts import render
 
 from .models import  Post, LikePost,Comment
+from userprofile.models import  Profile , FollowerCount
 from .forms import NewPostForm, NewCommentForm
 from register.models import User 
 from django.contrib.auth.decorators import login_required
@@ -85,17 +88,50 @@ def Postlike (request):
 
 @login_required
 def Postcomment(request,pk):
-    user =request.user
+    userd =request.user
     post =Post.objects.all()
     user_posts =Post.objects.filter(id=pk)
     comments = Comment.objects.filter(post_id=pk)
     post_id = pk
+    all_users = User.objects.all()
+    user_following = FollowerCount.objects.filter(follower=request.user.username)
 
+
+    # Friends Suggestions
+    user_following_all =[]
+
+    for user in user_following:
+        user_list =User.objects.get(username=user.user)
+        user_following_all.append(user_list)
+
+    new_suggestions_list = [x for x in list(all_users) if (x not in list(user_following_all))]
+    current_user = User.objects.filter(username=request.user.username)
+    final_suggestions_list = [x for x in list(new_suggestions_list) if ( x not in list(current_user))]
+    random.shuffle(final_suggestions_list)
+
+    username_profile = []
+    username_profile_list = []
+
+    for users in final_suggestions_list:
+        username_profile.append(users.id)
+
+    for ids in username_profile:
+        profile_lists = Profile.objects.filter(user_id=ids)
+        username_profile_list.append(profile_lists)
+
+    suggestions_username_profile_list = list(chain(*username_profile_list))
+
+    user_comments =Comment.objects.filter(post=pk)
+    user_comment_length = len(user_comments)
+
+   
     context={
         'posts': user_posts,
         'comments': comments,
         'post_id': post_id,
-        'user':user
+        'user': userd,
+        'user_comment_length':user_comment_length,
+        'suggestions_username_profile_list':suggestions_username_profile_list[:4]
     }
     return render(request, 'comment.html',context)
 
@@ -119,6 +155,8 @@ def create_comment(request,pk):
             data.post = post
             data.body = comment
             data.save()
+            post.comment = post.comment +1
+            post.save()
             print("form saved")
             return redirect('comment',pk)
             
