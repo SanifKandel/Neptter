@@ -79,9 +79,7 @@ def HomeProcess(request):
 
     context={
         'posts':post,
-        'user_profile': user_profile,
-        'user_posts':feed_list,
-        'liked_post':liked_post,
+     
 
     
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
