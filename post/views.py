@@ -151,11 +151,11 @@ def create_comment(request,pk):
         form = NewCommentForm(request.POST)
         if  form.is_valid():
             data =  Comment()
-            data.name = current_user.first_name
+            data.user= current_user
             data.post = post
             data.body = comment
             data.save()
-            post.comment = post.comment +1
+            post.comment = post.comment + 1
             post.save()
             print("form saved")
             return redirect('comment',pk)
@@ -167,5 +167,10 @@ def create_comment(request,pk):
 @login_required
 def Commentdelete(request,comment_id): 
     comment = Comment.objects.get(id=comment_id)
+    commentid = comment.post.id
+    post=Post.objects.get(id=commentid)
+    post.comment = post.comment - 1
+    post.save()
+
     comment.delete()
-    return redirect('comment')
+    return redirect('comment',commentid)
