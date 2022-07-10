@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="comment-main">      
+
+    <div class="post-title">
+       <a href="{% url 'home' %}" style="color: white;"> <i class="uil uil-arrow-left"></i> </a>
+        <h4>Post</h4>
+    </div>
+    <div class="feeds">
+                <!--============== FEED- 1 ============== -->
+                {% for post in  posts reversed %}
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-photo">
+                                <a href='{% url 'myprofiles' pk=post.user_name.username %}'>
+                                <img src="{{ post.user_name.profile.profile_pic.url }}" alt="">
+                                </a>
+                            </div>
+                            <div class="info">
+                                {% if post.user_name.username == 'neptter12' %}
+                                
+                                <a class="verify"><h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3><img src="{% static 'images/verified.png' %}" style="width:20px; height:20px;" alt=""/></a>
+                                {% else %}
+                                <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
+                                {% endif %}
+                                <small> {{post.date_posted }}</small>
+                            </div>
+                        </div>
+                       
+                        <div class="menu">
+                        <span class="edit">
+                            <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
+                        </span>
+                        <div class="menu-content" >
+                        <ul class="list">
+                            {% if post.user_name.first_name == user.first_name %}
+                            <li><a href="{% url 'postdelete' post_id=post.id %}"><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
+                            {% endif %}
+                            <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>
+                          </ul></div>
+
+                        </div>
+                       
+                    </div>
+                    <div class="caption">
+                        <p>{{post.description}}</p>
+                    </div>
+                    {% comment %} {% if post.pic %}
+                    <div  class="photo">
+                        <a href="{{post.pic.url}}" target="_blank">
+                        <img
+                          src="{{post.pic.url}}"
+                          alt=""
+                        />
+                        </a>
+                    </div> {% endcomment %}
+                    {% comment %} {% if  post.pic.toString().endsWith(".mp4") %}
+                    <video class="photo" controls>
+                        <source src="{{post.pic.url}}" type="video/mp4">
+                </video> 
+                {% else %} {% endcomment %}
+                {% if post.pic %}
+                <div  class="photo">
+                    <a href="{{post.pic.url}}" target="_blank">
+                    <img
+                      src="{{post.pic.url}}"
+                      alt=""
+                    />
+                    </a>
+                </div>
+                    {% endif %}
+                    <div class="action-button">
+                        <div class="interaction-button">
+                            <a   class="like" ><i  id="{{post.id}}" class="fa-regular fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+
+
+                            {% comment %} {%  if liked_post %} {% endcomment %}
+                            {% comment %} 
+                                {% for liked in liked_post %}  {% endcomment %}
+                                    {% comment %} {% if request.user in liked_post  %}
+                                        <a   class="like" ><i  id="{{post.id}}" class="fa-solid fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+                                    {% else %} 
+                                        <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})"></i></a> 
+                                    {% endif %}  {% endcomment %}
+                                
+                            {% comment %} {% else %} 
+                                <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})" ></i></a> 
+                            {% endif%}  {% endcomment %}
+                            
+                            <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
+        
+
+                        </div>
+                    </div>
+                    <div class="liked-by">
+                        <p><b>{{post.like}}</b> likes</p>
+                        <p class="comment-count"><b>{{user_comment_length}}</b> comment</p>
+                    </div>
+                
+                    
+                </div>
+                {% empty %}
+                {% endfor %}
+
+
+                 
+</div>
+
+    <form   method="POST" enctype="multipart/form-data"  action="{% url 'createcomment' pk=post_id %}" class="create-comment">
+    {% csrf_token %}
+        <div class="profile-photo">
+        <img src="{{ user.profile.profile_pic.url }}">
+    </div>
+    <input type="text"  name ='body' placeholder="Write a comment...." id="create-comment">
+    <button type="submit" class="btn btn-primary">Comment</button>
+ </form>
+
+
+ <div class="comment-title" >
+    <i class="uil uil-comment-alt"></i>
+    <h4>Comments</h4>
+</div>
+    <div class="comments">
+    <!--============== Comment-1 ============== -->
+    {% if not comments %}
+    <div class="nofeed" >
+    <span><h3 >No comments yet.</h3></span>
+    </div>
+    {%else%}
+    {% for comment in comments %}
+    <div class="comment">
+        <div class="head">
+            <div class="user">
+                <div class="profile-photo">
+                    <img src="{{comment.user.profile.profile_pic.url}}" alt="">
+                </div>
+                <div class="info">
+                    <h3>{{comment.user.first_name}}</h3>
+                    <div class="caption">
+                        <p>{{comment.body}}</p>
+                    </div>
+                </div>
+            </div>
+        
+            <span class="edit">
+                <a href="{% url 'deletecomment' comment_id=comment.id %}"><i class="uil uil-trash-alt"></i></a>
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+      {% comment %} <!--============== Comment- 2 ============== -->
+      <div class="comment">
+        <div class="head">
+            <div class="user">
+                <div class="profile-photo">
+                    <img src="../static/images/sanif.jpg" alt="">
+                </div>
+                <div class="info">
+                    <h3>Ram Sharma</h3>
+                    <div class="caption">
+                        <p>Nice pic sexy. </p>
+                    </div>
+                </div>
+            </div>
+        
+            <span class="edit">
+                <i class="uil uil-trash-alt"></i>
+            </span>
+        </div>
+    </div> {% endcomment %}
+     
+</div>
+
+
+
+</div>
+    
+{% endblock %}

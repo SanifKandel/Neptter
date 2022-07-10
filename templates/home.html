@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+            <!--============== MIDDLE SECTION ============== -->
+             
+            <div class="middle">
+         
+             <form   method="POST" enctype="multipart/form-data"  action="{% url 'post' %}" class="create-post" >
+                {% csrf_token %}
+                <div class='upper-part'>
+                <div class="profile-photo">
+                    <img src="{{ user.profile.profile_pic.url }}">
+                </div>
+            
+                <input type="text"  name ='description' placeholder="What's on your mind {{user.first_name}}?" id="create-post">
+                <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload" onclick="defaultBtnActive();"> 
+                <label for="imageupload"><i class="uil uil-image" ></i></label>
+                <div id="imageurl"></div>
+                <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+                <div class='lower-part'>
+                    <img src="" alt="">
+                    <a id="close" class="cancel"><i class="uil uil-times-circle" style="cursor:pointer; color:red;  font-size:19px;"></i></a>
+                    </div>
+             </form>
+             <!--============== FEEDS ============== -->
+              <div class="feeds">
+                <!--============== FEED- 1 ============== -->
+                {% for post in  user_posts %}
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-photo">
+                                <a href='{% url 'myprofiles' pk=post.user_name.username %}'>
+                                <img src="{{ post.user_name.profile.profile_pic.url }}" alt="">
+                                </a>
+                            </div>
+                            <div class="info">
+                                <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
+                                <small> {{post.whenpublished}}</small>
+                            </div>
+                        </div>
+                       
+                        <div class="menu">
+                        <span class="edit">
+                            <i class="uil uil-ellipsis-h" onclick="menuToggle();"></i>
+                        </span>
+                        <div class="menu-content">
+                        <ul class="list">
+                            {% if post.user_name.first_name == user.first_name %}
+                            <li><a href="{% url 'postdelete' post_id=post.id %}"><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
+                            {% endif %}
+                            <li><a  href="{{post.pic}}" ><i class="uil uil-import"></i>Download</a></li>
+                          </ul></div>
+
+                        </div>
+                       
+                    </div>
+                    <div class="caption">
+                        <p>{{post.description}}</p>
+                    </div>
+                {% if post.pic %}
+                <div  class="photo">
+                    <a href="{{post.pic.url}}" target="_blank">
+                    <img
+                      src="{{post.pic.url}}"
+                      alt=""
+                    />
+                    </a>
+                </div>
+                    {% endif %}
+                    <div class="action-button">
+                        
+                        <div class="interaction-button">
+                            <a   class="like" ><i  id="{{post.id}}" class="fa-regular fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+
+
+                            {% comment %} {%  if liked_post %} {% endcomment %}
+                            {% comment %} 
+                                {% for liked in liked_post %}  {% endcomment %}
+                                    {% comment %} {% if request.user in liked_post  %}
+                                        <a   class="like" ><i  id="{{post.id}}" class="fa-solid fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+                                    {% else %} 
+                                        <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})"></i></a> 
+                                    {% endif %}  {% endcomment %}
+                                
+                            {% comment %} {% else %} 
+                                <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})" ></i></a> 
+                            {% endif%}  {% endcomment %}
+                            
+                            <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
+        
+
+                        </div>
+                    </div>
+                    
+                    <div class="liked-by">
+                     <p style="font-weight:bold;" id="like{{post.id}}">{{post.like}}</p><p style="margin-left:2.5px;"> like</p>
+                     <p class="comment-count"><b>{{post.comment}}</b> comment</p>
+                    </div>
+                   
+                    {% comment %} {% if not post.comments.all%} No Comments<a href="#">Add One</a>
+                    {% else %}
+                    {% for comment in post.comments.all %}
+                    <strong>{{comment.name}} -{{comment.date_added}}</strong>
+                    <br>{{comment.body}}</br>
+                    {% endfor %}
+                    {% endif %} {% endcomment %}
+                    
+                    {% comment %} <div class="caption">
+                        <p> <b>{{post.user_name.first_name}}</b> {{post.description}}</p>
+                    </div> {% endcomment %}
+                </div>
+
+                  <!--===========END OF FEED ==========-->
+                  
+                  {% empty %}
+                  {% endfor %}
+
+              </div>
+             
+               <!--===========END OF FEEDS==========-->
+            </div>
+            <script>
+            function LikePost(e,postid){
+                e.preventDefault();
+                $.ajax({
+                    type : "POST", 
+                    url: "{% url 'likepost' %}",
+                    data: {
+                       post_id: postid,
+                       csrfmiddlewaretoken: csrftoken,
+                       dataType: "json",
+                    },
+                    
+                    success: function(data){
+                        if (data == true){ 
+                            $("#"+postid).removeClass("fa-regular")
+                            $("#"+postid).addClass("fa-solid")
+                            var like= $("#"+"like"+postid).text()
+                            like = parseInt(like)                         
+                            $("#like"+postid).text(like + 1)
+    
+                        }
+                        else{
+                            $("#"+postid).removeClass("fa-solid")
+                            $("#"+postid).addClass("fa-regular")
+                            var like= $("#"+"like"+postid).text()
+                            like = parseInt(like)                         
+                            $("#like"+postid).text(like - 1)
+                            
+
+                        }
+                      
+
+  
+                    },
+             
+                    failure: function() {
+                        console.log("failed")
+                        
+                    }
+             
+                });
+            }
+
+            </script>
+            {% endblock %}
+
+            

@@ -1,0 +1,228 @@
+/* ===== =====  Poppins Google Font  ===== =====  */
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+/* ===== =====>>  Universal Selector  <<===== =====  */
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== =====>>  Body Font Size  <<===== =====  */
+html {
+  font-size: 10px;
+}
+
+/* ===== =====>> Css Variables  <<===== =====  */
+:root {
+  /* =====>>  Font Color  <<===== */
+  --f1-color: #fff;
+  --f2-color: #000;
+  --f3-color: rgba(0, 0, 0, 0.8);
+  --f4-color: rgba(0, 0, 0, 0.6);
+  --f5-color: #0099cc;
+  --f6-color: #88cee6;
+
+  /* =====>>  Background Color  <<===== */
+  --bg1-color: #fff;
+  --bg2-color: #000;
+  --bg3-color: #33ccff;
+  --bg4-color: #33cc33;
+  --bg5-color: #0099cc;
+  --bg6-color: rgba(0, 0, 0, 0.4);
+  --bg7-color: rgba(0, 0, 0, 0.2);
+  --glass-bg: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3)
+  );
+  --C-lg-bg: linear-gradient(45deg, #ff3399, #ff9933);
+
+  /* ===== =====>>  Font Size  <<===== =====  */
+  --xxxl-fs: 2.2rem;
+  --xxl-fs: 1.8rem;
+  --xl-fs: 1.6rem;
+  --l-fs: 1.4rem;
+  --m-fs: 1.2rem;
+  --s-fs: 1.1rem;
+  --xs-fs: 1rem;
+
+  /* =====>>  Margin  <<===== */
+  --m-2-5: 2.5rem;
+  --m-1-8: 1.8rem;
+  --m-1-5: 1.5rem;
+  --m-0-6: 0.6rem;
+  --m-0-5: 0.5rem;
+  --m-0-3: 0.3rem;
+
+  /* =====>>  Padding  <<===== */
+  --p-2-5: 2.5rem;
+  --p-1-5: 1.5rem;
+  --p-1-0: 1rem;
+  --p-0-8: 0.8rem;
+  --p-0-5: 0.5rem;
+  --p-0-4: 0.4rem;
+  --p-0-3: 0.3rem;
+}
+
+/* ===== =====>>  Body Css  <<===== =====  */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== =====>>  Main-Container Css  <<===== =====  */
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "header header"
+    "userProfile userDetails";
+  width: 85%;
+  height: 90vh;
+  background: var(--glass-bg);
+  padding: var(--p-1-5);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== =====>>  Container Cards Grid-Area Css Start  <<===== =====  */
+header {
+  grid-area: header;
+}
+
+.userProfile {
+  grid-area: userProfile;
+}
+.userDetails {
+  grid-area: userDetails;
+}
+/* ===== =====>>  Container Cards Css  <<===== =====  */
+.container .card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(3rem);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+  padding: var(--p-1-5);
+}
+/* ===== =====>>  User Main-Profile Css Start  <<===== ===== */
+.container .userProfile {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.container .userProfile .profile figure img {
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+}
+
+/* ===== =====>>  User Details Css Start  <<===== ===== */
+.userDetails {
+  position: relative;
+  /*width: 80%;*/
+  padding: var(--p-1-5) var(--p-2-5);
+  justify-content: center;
+  align-items: center;
+}
+
+.userDetails .title h1 {
+  font-size: var(--xxxl-fs);
+}
+
+.userDetails .info input{
+  display: block;
+   width: 50%;
+   box-sizing: border-box;
+   border-radius: 8px;
+   border: 1px solid #c4c4c4;
+   padding: 1em;
+   margin-bottom: 1.25rem;
+   font-size: 1.25rem;
+}
+
+.sign-up-btn{
+  display: block;
+  margin-top: 5px;
+  width: 50%;
+  background:lightskyblue;
+  color: black;
+  font-weight:700;
+  /*border: 5px;*/
+  padding:1rem;
+  border-radius: 8px;
+  font-size: 1.75rem;
+  /*text-transform: uppercase;*/
+  letter-spacing: 0.5px;
+
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
+
+  /*!* ===== =====>>  Container Css Start  <<===== ===== *!*/
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "userProfile"
+      "userDetails";
+    overflow-x: hidden;
+    overflow-y: inherit;
+    padding: 0;
+    width: 90%;
+    height: 100%;
+    box-shadow: none;
+  }
+
+  /* ===== =====>>  Container Card Css Start  <<===== ===== */
+  .container .card {
+    backdrop-filter: none;
+  }
+
+  .userDetails {
+    margin-bottom: 3rem;
+  }
+
+  .container::before,
+  .container::after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    overflow: initial;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .main_bg {
+    animation: none;
+  }
+}

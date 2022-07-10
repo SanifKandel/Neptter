@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neptter</title>
+   <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+        <link rel="stylesheet" href="{% static 'css/forget-pw.css' %}">
+        </head>
+        <Body>
+            <form method="POST"  class="form"  action=""  id="form">
+                {% csrf_token %}
+                    <a href="{% url 'login'%}" target="_blank"> Back to Login</a>
+                <h1>Forgot password?</h1>
+                <img class="imagec" src="{% static 'images/email.PNG' %}" script=" height=20px;">
+                <h4>Send a link to your email to reset your password.</h4>
+                <div class="input-container Email">
+                    <label for="fname">Username</label>
+                    <input id="username" name="username" type="text" placeholder="Enter your username">
+                </div>
+                <button class="sent" type="submit">Submit <link rel="stylesheet"></button>
+
+            </form>
+    
+        </body>
+</html>

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neptter</title>
+   <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    </head>
+<body>
+    <div class = "split-screen">
+        <div class="left" >
+            <section class="copy">
+                <h1>Softwarica's Social Network</h1>
+                <p>Over 1000 happy users.</p>
+            </section>
+        </div> 
+        <div class="right">
+            <form  action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <section class="copy">
+                    <h2>Sign up</h2>
+                    <div class="login-container">
+                        <p>Already have an account? <a href="{% url 'login'%}" >
+                            <strong>Log In</strong>
+                        </a></p>
+                    </div>
+                </section>
+                <div class="input-container name">
+                    <label for="fname">Full Name</label>
+                    <input id="first_name" name="first_name" type="text" required>
+                </div>
+
+                <div class="input-container username">
+                    <label for="fname">Username</label>
+                    <input id="username" name="username" type="text" required>
+                </div>
+
+                <div class="input-container email">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required>
+                </div>
+                
+                <div class="input-container password">
+                    <label for="password">Password</label>
+                    <input id="password1" name="password1" type="password" placeholder="Must be atleast 6 characters"> 
+                </div>
+                <div class="input-container password">
+                    <label for="password">Confirm Password</label>
+                    <input id="password2" name="password2" type="password" placeholder="Must be atleast 6 characters">
+                </div>
+        
+                <button class="sign-up-btn" type="submit">Sign up</button>
+                <section class="copy legal">
+                    <p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy policy</a> & <a href="#">Terms of service.</a></span></p>
+                </section>
+
+            </form>
+              </div>
+    </div>
+
+</body>
+</html>
