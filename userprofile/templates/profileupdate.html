@@ -158,7 +158,7 @@
                             </div>
                             <div class="info">
                                 <h3> {{post.user_name.first_name}} </h3>
-                                <small> {{post.date_posted}}</small>
+                                <small> {{post.whenpublished}}</small>
                             </div>
                         </div>
                        
@@ -191,26 +191,35 @@
                     {% endif %}
                     <div class="action-button">
                         <div class="interaction-button">
-                            {% comment %} {% if liked %}  {% endcomment %}
-                            <a href="/likepost?post_id={{post.id}}"  class="like"><i class="fa-solid fa-heart" style="color: red; font-size:20px;"></i></a>
-                             {% comment %} {% else %} 
-                            <a href="/likepost?post_id={{post.id}}"><i class="uil comment-dots" style="color:red; "></i></a>
-                            {% endif %} {% endcomment %}
+                            <a   class="like" ><i  id="{{post.id}}" class="fa-regular fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+
+
+                            {% comment %} {%  if liked_post %} {% endcomment %}
+                            {% comment %} 
+                                {% for liked in liked_post %}  {% endcomment %}
+                                    {% comment %} {% if request.user in liked_post  %}
+                                        <a   class="like" ><i  id="{{post.id}}" class="fa-solid fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+                                    {% else %} 
+                                        <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})"></i></a> 
+                                    {% endif %}  {% endcomment %}
+                                
+                            {% comment %} {% else %} 
+                                <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})" ></i></a> 
+                            {% endif%}  {% endcomment %}
+                            
                             <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
         
 
                         </div>
                     </div>
                     <div class="liked-by">
-                        <p><b>{{post.like}}</b> likes</p>
-                    </div>
-                    {% comment %} <div class="caption">
-                        <p> <b>{{post.user_name.first_name}}</b> {{post.description}}</p>
-                    </div> {% endcomment %}
+                        <p style="font-weight:bold;" id="like{{post.id}}">{{post.like}}</p><p style="margin-left:2.5px;"> like</p>
+                        <p class="comment-count"><b>{{post.comment}}</b> comment</p>
+                       </div>
                 </div>
 
                   <!--===========END OF FEED ==========-->
-                  {% comment %} {% endif %} {% endcomment %}
+                
                   {% empty %}
                   {% endfor %}
                   {% endif %}

@@ -13,11 +13,6 @@
                 </div>
             
                 <input type="text"  name ='description' placeholder="What's on your mind {{user.first_name}}?" id="create-post">
-                {% comment %} <div class="image-preview" id="imagePreview">
-                    <span class="image-preview__default-text">Image Preview</span>
-                    <img src="" alt="Image Preview" class="image-preview__image">
- 
-                 </div> {% endcomment %}
                 <input name='pic' type="file" class="form-control-file mt-5"  id="imageupload" onclick="defaultBtnActive();"> 
                 <label for="imageupload"><i class="uil uil-image" ></i></label>
                 <div id="imageurl"></div>
@@ -42,7 +37,7 @@
                             </div>
                             <div class="info">
                                 <h3><a href='{% url 'myprofiles' pk=post.user_name.username %}'> {{post.user_name.first_name}} </a></h3>
-                                <small> {{post.date_posted }}</small>
+                                <small> {{post.whenpublished}}</small>
                             </div>
                         </div>
                        
@@ -55,7 +50,7 @@
                             {% if post.user_name.first_name == user.first_name %}
                             <li><a href="{% url 'postdelete' post_id=post.id %}"><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
                             {% endif %}
-                            <li><a  href="{{post.pic}}" download ><i class="uil uil-import"></i>Download</a></li>
+                            <li><a  href="{{post.pic}}" ><i class="uil uil-import"></i>Download</a></li>
                           </ul></div>
 
                         </div>
@@ -64,20 +59,6 @@
                     <div class="caption">
                         <p>{{post.description}}</p>
                     </div>
-                    {% comment %} {% if post.pic %}
-                    <div  class="photo">
-                        <a href="{{post.pic.url}}" target="_blank">
-                        <img
-                          src="{{post.pic.url}}"
-                          alt=""
-                        />
-                        </a>
-                    </div> {% endcomment %}
-                    {% comment %} {% if  post.pic.toString().endsWith(".mp4") %}
-                    <video class="photo" controls>
-                        <source src="{{post.pic.url}}" type="video/mp4">
-                </video> 
-                {% else %} {% endcomment %}
                 {% if post.pic %}
                 <div  class="photo">
                     <a href="{{post.pic.url}}" target="_blank">
@@ -88,27 +69,25 @@
                     </a>
                 </div>
                     {% endif %}
-                    {% comment %} <div class="action-button">
-                        <div class="interaction-button">
-                            {% if like %}
-                            <a href="/likepost?post_id={{post.id}}" class="like"><i class="uil uil-heart"></i></a>
-                            {% else%}
-                            <a href="/likepost?post_id={{post.id}}" class="like"><i class="uil uil-comment"></i></a>
-                            {% endif %}
-                            <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
-
-
-                        </div>
-                    </div> {% endcomment %}
                     <div class="action-button">
+                        
                         <div class="interaction-button">
-                            {% if liked_filters == None %} 
+                            <a   class="like" ><i  id="{{post.id}}" class="fa-regular fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+
+
+                            {% comment %} {%  if liked_post %} {% endcomment %}
+                            {% comment %} 
+                                {% for liked in liked_post %}  {% endcomment %}
+                                    {% comment %} {% if request.user in liked_post  %}
+                                        <a   class="like" ><i  id="{{post.id}}" class="fa-solid fa-heart" style="color: red; font-size:20px;" onclick="LikePost(event,{{post.id}})"></i></a>
+                                    {% else %} 
+                                        <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})"></i></a> 
+                                    {% endif %}  {% endcomment %}
+                                
+                            {% comment %} {% else %} 
+                                <a   class="like" ><i id="{{post.id}}" class="fa-regular fa-heart" onclick="LikePost(event,{{post.id}})" ></i></a> 
+                            {% endif%}  {% endcomment %}
                             
-                            <a href="/likepost?post_id={{post.id}}"  class="like" id="like"><i class="fa-solid fa-heart" style="color: red; font-size:20px;"></i></a>
-                            <h3 id="postid" style="display: none;">{{post.id}}</h3>
-                            {% else %} 
-                            <a href="/likepost?post_id={{post.id}}"  class="like" id="like"><i class="fa-regular fa-heart"></i></a>
-                            {% endif %} 
                             <a href="{% url 'comment' pk=post.id %}" class="comment"><i class="uil uil-comment-alt"></i></a>
         
 
@@ -116,7 +95,8 @@
                     </div>
                     
                     <div class="liked-by">
-                        <p><b>{{post.like}}</b> likes</p>
+                     <p style="font-weight:bold;" id="like{{post.id}}">{{post.like}}</p><p style="margin-left:2.5px;"> like</p>
+                     <p class="comment-count"><b>{{post.comment}}</b> comment</p>
                     </div>
                    
                     {% comment %} {% if not post.comments.all%} No Comments<a href="#">Add One</a>
@@ -141,4 +121,50 @@
              
                <!--===========END OF FEEDS==========-->
             </div>
+            <script>
+            function LikePost(e,postid){
+                e.preventDefault();
+                $.ajax({
+                    type : "POST", 
+                    url: "{% url 'likepost' %}",
+                    data: {
+                       post_id: postid,
+                       csrfmiddlewaretoken: csrftoken,
+                       dataType: "json",
+                    },
+                    
+                    success: function(data){
+                        if (data == true){ 
+                            $("#"+postid).removeClass("fa-regular")
+                            $("#"+postid).addClass("fa-solid")
+                            var like= $("#"+"like"+postid).text()
+                            like = parseInt(like)                         
+                            $("#like"+postid).text(like + 1)
+    
+                        }
+                        else{
+                            $("#"+postid).removeClass("fa-solid")
+                            $("#"+postid).addClass("fa-regular")
+                            var like= $("#"+"like"+postid).text()
+                            like = parseInt(like)                         
+                            $("#like"+postid).text(like - 1)
+                            
+
+                        }
+                      
+
+  
+                    },
+             
+                    failure: function() {
+                        console.log("failed")
+                        
+                    }
+             
+                });
+            }
+
+            </script>
             {% endblock %}
+
+            

@@ -367,12 +367,7 @@ main .container .left .profile{
 
 
 .middle .create-post{
-    /* overflow: absolute; */
     width: 100%;
-    /* height:5rem;
-    display:flex;
-    align-items: center;
-    justify-content:space-between; */
     background: var(--color-white);
     padding: 0.4rem var(--card-padding);
     border-radius: var(--border-radius);
@@ -550,6 +545,9 @@ color: var(--color-danger);
 .middle .liked-by{
     display: flex;
 }
+.middle .liked-by .comment-count{
+    margin-left: 12rem;
+}
 .middle .liked-by p{
     margin-top: -0.5rem;
     margin-left: 0.5rem;
@@ -583,13 +581,12 @@ main .container .right{
     display:flex;
 }
 .right .request .info{
-    display:flex;
+    width: 20rem;
+    display: flex;
+    justify-content: space-between;
     gap: 1rem;
 }
-/* .right .request .info .action{
-    justify-content: flex-end;
 
-} */
 .right .request .info button{
     justify-content: right;
 }
@@ -911,18 +908,6 @@ color: var(--color-dark);
     opacity: 0.8;
 }
 
-/* Form */
-
-/* Google Fonts - Poppins */
-
-/* .popup-box .form{
-    position: absolute;
-    max-width: 430px;
-    width: 100%;
-    padding: 30px;
-    border-radius: 6px;
-    background: #FFF;
-} */
 
 header{
     font-size: 21px;
@@ -930,9 +915,7 @@ header{
     color: var(--color-dark);
     text-align: center;
 }
-/* form{
-    margin-top: 30px;
-} */
+
 .popup-box .field{
     position: relative;
     height: 50px;
@@ -973,12 +956,6 @@ header{
 }
 .field button:hover{
     background-color: #016dcb;
-}
-@media screen and (max-width: 400px) {
-    /* .popup-box{
-        padding: 20px 10px;
-    } */
-    
 }
 
 
@@ -1103,6 +1080,10 @@ color: var(--color-danger);
     cursor: pointer;
 }
 
+.comment-main  .feed .action-button .comment{
+    margin-left: 16rem;
+}
+
 
 
 
@@ -1112,6 +1093,9 @@ color: var(--color-danger);
 .comment-main  .liked-by p{
     margin-top: -0.5rem;
     margin-left: 0.5rem;
+}
+.comment-main  .liked-by .comment-count{
+    margin-left: 13rem;
 }
 
 /* Comment Section */

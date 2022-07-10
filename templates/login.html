@@ -15,8 +15,8 @@
 </head>
 <body>
 <div class ="split-screen">
-  <div class="left">
-  </div>
+<div class="left">
+  </div> 
   <div class="right">
     <form  action="{% url 'login' %}" method="POST">
       {% csrf_token %}
@@ -41,11 +41,7 @@
       </div>
       <div class="containter cta">
         <label class="google-container">
-           <p class="social-text">Have Gmail Account? </p>
-
-          <a href="{% provider_login_url "google" method='oauth2' %}" class="social-icon">
-                <i class="fab fa-google"></i>
-              </a>
+      
         </label>
       </div>
       <button class="sign-up-btn" type="submit"> Sign in</button>

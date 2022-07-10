@@ -1,7 +1,11 @@
+import os
 import random
+from django.conf import settings
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
-from post.models import Post
+from post.models import Post,Comment
 from userprofile.models import Profile ,FollowerCount
+from post.models import LikePost
 from register.models import User 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -34,13 +38,11 @@ def HomeProcess(request):
 
     for usernames in user_following_list:
         feed_lists =Post.objects.filter(user_name_id= usernames)
-        print("Before")
         print(feed_lists)
         feed.append(feed_lists)
 
     feed_lists =Post.objects.filter(user_name_id=user_object.id)
     feed.append(feed_lists)
-    print("After")
     print(feed_lists)
 
     feed_list = list(chain(*feed))
@@ -71,17 +73,16 @@ def HomeProcess(request):
 
     suggestions_username_profile_list = list(chain(*username_profile_list))
 
-    # comment = Comment.objects.all()
-    # user_object = User.objects.get(username=comment.name)
-    # posts =Post.objects.filter(user_name=user_object)
-    # user_comments =Comment.objects.filter(id=posts.id)
-    # user_comment_length = len(user_comments)
+    liked_post = LikePost.objects.all()
+
 
 
     context={
         'posts':post,
         'user_profile': user_profile,
         'user_posts':feed_list,
+        'liked_post':liked_post,
+
     
         'suggestions_username_profile_list': suggestions_username_profile_list[:4]
 
@@ -89,5 +90,9 @@ def HomeProcess(request):
     return render(request, 'home.html',context)
 
 
+
+
 def AboutProcess(request):
+    
+
     return render(request, 'aboutus.html')

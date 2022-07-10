@@ -1,3 +1,24 @@
+//CSRFTOKEN
+
+function getToken(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+    }
+    const csrftoken = getToken('csrftoken');
+
+
+
 //SIDEBAR
 const menuItems = document.querySelectorAll('.menu-item');
 
@@ -47,47 +68,18 @@ const changeBG= () => {
     root.style.setProperty('--dark-color-lightness', darkColorLightness);
 }
 
-// button.addEventListener('click', ()=>{
-//     // function darkmode{
-//     if (icon.classList.contains('uil-moon')){
-//     darkColorLightness='95%';
-//     whiteColorLightness='0%';
-//     lightColorLightness= '10%';
-//     icon.classList.remove('uil-moon');
-//     icon.classList.add('uil-sun');
-//     mode.innerHTML='Light Mode';
-//     localStorage.setItem("mode", "Light Mode");
-    
-//     changeBG();
-//     }
-//     else{
-//     darkColorLightness='17%';
-//     whiteColorLightness='95%';
-//     lightColorLightness= '100%';
-//     icon.classList.remove('uil-sun');
-//     icon.classList.add('uil-moon');
-//     mode.innerHTML='Dark Mode';
-//     localStorage.setItem("mode", "Dark Mode");
-    
-//     changeBG();
-//     }  
-// });
 
-
-//We're going to use "check" to get the ckeckbox element
 const check =document.getElementById("theme")
 
-//If darkMode doesn’t exist in the LocalStorage, create it. False by default
+
 if (localStorage.getItem('darkMode')===null){
     localStorage.setItem('darkMode', "true");
 }
 
-//checkStatus is only called one time in the program, when you reload the page
-//It gives the page it's default look, depening on waht darkMode is set to
 
 button.addEventListener('click', ()=>{  
     if (localStorage.getItem('darkMode')=="true"){
-        // checked = true;                                       //the checkbox is checked (if you load the page by default it isn’t)
+        // checked = true;                                       
        Dark();
         
     }else{
@@ -97,9 +89,8 @@ button.addEventListener('click', ()=>{
     }
 });
 
-function Dark (){                                   //This function gets called every time the checkbox is clicked
-    // localStorage.getItem('darkMode')==="true"             //if darkMode was active and this function is called it means the user now wants light
-        localStorage.setItem('darkMode', "false");                  //so we set it to false, to indicate we are in light mode
+function Dark (){                                            
+        localStorage.setItem('darkMode', "false");                  
         darkColorLightness='95%';
         whiteColorLightness='0%';
         lightColorLightness= '10%';
@@ -110,7 +101,7 @@ function Dark (){                                   //This function gets called 
     } 
     
 function White(){
-        localStorage.setItem('darkMode', "true");                   //same code but adapted for dark theme
+        localStorage.setItem('darkMode', "true");                  
         darkColorLightness='17%';
         whiteColorLightness='100%';
         lightColorLightness= '95%';
@@ -120,48 +111,6 @@ function White(){
         changeBG();
     }
 
-
-
-
-// function darkmode(){
-//     darkColorLightness='95%';
-//     whiteColorLightness='0%';
-//     lightColorLightness= '10%';
-//     icon.classList.remove('uil-moon');
-//     icon.classList.add('uil-sun');
-//     mode.innerHTML='Light Mode';
-//     localStorage.setItem("mode", "light");
-    
-//     changeBG();
-// }
-// function lightmode(){
-//     darkColorLightness='17%';
-//     whiteColorLightness='95%';
-//     lightColorLightness= '100%';
-//     icon.classList.remove('uil-sun');
-//     icon.classList.add('uil-moon');
-//     mode.innerHTML='Dark Mode';
-//     localStorage.setItem("mode", "dark");
-//     changeBG();
-// }
-
-// if(localStorage.getItem("mode")=="dark")
-//     darkmode();
-// else
-//     nodark();
-
-// $('#theme').change(function(){   
-
-//     if ($(this).prop('checked'))
-//     {
-//     darkmode();
-//     }
-//     else
-//     {
-//     nodark();
-//     }
-
-// });
 
 
 // Search feature of post
@@ -188,19 +137,16 @@ const searchpost =()=>{
 postsearch.addEventListener('keyup', searchpost);
 
 
-
-
-
 //Profile Update Frontend
 
-const section = document.querySelector(".profile-main"),
-      hireBtn = document.querySelector(".profile-details .buttons");
+const section = document.querySelector(".profile-main");
+const  hireBtn = document.querySelector(".buttons");
       cancelBtn = document.querySelectorAll("#close");
       
 
-// hireBtn.addEventListener("click", ()=>{
-//     section.classList.add("active");
-// });
+hireBtn.addEventListener("click", ()=>{
+    section.classList.add("active");
+});
 
 cancelBtn.forEach(cBtn => {
     cBtn.addEventListener("click", () =>{
@@ -239,31 +185,32 @@ like.addEventListener("click", ()=>{
 //Display Image
 const middle = document.querySelector(".middle");
 const wrapper = middle.querySelector(".lower-part");
-const defaultbtn = middle.querySelector("#imageupload");
+
 const img = wrapper.querySelector("img");
-var cancelBtn = wrapper.querySelector(".cancel");
+var cancelBtnn = wrapper.querySelector(".cancel");
+const defaultbtn = document.querySelector("#imageupload");
 
 function defaultBtnActive(){
     defaultbtn.click();
-  }
-  defaultbtn.addEventListener("change", function(){
+}
+
+
+defaultbtn.addEventListener("change", function(){
     console.log("hii");
 
     const file = this.files[0];
     console.log(file);
-    console.log("hii2");
 
     if(file){
       const reader = new FileReader();
       reader.onload = function(){
-        console.log("hii3");
         const result = reader.result;
         img.src = result;
         console.log(result);
         wrapper.classList.add("active");
       }
 
-     cancelBtn.addEventListener("click", function(){
+     cancelBtnn.addEventListener("click", function(){
      img.src = "";
      wrapper.classList.remove("active");
       })
@@ -273,4 +220,4 @@ function defaultBtnActive(){
       });
    
 
-   
+  
