@@ -50,7 +50,7 @@
                             {% if post.user_name.first_name == user.first_name %}
                             <li><a href="{% url 'postdelete' post_id=post.id %}"><i class="uil uil-trash-alt" ></i>Delete Post</a></li>
                             {% endif %}
-                            <li><a  href="{{post.pic}}" download="{{post.pic.url}}" ><i class="uil uil-import"></i>Download</a></li>
+                            <li><a  href="{{post.pic}}" ><i class="uil uil-import"></i>Download</a></li>
                           </ul></div>
 
                         </div>

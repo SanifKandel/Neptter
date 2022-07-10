@@ -581,7 +581,9 @@ main .container .right{
     display:flex;
 }
 .right .request .info{
-    display:flex;
+    width: 20rem;
+    display: flex;
+    justify-content: space-between;
     gap: 1rem;
 }
 
