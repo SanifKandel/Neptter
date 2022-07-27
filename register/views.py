@@ -7,16 +7,17 @@ from register.forms import CreateUserForm
 
 def registerProcess(request):
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        username = request.POST['username']
-        email = request.POST['email']
         password1 =request.POST['password1']
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        email = request.POST['email']
+        
 
         user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name)
         profile = Profile.objects.create(user=user,email=email)
         user.save()
         profile.save()
-        print("User created")
+        print("New user has been created")
         return redirect('login')
    
     else:
