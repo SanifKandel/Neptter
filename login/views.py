@@ -33,7 +33,7 @@ def loginProcess(request):
 
 
 def send_forget_password_mail(email, token):
-    subject = 'Your forget password link'
+    subject = 'Your forget password link is given'
     message = f'Hi , click on the link to reset your password http://localhost:8000/reset-password/{token}/'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
