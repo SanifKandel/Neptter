@@ -4,9 +4,11 @@ from django.urls.conf import include
 from . import views
 
 urlpatterns = [
-
-
- path('',views.HomeProcess,name="home"),
- path('profile/',views.ProfileProcess,name="profile"),
  path('aboutus/',views.AboutProcess,name="about"),
+ path('profile/',views.ProfileProcess,name="profile"),
+ path('',views.HomeProcess,name="home"),
+ 
+
+
+
 ]
